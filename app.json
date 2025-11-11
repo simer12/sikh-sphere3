@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "SikhSphere",
+    "slug": "sikhsphere",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sikhsphere.app"
+    },
+    "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "NOTIFICATIONS"
+      ],
+      "package": "com.sikhsphere.app"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e2c3f2c3-5f8a-4289-b733-26a8f6c6c208"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e2c3f2c3-5f8a-4289-b733-26a8f6c6c208"
+      },
+      "googlePlacesApiKey": "AIzaSyByU71OCTFKA01cmEgk3MB5U5GFA51H0q4"
+    }
+  }
+}
