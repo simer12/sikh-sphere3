@@ -14,3 +14,15 @@ web-build/
 *.log
 .vscode/
 .idea/
+
+# Large source files - EPUB and PDF
+*.epub
+*.pdf
+
+# Large extracted data files
+extracted-history/*.json
+extracted-history/*.ts
+guru-nanak-jeevan-katha-FINAL.ts
+
+# OCR training data
+*.traineddata
