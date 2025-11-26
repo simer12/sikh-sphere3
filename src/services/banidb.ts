@@ -2,14 +2,15 @@
 const API_BASE_URL = 'https://api.banidb.com/v2';
 
 // Common Nitnem Bani IDs from BaniDB
+// Note: These are the correct complete Nitnem versions
 export const NITNEM_BANI_IDS = {
-  JAPJI_SAHIB: 1,
-  JAAP_SAHIB: 2,
-  TVA_PRASAD_SAVAIYE: 3,
-  CHAUPAI_SAHIB: 4,
-  ANAND_SAHIB: 5,
-  REHRAS_SAHIB: 6,
-  KIRTAN_SOHILA: 7,
+  JAPJI_SAHIB: 2,        // Complete Japji Sahib (not Mool Mantar)
+  JAAP_SAHIB: 4,         // Complete Jaap Sahib
+  TVA_PRASAD_SAVAIYE: 5, // Tav Prasad Savaiye
+  CHAUPAI_SAHIB: 6,      // Chaupai Sahib
+  ANAND_SAHIB: 7,        // Anand Sahib (6 pauris)
+  REHRAS_SAHIB: 8,       // Rehras Sahib
+  KIRTAN_SOHILA: 9,      // Kirtan Sohila
 };
 
 interface BaniDBVerse {
@@ -79,31 +80,32 @@ export function convertBaniDBToBani(baniDBData: BaniDBResponse, baniInfo: any) {
       throw new Error('Invalid API response: verses not found');
     }
 
-    // Filter out header lines (header !== 0) and combine content lines
-    const contentVerses = verses.filter(v => v.header === 0);
+    // Include ALL verses - headers and content (header values: 0=content, 1+=headers)
+    // Headers often contain important content like Mool Mantar, section titles, etc.
+    const allVerses = verses;
 
     // Combine all verses into continuous text blocks (Gutka format)
-    const gurmukhiText = contentVerses
+    const gurmukhiText = allVerses
       .map(v => v.verse?.verse?.unicode || '')
       .filter(text => text && text.trim && text.trim())
       .join('\n\n');
     
-    const transliterationText = contentVerses
+    const transliterationText = allVerses
       .map(v => v.verse?.transliteration?.english || v.verse?.transliteration?.en || '')
       .filter(text => text && text.trim && text.trim())
       .join('\n\n');
     
-    const englishText = contentVerses
+    const englishText = allVerses
       .map(v => v.verse?.translation?.en || '')
       .filter(text => text && text.trim && text.trim())
       .join('\n\n');
 
-    const hindiText = contentVerses
+    const hindiText = allVerses
       .map(v => v.verse?.translation?.hi || '')
       .filter(text => text && text.trim && text.trim())
       .join('\n\n');
 
-    const punjabiText = contentVerses
+    const punjabiText = allVerses
       .map(v => v.verse?.translation?.pu || '')
       .filter(text => text && text.trim && text.trim())
       .join('\n\n');
@@ -111,7 +113,7 @@ export function convertBaniDBToBani(baniDBData: BaniDBResponse, baniInfo: any) {
     return {
       id: baniInfo.id,
       name: baniInfo.name,
-      nameGurmukhi: baniDBData.baniInfo?.unicode || baniInfo.nameGurmukhi,
+      nameGurmukhi: baniInfo.nameGurmukhi, // Use our metadata names, not API names
       description: baniInfo.description,
       time: baniInfo.time,
       duration: baniInfo.duration,

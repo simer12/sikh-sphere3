@@ -1,0 +1,387 @@
+{
+  "id": 28,
+  "name": "Akal Ustat",
+  "nameGurmukhi": "ਅਕਾਲ ਉਸਤਤ",
+  "description": "Akal Ustat from Sri Dasam Granth Sahib",
+  "verses": [
+    {
+      "id": "3963",
+      "gurmukhi": "ਬਾਰਹ ਮਾਹ ॥",
+      "transliteration": "baareh maeh ||",
+      "translation": "",
+      "lineNumber": 1
+    },
+    {
+      "id": "3965",
+      "gurmukhi": "ਸਵੈਯਾ ॥",
+      "transliteration": "savaiyaa ||",
+      "translation": "SWAYYA",
+      "lineNumber": 2
+    },
+    {
+      "id": "3966",
+      "gurmukhi": "ਫਾਗੁਨ ਮੈ ਸਖੀ ਡਾਰਿ ਗੁਲਾਲ ਸਭੈ ਹਰਿ ਸਿਉ ਬਨ ਬੀਚ ਰਮੈ ॥",
+      "transliteration": "faagun mai sakhee ddaar gulaal sabhai har siau ban beech ramai ||",
+      "translation": "In the moth of Phalgun, the young damsels are roaming with Krishna in the forest, throwing dry colours on each other",
+      "lineNumber": 3
+    },
+    {
+      "id": "3967",
+      "gurmukhi": "ਪਿਚਕਾਰਨ ਲੈ ਕਰਿ ਗਾਵਤਿ ਗੀਤ ਸਭੈ ਮਿਲਿ ਗ੍ਵਾਰਨਿ ਤਉਨ ਸਮੈ ॥",
+      "transliteration": "pichakaaran lai kar gaavat geet sabhai mil gavaiaaran taun samai ||",
+      "translation": "Taking the pumps in their hands, they are singing charming songs:",
+      "lineNumber": 4
+    },
+    {
+      "id": "3968",
+      "gurmukhi": "ਅਤਿ ਸੁੰਦਰ ਕੁੰਜ ਗਲੀਨ ਕੇ ਬੀਚ ਕਿਧੌ ਮਨ ਕੇ ਕਰਿ ਦੂਰ ਗਮੈ ॥",
+      "transliteration": "at su(n)dhar ku(n)j galeen ke beech kidhau man ke kar dhoor gamai ||",
+      "translation": "",
+      "lineNumber": 5
+    },
+    {
+      "id": "3969",
+      "gurmukhi": "ਅਰੁ ਤ੍ਯਾਗਿ ਤਮੈ ਸਭ ਧਾਮਨ ਕੀ ਇਹ ਸੁੰਦਰਿ ਸ੍ਯਾਮ ਕੀ ਮਾਨਿ ਤਮੈ ॥੮੬੭॥",
+      "transliteration": "ar tayaag tamai sabh dhaaman kee ieh su(n)dhar sayaam kee maan tamai ||867||",
+      "translation": "Removing the sorrows from their mind they are running in the alcoves and in the love of the beautiful Krishna, they have forgotten the decorum of their house.867.",
+      "lineNumber": 6
+    },
+    {
+      "id": "3970",
+      "gurmukhi": "ਫੂਲਿ ਸੀ ਗ੍ਵਾਰਨਿ ਫੂਲਿ ਰਹੀ ਪਟ ਰੰਗਨ ਕੇ ਫੁਨਿ ਫੂਲ ਲੀਏ ॥",
+      "transliteration": "fool see gavaiaaran fool rahee paT ra(n)gan ke fun fool le'ee ||",
+      "translation": "The gopis are blooming like flowers with the flowers attached to their garments",
+      "lineNumber": 7
+    },
+    {
+      "id": "3971",
+      "gurmukhi": "ਇਕ ਸ੍ਯਾਮ ਸੀਗਾਰ ਸੁ ਗਾਵਤ ਹੈ ਪੁਨਿ ਕੋਕਿਲਕਾ ਸਮ ਹੋਤ ਜੀਏ ॥",
+      "transliteration": "eik sayaam seegaar su gaavat hai pun kokilakaa sam hot je'ee ||",
+      "translation": "After bedecking themselves they are singing for Krishna like nightingale",
+      "lineNumber": 8
+    },
+    {
+      "id": "3972",
+      "gurmukhi": "ਰਿਤੁ ਨਾਮਹਿ ਸ੍ਯਾਮ ਭਯੋ ਸਜਨੀ ਤਿਹ ਤੇ ਸਭ ਛਾਜ ਸੁ ਸਾਜ ਦੀਏ ॥",
+      "transliteration": "rit naameh sayaam bhayo sajanee teh te sabh chhaaj su saaj dhe'ee ||",
+      "translation": "Now it is the spring season, therefore they have forsaken all the embellishment",
+      "lineNumber": 9
+    },
+    {
+      "id": "3973",
+      "gurmukhi": "ਪਿਖਿ ਜਾ ਚਤੁਰਾਨਨ ਚਉਕਿ ਰਹੈ ਜਿਹ ਦੇਖਤ ਹੋਤ ਹੁਲਾਸ ਹੀਏ ॥੮੬੮॥",
+      "transliteration": "pikh jaa chaturaanan chauk rahai jeh dhekhat hot hulaas he'ee ||868||",
+      "translation": "Seeing their glory even Brahma is wonder-struck.868.",
+      "lineNumber": 10
+    },
+    {
+      "id": "3974",
+      "gurmukhi": "ਏਕ ਸਮੈ ਰਹੈ ਕਿੰਸੁਕ ਫੂਲਿ ਸਖੀ ਤਹ ਪਉਨ ਬਹੈ ਸੁਖਦਾਈ ॥",
+      "transliteration": "ek samai rahai ki(n)suk fool sakhee teh paun bahai sukhadhaiee ||",
+      "translation": "Once the flowers of palas were blooming and the comfort-giving wind was blowing",
+      "lineNumber": 11
+    },
+    {
+      "id": "3975",
+      "gurmukhi": "ਭਉਰ ਗੁੰਜਾਰਤ ਹੈ ਇਤ ਤੇ ਉਤ ਤੇ ਮੁਰਲੀ ਨੰਦ ਲਾਲ ਬਜਾਈ ॥",
+      "transliteration": "bhaur gu(n)jaarat hai it te ut te muralee na(n)dh laal bajaiee ||",
+      "translation": "The black bees were humming here and there, Krishna had played on his flute",
+      "lineNumber": 12
+    },
+    {
+      "id": "3976",
+      "gurmukhi": "ਰੀਝਿ ਰਹਿਯੋ ਸੁਨਿ ਕੈ ਸੁਰ ਮੰਡਲ ਤਾ ਛਬਿ ਕੋ ਬਰਨਿਯੋ ਨਹੀ ਜਾਈ ॥",
+      "transliteration": "reejh rahiyo sun kai sur ma(n)ddal taa chhab ko baraniyo nahee jaiee ||",
+      "translation": "Hearing this flute the gods were getting pleased and the beauty of that spectacle is indescribable",
+      "lineNumber": 13
+    },
+    {
+      "id": "3977",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਅਉਸਰ ਯਾਹਿ ਭਈ ਦੁਖਦਾਈ ॥੮੬੯॥",
+      "transliteration": "taun samai sukhadhaik thee rit aausar yaeh bhiee dhukhadhaiee ||869||",
+      "translation": "At that time, that season was joy-giving, but now the same has become distressing.869.",
+      "lineNumber": 14
+    },
+    {
+      "id": "3978",
+      "gurmukhi": "ਜੇਠ ਸਮੈ ਸਖੀ ਤੀਰ ਨਦੀ ਹਮ ਖੇਲਤ ਚਿਤਿ ਹੁਲਾਸ ਬਢਾਈ ॥",
+      "transliteration": "jeTh samai sakhee teer nadhee ham khelat chit hulaas baddaiee ||",
+      "translation": "In the month of Jeth, O friend! we used to be absorbed in amorous play on the bank of the river, being pleased in our mind",
+      "lineNumber": 15
+    },
+    {
+      "id": "3979",
+      "gurmukhi": "ਚੰਦਨ ਸੋ ਤਨ ਲੀਪ ਸਭੈ ਸੁ ਗੁਲਾਬਹਿ ਸੋ ਧਰਨੀ ਛਿਰਕਾਈ ॥",
+      "transliteration": "cha(n)dhan so tan leep sabhai su gulaabeh so dharanee chhirakaiee ||",
+      "translation": "We plastered our bodies with sandal and sprinkled rose-water on the earth",
+      "lineNumber": 16
+    },
+    {
+      "id": "3980",
+      "gurmukhi": "ਲਾਇ ਸੁਗੰਧ ਭਲੀ ਕਪਰਿਯੋ ਪਰ ਤਾ ਕੀ ਪ੍ਰਭਾ ਬਰਨੀ ਨਹੀ ਜਾਈ ॥",
+      "transliteration": "lai suga(n)dh bhalee kapariyo par taa kee prabhaa baranee nahee jaiee ||",
+      "translation": "We applied fragrance to our clothes and that glory is indescribable",
+      "lineNumber": 17
+    },
+    {
+      "id": "3981",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਇਹ ਅਉਸਰ ਸ੍ਯਾਮ ਬਿਨਾ ਦੁਖਦਾਈ ॥੮੭੦॥",
+      "transliteration": "taun samai sukhadhaik thee ieh aausar sayaam binaa dhukhadhaiee ||870||",
+      "translation": "That occasion was highly pleasing, but now the same occasion has become troublesome without Krishna.870.",
+      "lineNumber": 18
+    },
+    {
+      "id": "3982",
+      "gurmukhi": "ਪਉਨ ਪ੍ਰਚੰਡ ਚਲੈ ਜਿਹ ਅਉਸਰ ਅਉਰ ਬਘੂਲਨ ਧੂਰਿ ਉਡਾਈ ॥",
+      "transliteration": "paun pracha(n)dd chalai jeh aausar aaur baghoolan dhoor uddaiee ||",
+      "translation": "",
+      "lineNumber": 19
+    },
+    {
+      "id": "3983",
+      "gurmukhi": "ਧੂਪ ਲਗੈ ਜਿਹ ਮਾਸ ਬੁਰੀ ਸੁ ਲਗੈ ਸੁਖਦਾਇਕ ਸੀਤਲ ਜਾਈ ॥",
+      "transliteration": "dhoop lagai jeh maas buree su lagai sukhadhaik seetal jaiee ||",
+      "translation": "The time, when the wind blew ferociously, the cranes arose and the sunshine was agonizing, even that time appeared to us as joy-giving",
+      "lineNumber": 20
+    },
+    {
+      "id": "3984",
+      "gurmukhi": "ਸ੍ਯਾਮ ਕੇ ਸੰਗ ਸਭੈ ਹਮ ਖੇਲਤ ਸੀਤਲ ਪਾਟਕ ਕਾਬਿ ਛਟਾਈ ॥",
+      "transliteration": "sayaam ke sa(n)g sabhai ham khelat seetal paaTak kaab chhaTaiee ||",
+      "translation": "All of us played with Krishna splashing water on one another",
+      "lineNumber": 21
+    },
+    {
+      "id": "3985",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਅਉਸਰ ਯਾਹਿ ਭਈ ਦੁਖਦਾਈ ॥੮੭੧॥",
+      "transliteration": "taun samai sukhadhaik thee rit aausar yaeh bhiee dhukhadhaiee ||871||",
+      "translation": "That time was extremely comfort-giving, but now the same time has become agonising.871.",
+      "lineNumber": 22
+    },
+    {
+      "id": "3986",
+      "gurmukhi": "ਜੋਰਿ ਘਟਾ ਘਟ ਆਏ ਜਹਾ ਸਖੀ ਬੂੰਦਨ ਮੇਘ ਭਲੀ ਛਬਿ ਪਾਈ ॥",
+      "transliteration": "jor ghaTaa ghaT aae jahaa sakhee boo(n)dhan megh bhalee chhab paiee ||",
+      "translation": "Look, O friend! the clouds have surrounded us and it is a beautiful spectacle created by raindrops",
+      "lineNumber": 23
+    },
+    {
+      "id": "3987",
+      "gurmukhi": "ਬੋਲਤ ਚਾਤ੍ਰਿਕ ਦਾਦਰ ਅਉ ਘਨ ਮੋਰਨ ਪੈ ਘਨਘੋਰ ਲਗਾਈ ॥",
+      "transliteration": "bolat chaatirak dhaadhar aau ghan moran pai ghanaghor lagaiee ||",
+      "translation": "The sound of cuckoo, peacock and frog is resounding",
+      "lineNumber": 24
+    },
+    {
+      "id": "3988",
+      "gurmukhi": "ਤਾਹਿ ਸਮੈ ਹਮ ਕਾਨਰ ਕੇ ਸੰਗਿ ਖੇਲਤ ਥੀ ਅਤਿ ਪ੍ਰੇਮ ਬਢਾਈ ॥",
+      "transliteration": "taeh samai ham kaanar ke sa(n)g khelat thee at prem baddaiee ||",
+      "translation": "In such a time we were absorbed with Krishna in amorous play",
+      "lineNumber": 25
+    },
+    {
+      "id": "3989",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਅਉਸਰ ਯਾਹਿ ਭਈ ਦੁਖਦਾਈ ॥੮੭੨॥",
+      "transliteration": "taun samai sukhadhaik thee rit aausar yaeh bhiee dhukhadhaiee ||872||",
+      "translation": "How much comfortable was that time and now this time is greatly distressing.872.",
+      "lineNumber": 26
+    },
+    {
+      "id": "3990",
+      "gurmukhi": "ਮੇਘ ਪਰੈ ਕਬਹੂੰ ਉਘਰੈ ਸਖੀ ਛਾਇ ਲਗੈ ਦ੍ਰੁਮ ਕੀ ਸੁਖਦਾਈ ॥",
+      "transliteration": "megh parai kabahoo(n) ugharai sakhee chhai lagai dhrum kee sukhadhaiee ||",
+      "translation": "Sometimes the clouds burst into rain and the shade of the tree appeared comfort-giving",
+      "lineNumber": 27
+    },
+    {
+      "id": "3991",
+      "gurmukhi": "ਸ੍ਯਾਮ ਕੇ ਸੰਗਿ ਫਿਰੈ ਸਜਨੀ ਰੰਗ ਫੂਲਨ ਕੇ ਹਮ ਬਸਤ੍ਰ ਬਨਾਈ ॥",
+      "transliteration": "sayaam ke sa(n)g firai sajanee ra(n)g foolan ke ham basatr banaiee ||",
+      "translation": "We used to wander with Krishna, wearing the garments of flowers",
+      "lineNumber": 28
+    },
+    {
+      "id": "3992",
+      "gurmukhi": "ਖੇਲਤ ਕ੍ਰੀੜ ਕਰੈ ਰਸ ਕੀ ਇਹ ਅਉਸਰ ਕਉ ਬਰਨਿਯੋ ਨਹੀ ਜਾਈ ॥",
+      "transliteration": "khelat kreeR karai ras kee ieh aausar kau baraniyo nahee jaiee ||",
+      "translation": "While roaming, we were absorbed in amorous play",
+      "lineNumber": 29
+    },
+    {
+      "id": "3993",
+      "gurmukhi": "ਸ੍ਯਾਮ ਸਨੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤ ਸ੍ਯਾਮ ਬਿਨਾ ਅਤਿ ਭੀ ਦੁਖਦਾਈ ॥੮੭੩॥",
+      "transliteration": "sayaam sanai sukhadhaik thee rit sayaam binaa at bhee dhukhadhaiee ||873||",
+      "translation": "It is impossible to describe that occasion, remaining with Krishna, that season has become distressing.873.",
+      "lineNumber": 30
+    },
+    {
+      "id": "3994",
+      "gurmukhi": "ਮਾਸ ਅਸੂ ਹਮ ਕਾਨਰ ਕੇ ਸੰਗਿ ਖੇਲਤ ਚਿਤਿ ਹੁਲਾਸ ਬਢਾਈ ॥",
+      "transliteration": "maas asoo ham kaanar ke sa(n)g khelat chit hulaas baddaiee ||",
+      "translation": "In the month of Ashvin, with great joy, we played with Krishna",
+      "lineNumber": 31
+    },
+    {
+      "id": "3995",
+      "gurmukhi": "ਕਾਨ੍ਰਹ ਤਹਾ ਪੁਨਿ ਗਾਵਤ ਥੋ ਅਤਿ ਸੁੰਦਰ ਰਾਗਨ ਤਾਨ ਬਸਾਈ ॥",
+      "transliteration": "kaanreh tahaa pun gaavat tho at su(n)dhar raagan taan basaiee ||",
+      "translation": "Being intoxicated Krishna used to play on (his flute) and produce tunes of charming musical modes,",
+      "lineNumber": 32
+    },
+    {
+      "id": "3996",
+      "gurmukhi": "ਗਾਵਤ ਥੀ ਹਮ ਹੂੰ ਸੰਗ ਤਾਹੀ ਕੇ ਤਾ ਛਬਿ ਕੋ ਬਰਨਿਯੋ ਨਹੀ ਜਾਈ ॥",
+      "transliteration": "gaavat thee ham hoo(n) sa(n)g taahee ke taa chhab ko baraniyo nahee jaiee ||",
+      "translation": "We sang with him and that spectacle is indescribable",
+      "lineNumber": 33
+    },
+    {
+      "id": "3997",
+      "gurmukhi": "ਤਾ ਸੰਗ ਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਸ੍ਯਾਮ ਬਿਨਾ ਅਬ ਭੀ ਦੁਖਦਾਈ ॥੮੭੪॥",
+      "transliteration": "taa sa(n)g mai sukhadhaik thee rit sayaam binaa ab bhee dhukhadhaiee ||874||",
+      "translation": "We remained in his company, that season was pleasure-giving and now the same season has become distressing.874.",
+      "lineNumber": 34
+    },
+    {
+      "id": "3998",
+      "gurmukhi": "ਕਾਤਿਕ ਕੀ ਸਖੀ ਰਾਸਿ ਬਿਖੈ ਰਤਿ ਖੇਲਤ ਥੀ ਹਰਿ ਸੋ ਚਿਤੁ ਲਾਈ ॥",
+      "transliteration": "kaatik kee sakhee raas bikhai rat khelat thee har so chit laiee ||",
+      "translation": "In the month of Kartik, we, in delight, were absorbed in amorous play with Krishna",
+      "lineNumber": 35
+    },
+    {
+      "id": "3999",
+      "gurmukhi": "ਸੇਤਹਿ ਗ੍ਵਾਰਨਿ ਕੇ ਪਟ ਛਾਜਤ ਸੇਤ ਨਦੀ ਤਹ ਧਾਰ ਬਹਾਈ ॥",
+      "transliteration": "seteh gavaiaaran ke paT chhaajat set nadhee teh dhaar bahaiee ||",
+      "translation": "In the current of the white river, the gopis also wore white clothes",
+      "lineNumber": 36
+    },
+    {
+      "id": "4000",
+      "gurmukhi": "ਭੂਖਨ ਸੇਤਹਿ ਗੋਪਨਿ ਕੇ ਅਰੁ ਮੋਤਿਨ ਹਾਰ ਭਲੀ ਛਬਿ ਪਾਈ ॥",
+      "transliteration": "bhookhan seteh gopan ke ar motin haar bhalee chhab paiee ||",
+      "translation": "The gopas also wore white ornaments and necklaces of pearls",
+      "lineNumber": 37
+    },
+    {
+      "id": "4001",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਅਉਸਰ ਯਾਹਿ ਭਈ ਦੁਖਦਾਈ ॥੮੭੫॥",
+      "transliteration": "taun samai sukhadhaik thee rit aausar yaeh bhiee dhukhadhaiee ||875||",
+      "translation": "They all looked fine, that time was very comfortable and now this time has become extremely agonising.875.",
+      "lineNumber": 38
+    },
+    {
+      "id": "4002",
+      "gurmukhi": "ਮਘ੍ਰ ਸਮੈ ਸਬ ਸ੍ਯਾਮ ਕੇ ਸੰਗਿ ਹੁਇ ਖੇਲਤ ਥੀ ਮਨਿ ਆਨੰਦ ਪਾਈ ॥",
+      "transliteration": "maghr samai sab sayaam ke sa(n)g hui khelat thee man aana(n)dh paiee ||",
+      "translation": "In the month of Maghar, in great pleasure, we used to play with Krishna",
+      "lineNumber": 39
+    },
+    {
+      "id": "4003",
+      "gurmukhi": "ਸੀਤ ਲਗੈ ਤਬ ਦੂਰ ਕਰੈ ਹਮ ਸ੍ਯਾਮ ਕੇ ਅੰਗ ਸੋ ਅੰਗ ਮਿਲਾਈ ॥",
+      "transliteration": "seet lagai tab dhoor karai ham sayaam ke a(n)g so a(n)g milaiee ||",
+      "translation": "When we felt cold, we removed the coolness by blending our limbs with the limbs of Krishna",
+      "lineNumber": 40
+    },
+    {
+      "id": "4004",
+      "gurmukhi": "ਫੂਲ ਚੰਬੇਲੀ ਕੇ ਫੂਲਿ ਰਹੇ ਜਹਿ ਨੀਰ ਘਟਿਯੋ ਜਮਨਾ ਜੀਅ ਆਈ ॥",
+      "transliteration": "fool cha(n)belee ke fool rahe jeh neer ghaTiyo jamanaa jeea aaiee ||",
+      "translation": "",
+      "lineNumber": 41
+    },
+    {
+      "id": "4005",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਅਉਸਰ ਯਾਹਿ ਭਈ ਦੁਖਦਾਈ ॥੮੭੬॥",
+      "transliteration": "taun samai sukhadhaik thee rit aausar yaeh bhiee dhukhadhaiee ||876||",
+      "translation": "The flowers of jasmine are not blooming and in sorrow, the water of Yamuna has also decreased, O friend! the season alongwith Krishna was very joy-giving and this season is very troublesome.876.",
+      "lineNumber": 42
+    },
+    {
+      "id": "4006",
+      "gurmukhi": "ਬੀਚ ਸਰਦ ਰਿਤੁ ਕੇ ਸਜਨੀ ਹਮ ਖੇਲਤ ਸ੍ਯਾਮ ਸੋ ਪ੍ਰੀਤਿ ਲਗਾਈ ॥",
+      "transliteration": "beech saradh rit ke sajanee ham khelat sayaam so preet lagaiee ||",
+      "translation": "",
+      "lineNumber": 43
+    },
+    {
+      "id": "4007",
+      "gurmukhi": "ਆਨੰਦ ਕੈ ਅਤਿ ਹੀ ਮਨ ਮੈ ਤਜ ਕੈ ਸਭ ਹੀ ਜੀਯ ਕੀ ਦੁਚਿਤਾਈ ॥",
+      "transliteration": "aana(n)dh kai at hee man mai taj kai sabh hee jeey kee dhuchitaiee ||",
+      "translation": "In winter season, we all had been happy in the company of Krishna and removing all our doubts we were absorbed in the amorous play",
+      "lineNumber": 44
+    },
+    {
+      "id": "4008",
+      "gurmukhi": "ਨਾਰਿ ਸਭੈ ਬ੍ਰਿਜ ਕੀਨ ਬਿਖੈ ਮਨ ਕੀ ਤਜਿ ਕੈ ਸਭ ਸੰਕ ਕਨ੍ਰਹਾਈ ॥",
+      "transliteration": "naar sabhai biraj keen bikhai man kee taj kai sabh sa(n)k kanrahaiee ||",
+      "translation": "Krishna also unhesitatingly considered all the gopis of Braja as his wives",
+      "lineNumber": 45
+    },
+    {
+      "id": "4009",
+      "gurmukhi": "ਤਾ ਸੰਗ ਸੋ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਸ੍ਯਾਮ ਬਿਨਾ ਅਬ ਭੀ ਦੁਖਦਾਈ ॥੮੭੭॥",
+      "transliteration": "taa sa(n)g so sukhadhaik thee rit sayaam binaa ab bhee dhukhadhaiee ||877||",
+      "translation": "In his company that season was pleasure-giving and now the same season has become troublesome.877.",
+      "lineNumber": 46
+    },
+    {
+      "id": "4010",
+      "gurmukhi": "ਮਾਘ ਬਿਖੈ ਮਿਲ ਕੈ ਹਰਿ ਸੋ ਹਮ ਸੋ ਰਸ ਰਾਸ ਕੀ ਖੇਲ ਮਚਾਈ ॥",
+      "transliteration": "maagh bikhai mil kai har so ham so ras raas kee khel machaiee ||",
+      "translation": "In the month of Magh, we had made the amorous play very famous in the company of Krishna",
+      "lineNumber": 47
+    },
+    {
+      "id": "4011",
+      "gurmukhi": "ਕਾਨ੍ਰਹ ਬਜਾਵਤ ਥੋ ਮੁਰਲੀ ਤਿਹ ਅਉਸਰ ਕੋ ਬਰਨਿਯੋ ਨਹਿ ਜਾਈ ॥",
+      "transliteration": "kaanreh bajaavat tho muralee teh aausar ko baraniyo neh jaiee ||",
+      "translation": "At that time, Krishna played on his flute, that occasion cannot be described",
+      "lineNumber": 48
+    },
+    {
+      "id": "4012",
+      "gurmukhi": "ਫੂਲਿ ਰਹੇ ਤਹਿ ਫੂਲ ਭਲੇ ਪਿਖਿਯੋ ਜਿਹ ਰੀਝਿ ਰਹੈ ਸੁਰਰਾਈ ॥",
+      "transliteration": "fool rahe teh fool bhale pikhiyo jeh reejh rahai suraraiee ||",
+      "translation": "The flowers were blossoming and Indra, the king of gods, was getting pleased on seeing that spectacle",
+      "lineNumber": 49
+    },
+    {
+      "id": "4013",
+      "gurmukhi": "ਤਉਨ ਸਮੈ ਸੁਖਦਾਇਕ ਥੀ ਰਿਤੁ ਸ੍ਯਾਮ ਬਿਨਾ ਅਬ ਭੀ ਦੁਖਦਾਈ ॥੮੭੮॥",
+      "transliteration": "taun samai sukhadhaik thee rit sayaam binaa ab bhee dhukhadhaiee ||878||",
+      "translation": "O friend! that season was comfort-giving and now the same season has become distressing.878.",
+      "lineNumber": 50
+    },
+    {
+      "id": "4014",
+      "gurmukhi": "ਸ੍ਯਾਮ ਚਿਤਾਰਿ ਸਭੈ ਤਹ ਗ੍ਵਾਰਨਿ ਸ੍ਯਾਮ ਕਹੈ ਜੁ ਹੁਤੀ ਬਡਭਾਗੀ ॥",
+      "transliteration": "sayaam chitaar sabhai teh gavaiaaran sayaam kahai ju hutee baddabhaagee ||",
+      "translation": "The poet Shyam says, “Those very fortunate gopis are remembering Krishna",
+      "lineNumber": 51
+    },
+    {
+      "id": "4015",
+      "gurmukhi": "ਤ੍ਯਾਗ ਦਈ ਸੁਧਿ ਅਉਰ ਸਭੈ ਹਰਿ ਬਾਤਨ ਕੇ ਰਸ ਭੀਤਰ ਪਾਗੀ ॥",
+      "transliteration": "tayaag dhiee sudh aaur sabhai har baatan ke ras bheetar paagee ||",
+      "translation": "Losing their consciousness, they are absorbed in the passionate love of Krihsna",
+      "lineNumber": 52
+    },
+    {
+      "id": "4016",
+      "gurmukhi": "ਏਕ ਗਿਰੀ ਧਰਿ ਹ੍ਵੈ ਬਿਸੁਧੀ ਇਕ ਪੈ ਕਰੁਨਾ ਹੀ ਬਿਖੈ ਅਨੁਰਾਗੀ ॥",
+      "transliteration": "ek giree dhar havai bisudhee ik pai karunaa hee bikhai anuraagee ||",
+      "translation": "Someone has fallen down, someone has become unconscious and someone has been fully engrossed in his love",
+      "lineNumber": 53
+    },
+    {
+      "id": "4017",
+      "gurmukhi": "ਕੈ ਸੁਧਿ ਸ੍ਯਾਮ ਕੇ ਖੇਲਨ ਕੀ ਮਿਲ ਕੈ ਸਭ ਗ੍ਵਾਰਨਿ ਰੋਵਨ ਲਾਗੀ ॥੮੭੯॥",
+      "transliteration": "kai sudh sayaam ke khelan kee mil kai sabh gavaiaaran rovan laagee ||879||",
+      "translation": "All the gopis have begun weeping after remembering their amorous play with Krishna.879.",
+      "lineNumber": 54
+    }
+  ],
+  "totalVerses": 54
+}

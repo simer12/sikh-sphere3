@@ -1,6 +1,8 @@
 // Sikh History Data
 // Content summarized from various scholarly sources with proper attribution
 
+import { guruNanakJeevanKatha } from './guruNanakJeevanKatha';
+
 export interface HistorySource {
   title: string;
   author: string;
@@ -9,17 +11,34 @@ export interface HistorySource {
   license: string;
 }
 
+export interface HistorySection {
+  id: string;
+  title: string;
+  titleGurmukhi?: string;
+  content?: string;
+}
+
 export interface HistoryArticle {
   id: string;
   title: string;
   titleGurmukhi?: string;
-  period: string;
-  era: 'gurus' | 'warriors' | 'modern' | '1984';
-  summary: string;
-  content: string;
+  titleEnglish?: string;
+  period?: string;
+  era?: 'gurus' | 'warriors' | 'modern' | '1984';
+  summary?: string;
+  content?: string;
   contentWarning?: string;
-  sources: HistorySource[];
+  sources?: HistorySource[];
   relatedArticles?: string[];
+  sections?: HistorySection[];
+  // New format properties (for EPUB-based articles)
+  author?: string;
+  publisher?: string;
+  category?: string;
+  language?: string;
+  description?: string;
+  tableOfContents?: any[];
+  chapters?: any[];
 }
 
 export interface HistoryEra {
@@ -102,28 +121,9 @@ export const historicalSources: { [key: string]: HistorySource } = {
 // History Articles
 export const historyArticles: HistoryArticle[] = [
   // GURUS ERA (1469-1708)
-  {
-    id: 'guru_nanak_dev_ji',
-    title: 'Guru Nanak Dev Ji - The Founder',
-    titleGurmukhi: 'ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ',
-    period: '1469-1539',
-    era: 'gurus',
-    summary: 'The founder of Sikhism who traveled extensively spreading the message of one God and equality.',
-    content: `Guru Nanak Dev Ji was born in 1469 in Talwandi (now Nankana Sahib, Pakistan). He founded Sikhism and established the core principles that would guide the faith for centuries to come.
-
-Key Teachings:
-• Ik Onkar - There is One God
-• Equality of all humans regardless of caste, creed, or gender
-• Honest living and sharing with others (Kirat Karo, Vand Chakko)
-• Constant remembrance of God (Naam Japna)
-
-Udasis (Spiritual Journeys):
-Guru Nanak Dev Ji traveled extensively across India, Tibet, Arabia, and Persia, covering over 28,000 km on foot. During these journeys, he engaged in dialogues with religious leaders and common people alike, spreading his message of unity and devotion.
-
-Legacy:
-He established the town of Kartarpur and appointed Guru Angad Dev Ji as his successor, beginning the lineage of ten Sikh Gurus. His hymns form a significant part of the Guru Granth Sahib.`,
-    sources: [historicalSources.grewal_persian, historicalSources.ganda_singh, historicalSources.cunningham]
-  },
+  // Complete Biography from EPUB
+  guruNanakJeevanKatha,
+  
   {
     id: 'ten_gurus',
     title: 'The Ten Sikh Gurus',
@@ -631,7 +631,7 @@ export const historyEras: HistoryEra[] = [
     period: '1469-1708',
     description: 'The foundation of Sikhism through ten enlightened Gurus, from Guru Nanak Dev Ji to Guru Gobind Singh Ji, who established the core spiritual and temporal principles of the faith.',
     icon: '🙏',
-    articles: ['guru_nanak_dev_ji', 'ten_gurus', 'guru_gobind_singh']
+    articles: ['guru-nanak-jeevan-katha', 'ten_gurus', 'guru_gobind_singh']
   },
   {
     id: 'warriors',

@@ -1,0 +1,751 @@
+{
+  "id": 3,
+  "name": "Shabd Hazare",
+  "nameGurmukhi": "ਸ਼ਬਦ ਹਜ਼ਾਰੇ",
+  "description": "Shabd Hazare from Sri Dasam Granth Sahib",
+  "verses": [
+    {
+      "id": "397",
+      "gurmukhi": "ਸ਼ਬਦ ਹਜ਼ਾਰੇ",
+      "transliteration": "shabadh hazaare",
+      "translation": "",
+      "lineNumber": 1
+    },
+    {
+      "id": "398",
+      "gurmukhi": "ਮਾਝ ਮਹਲਾ ੫ ਚਉਪਦੇ ਘਰੁ ੧ ॥",
+      "transliteration": "maajh mahalaa panjavaa chaupadhe ghar pehilaa ||",
+      "translation": "Maajh, Fifth Mehla, Chau-Padhay, First House:",
+      "lineNumber": 2
+    },
+    {
+      "id": "399",
+      "gurmukhi": "ਮੇਰਾ ਮਨੁ ਲੋਚੈ ਗੁਰ ਦਰਸਨ ਤਾਈ ॥",
+      "transliteration": "meraa man lochai gur dharasan taiee ||",
+      "translation": "My mind longs for the Blessed Vision of the Guru's Darshan.",
+      "lineNumber": 3
+    },
+    {
+      "id": "400",
+      "gurmukhi": "ਬਿਲਪ ਕਰੇ ਚਾਤ੍ਰਿਕ ਕੀ ਨਿਆਈ ॥",
+      "transliteration": "bilap kare chaatirak kee niaaiee ||",
+      "translation": "It cries out like the thirsty song-bird.",
+      "lineNumber": 4
+    },
+    {
+      "id": "401",
+      "gurmukhi": "ਤ੍ਰਿਖਾ ਨ ਉਤਰੈ ਸਾਂਤਿ ਨ ਆਵੈ ਬਿਨੁ ਦਰਸਨ ਸੰਤ ਪਿਆਰੇ ਜੀਉ ॥੧॥",
+      "transliteration": "tirakhaa na utarai saa(n)t na aavai bin dharasan sa(n)t piaare jeeau ||1||",
+      "translation": "My thirst is not quenched, and I can find no peace, without the Blessed Vision of the Beloved Saint. ||1||",
+      "lineNumber": 5
+    },
+    {
+      "id": "402",
+      "gurmukhi": "ਹਉ ਘੋਲੀ ਜੀਉ ਘੋਲਿ ਘੁਮਾਈ ਗੁਰ ਦਰਸਨ ਸੰਤ ਪਿਆਰੇ ਜੀਉ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "hau gholee jeeau ghol ghumaiee gur dharasan sa(n)t piaare jeeau ||1|| rahaau ||",
+      "translation": "I am a sacrifice, my soul is a sacrifice, to the Blessed Vision of the Beloved Saint Guru. ||1||Pause||",
+      "lineNumber": 6
+    },
+    {
+      "id": "403",
+      "gurmukhi": "ਤੇਰਾ ਮੁਖੁ ਸੁਹਾਵਾ ਜੀਉ ਸਹਜ ਧੁਨਿ ਬਾਣੀ ॥",
+      "transliteration": "teraa mukh suhaavaa jeeau sahaj dhun baanee ||",
+      "translation": "Your Face is so Beautiful, and the Sound of Your Words imparts intuitive wisdom.",
+      "lineNumber": 7
+    },
+    {
+      "id": "404",
+      "gurmukhi": "ਚਿਰੁ ਹੋਆ ਦੇਖੇ ਸਾਰਿੰਗਪਾਣੀ ॥",
+      "transliteration": "chir hoaa dhekhe saari(n)gapaanee ||",
+      "translation": "It is so long since this rainbird has had even a glimpse of water.",
+      "lineNumber": 8
+    },
+    {
+      "id": "405",
+      "gurmukhi": "ਧੰਨੁ ਸੁ ਦੇਸੁ ਜਹਾ ਤੂੰ ਵਸਿਆ ਮੇਰੇ ਸਜਣ ਮੀਤ ਮੁਰਾਰੇ ਜੀਉ ॥੨॥",
+      "transliteration": "dha(n)nu su dhes jahaa too(n) vasiaa mere sajan meet muraare jeeau ||2||",
+      "translation": "Blessed is that land where You dwell, O my Friend and Intimate Divine Guru. ||2||",
+      "lineNumber": 9
+    },
+    {
+      "id": "406",
+      "gurmukhi": "ਹਉ ਘੋਲੀ ਹਉ ਘੋਲਿ ਘੁਮਾਈ ਗੁਰ ਸਜਣ ਮੀਤ ਮੁਰਾਰੇ ਜੀਉ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "hau gholee hau ghol ghumaiee gur sajan meet muraare jeeau ||1|| rahaau ||",
+      "translation": "I am a sacrifice, I am forever a sacrifice, to my Friend and Intimate Divine Guru. ||1||Pause||",
+      "lineNumber": 10
+    },
+    {
+      "id": "407",
+      "gurmukhi": "ਇਕ ਘੜੀ ਨ ਮਿਲਤੇ ਤਾ ਕਲਿਜੁਗੁ ਹੋਤਾ ॥",
+      "transliteration": "eik ghaRee na milate taa kalijug hotaa ||",
+      "translation": "When I could not be with You for just one moment, the Dark Age of Kali Yuga dawned for me.",
+      "lineNumber": 11
+    },
+    {
+      "id": "408",
+      "gurmukhi": "ਹੁਣਿ ਕਦਿ ਮਿਲੀਐ ਪ੍ਰਿਅ ਤੁਧੁ ਭਗਵੰਤਾ ॥",
+      "transliteration": "hun kadh mileeaai pria tudh bhagava(n)taa ||",
+      "translation": "When will I meet You, O my Beloved Lord?",
+      "lineNumber": 12
+    },
+    {
+      "id": "409",
+      "gurmukhi": "ਮੋਹਿ ਰੈਣਿ ਨ ਵਿਹਾਵੈ ਨੀਦ ਨ ਆਵੈ ਬਿਨੁ ਦੇਖੇ ਗੁਰ ਦਰਬਾਰੇ ਜੀਉ ॥੩॥",
+      "transliteration": "moh rain na vihaavai needh na aavai bin dhekhe gur dharabaare jeeau ||3||",
+      "translation": "I cannot endure the night, and sleep does not come, without the Sight of the Beloved Guru's Court. ||3||",
+      "lineNumber": 13
+    },
+    {
+      "id": "410",
+      "gurmukhi": "ਹਉ ਘੋਲੀ ਜੀਉ ਘੋਲਿ ਘੁਮਾਈ ਤਿਸੁ ਸਚੇ ਗੁਰ ਦਰਬਾਰੇ ਜੀਉ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "hau gholee jeeau ghol ghumaiee tis sache gur dharabaare jeeau ||1|| rahaau ||",
+      "translation": "I am a sacrifice, my soul is a sacrifice, to that True Court of the Beloved Guru. ||1||Pause||",
+      "lineNumber": 14
+    },
+    {
+      "id": "411",
+      "gurmukhi": "ਭਾਗੁ ਹੋਆ ਗੁਰਿ ਸੰਤੁ ਮਿਲਾਇਆ ॥",
+      "transliteration": "bhaag hoaa gur sa(n)t milaiaa ||",
+      "translation": "By good fortune, I have met the Saint Guru.",
+      "lineNumber": 15
+    },
+    {
+      "id": "412",
+      "gurmukhi": "ਪ੍ਰਭੁ ਅਬਿਨਾਸੀ ਘਰ ਮਹਿ ਪਾਇਆ ॥",
+      "transliteration": "prabh abinaasee ghar meh paiaa ||",
+      "translation": "I have found the Immortal Lord within the home of my own self.",
+      "lineNumber": 16
+    },
+    {
+      "id": "413",
+      "gurmukhi": "ਸੇਵ ਕਰੀ ਪਲੁ ਚਸਾ ਨ ਵਿਛੁੜਾ ਜਨ ਨਾਨਕ ਦਾਸ ਤੁਮਾਰੇ ਜੀਉ ॥੪॥",
+      "transliteration": "sev karee pal chasaa na vichhuRaa jan naanak dhaas tumaare jeeau ||4||",
+      "translation": "I will now serve You forever, and I shall never be separated from You, even for an instant. Servant Nanak is Your slave, O Beloved Master. ||4||",
+      "lineNumber": 17
+    },
+    {
+      "id": "414",
+      "gurmukhi": "ਹਉ ਘੋਲੀ ਜੀਉ ਘੋਲਿ ਘੁਮਾਈ ਜਨ ਨਾਨਕ ਦਾਸ ਤੁਮਾਰੇ ਜੀਉ ॥ ਰਹਾਉ ॥੧॥੮॥",
+      "transliteration": "hau gholee jeeau ghol ghumaiee jan naanak dhaas tumaare jeeau || rahaau ||1||8||",
+      "translation": "I am a sacrifice, my soul is a sacrifice; servant Nanak is Your slave, Lord. ||Pause||1||8||",
+      "lineNumber": 18
+    },
+    {
+      "id": "415",
+      "gurmukhi": "ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ ॥",
+      "transliteration": "ikOankaar sat naam karataa purakh nirabhau niravair akaal moorat ajoonee saibha(n) gur prasaadh ||",
+      "translation": "One Universal Creator God. Truth Is The Name. Creative Being Personified. No Fear. No Hatred. Image Of The Undying. Beyond Birth. Self-Existent. By Guru's Grace:",
+      "lineNumber": 19
+    },
+    {
+      "id": "416",
+      "gurmukhi": "ਧਨਾਸਰੀ ਮਹਲਾ ੧ ਘਰੁ ੧ ਚਉਪਦੇ",
+      "transliteration": "dhanaasaree mahalaa pehilaa ghar pehilaa chaupadhe",
+      "translation": "Dhanaasaree, First Mehla, First House, Chau-Padhay:",
+      "lineNumber": 20
+    },
+    {
+      "id": "417",
+      "gurmukhi": "ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ ॥",
+      "transliteration": "ikOankaar sat naam karataa purakh nirabhau niravair akaal moorat ajoonee saibha(n) gur prasaadh ||",
+      "translation": "One Universal Creator God. Truth Is The Name. Creative Being Personified. No Fear. No Hatred. Image Of The Undying. Beyond Birth. Self-Existent. By Guru's Grace:",
+      "lineNumber": 21
+    },
+    {
+      "id": "418",
+      "gurmukhi": "ਜੀਉ ਡਰਤੁ ਹੈ ਆਪਣਾ ਕੈ ਸਿਉ ਕਰੀ ਪੁਕਾਰ ॥",
+      "transliteration": "jeeau ddarat hai aapanaa kai siau karee pukaar ||",
+      "translation": "My soul is afraid; to whom should I complain?",
+      "lineNumber": 22
+    },
+    {
+      "id": "419",
+      "gurmukhi": "ਦੂਖ ਵਿਸਾਰਣੁ ਸੇਵਿਆ ਸਦਾ ਸਦਾ ਦਾਤਾਰੁ ॥੧॥",
+      "transliteration": "dhookh visaaran seviaa sadhaa sadhaa dhaataar ||1||",
+      "translation": "I serve Him, who makes me forget my pains; He is the Giver, forever and ever. ||1||",
+      "lineNumber": 23
+    },
+    {
+      "id": "420",
+      "gurmukhi": "ਸਾਹਿਬੁ ਮੇਰਾ ਨੀਤ ਨਵਾ ਸਦਾ ਸਦਾ ਦਾਤਾਰੁ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "saahib meraa neet navaa sadhaa sadhaa dhaataar ||1|| rahaau ||",
+      "translation": "My Lord and Master is forever new; He is the Giver, forever and ever. ||1||Pause||",
+      "lineNumber": 24
+    },
+    {
+      "id": "421",
+      "gurmukhi": "ਅਨਦਿਨੁ ਸਾਹਿਬੁ ਸੇਵੀਐ ਅੰਤਿ ਛਡਾਏ ਸੋਇ ॥",
+      "transliteration": "anadhin saahib seveeaai a(n)t chhaddaae soi ||",
+      "translation": "Night and day, I serve my Lord and Master; He shall save me in the end.",
+      "lineNumber": 25
+    },
+    {
+      "id": "422",
+      "gurmukhi": "ਸੁਣਿ ਸੁਣਿ ਮੇਰੀ ਕਾਮਣੀ ਪਾਰਿ ਉਤਾਰਾ ਹੋਇ ॥੨॥",
+      "transliteration": "sun sun meree kaamanee paar utaaraa hoi ||2||",
+      "translation": "Hearing and listening, O my dear sister, I have crossed over. ||2||",
+      "lineNumber": 26
+    },
+    {
+      "id": "423",
+      "gurmukhi": "ਦਇਆਲ ਤੇਰੈ ਨਾਮਿ ਤਰਾ ॥",
+      "transliteration": "dhiaal terai naam taraa ||",
+      "translation": "O Merciful Lord, Your Name carries me across.",
+      "lineNumber": 27
+    },
+    {
+      "id": "424",
+      "gurmukhi": "ਸਦ ਕੁਰਬਾਣੈ ਜਾਉ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "sadh kurabaanai jaau ||1|| rahaau ||",
+      "translation": "I am forever a sacrifice to You. ||1||Pause||",
+      "lineNumber": 28
+    },
+    {
+      "id": "425",
+      "gurmukhi": "ਸਰਬੰ ਸਾਚਾ ਏਕੁ ਹੈ ਦੂਜਾ ਨਾਹੀ ਕੋਇ ॥",
+      "transliteration": "saraba(n) saachaa ek hai dhoojaa naahee koi ||",
+      "translation": "In all the world, there is only the One True Lord; there is no other at all.",
+      "lineNumber": 29
+    },
+    {
+      "id": "426",
+      "gurmukhi": "ਤਾ ਕੀ ਸੇਵਾ ਸੋ ਕਰੇ ਜਾ ਕਉ ਨਦਰਿ ਕਰੇ ॥੩॥",
+      "transliteration": "taa kee sevaa so kare jaa kau nadhar kare ||3||",
+      "translation": "He alone serves the Lord, upon whom the Lord casts His Glance of Grace. ||3||",
+      "lineNumber": 30
+    },
+    {
+      "id": "427",
+      "gurmukhi": "ਤੁਧੁ ਬਾਝੁ ਪਿਆਰੇ ਕੇਵ ਰਹਾ ॥",
+      "transliteration": "tudh baajh piaare kev rahaa ||",
+      "translation": "Without You, O Beloved, how could I even live?",
+      "lineNumber": 31
+    },
+    {
+      "id": "428",
+      "gurmukhi": "ਸਾ ਵਡਿਆਈ ਦੇਹਿ ਜਿਤੁ ਨਾਮਿ ਤੇਰੇ ਲਾਗਿ ਰਹਾਂ ॥",
+      "transliteration": "saa vaddiaaiee dheh jit naam tere laag rahaa(n) ||",
+      "translation": "Bless me with such greatness, that I may remain attached to Your Name.",
+      "lineNumber": 32
+    },
+    {
+      "id": "429",
+      "gurmukhi": "ਦੂਜਾ ਨਾਹੀ ਕੋਇ ਜਿਸੁ ਆਗੈ ਪਿਆਰੇ ਜਾਇ ਕਹਾ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "dhoojaa naahee koi jis aagai piaare jai kahaa ||1|| rahaau ||",
+      "translation": "There is no other, O Beloved, to whom I can go and speak. ||1||Pause||",
+      "lineNumber": 33
+    },
+    {
+      "id": "430",
+      "gurmukhi": "ਸੇਵੀ ਸਾਹਿਬੁ ਆਪਣਾ ਅਵਰੁ ਨ ਜਾਚੰਉ ਕੋਇ ॥",
+      "transliteration": "sevee saahib aapanaa avar na jaacha(n)au koi ||",
+      "translation": "I serve my Lord and Master; I ask for no other.",
+      "lineNumber": 34
+    },
+    {
+      "id": "431",
+      "gurmukhi": "ਨਾਨਕੁ ਤਾ ਕਾ ਦਾਸੁ ਹੈ ਬਿੰਦ ਬਿੰਦ ਚੁਖ ਚੁਖ ਹੋਇ ॥੪॥",
+      "transliteration": "naanak taa kaa dhaas hai bi(n)dh bi(n)dh chukh chukh hoi ||4||",
+      "translation": "Nanak is His slave; moment by moment, bit by bit, he is a sacrifice to Him. ||4||",
+      "lineNumber": 35
+    },
+    {
+      "id": "432",
+      "gurmukhi": "ਸਾਹਿਬ ਤੇਰੇ ਨਾਮ ਵਿਟਹੁ ਬਿੰਦ ਬਿੰਦ ਚੁਖ ਚੁਖ ਹੋਇ ॥੧॥ ਰਹਾਉ ॥੪॥੧॥",
+      "transliteration": "saahib tere naam viTahu bi(n)dh bi(n)dh chukh chukh hoi ||1|| rahaau ||4||1||",
+      "translation": "O Lord Master, I am a sacrifice to Your Name, moment by moment, bit by bit. ||1||Pause||4||1||",
+      "lineNumber": 36
+    },
+    {
+      "id": "433",
+      "gurmukhi": "ੴ ਸਤਿਗੁਰ ਪ੍ਰਸਾਦਿ ॥",
+      "transliteration": "ikOankaar satigur prasaadh ||",
+      "translation": "One Universal Creator God. By The Grace Of The True Guru:",
+      "lineNumber": 37
+    },
+    {
+      "id": "434",
+      "gurmukhi": "ਤਿਲੰਗ ਮਹਲਾ ੧ ਘਰੁ ੩",
+      "transliteration": "tila(n)g mahalaa pehilaa ghar teejaa",
+      "translation": "Tilang, First Mehla, Third House:",
+      "lineNumber": 38
+    },
+    {
+      "id": "435",
+      "gurmukhi": "ੴ ਸਤਿਗੁਰ ਪ੍ਰਸਾਦਿ ॥",
+      "transliteration": "ikOankaar satigur prasaadh ||",
+      "translation": "One Universal Creator God. By The Grace Of The True Guru:",
+      "lineNumber": 39
+    },
+    {
+      "id": "436",
+      "gurmukhi": "ਇਹੁ ਤਨੁ ਮਾਇਆ ਪਾਹਿਆ ਪਿਆਰੇ ਲੀਤੜਾ ਲਬਿ ਰੰਗਾਏ ॥",
+      "transliteration": "eih tan maiaa paahiaa piaare leetaRaa lab ra(n)gaae ||",
+      "translation": "This body fabric is conditioned by Maya, O beloved; this cloth is dyed in greed.",
+      "lineNumber": 40
+    },
+    {
+      "id": "437",
+      "gurmukhi": "ਮੇਰੈ ਕੰਤ ਨ ਭਾਵੈ ਚੋਲੜਾ ਪਿਆਰੇ ਕਿਉ ਧਨ ਸੇਜੈ ਜਾਏ ॥੧॥",
+      "transliteration": "merai ka(n)t na bhaavai cholaRaa piaare kiau dhan sejai jaae ||1||",
+      "translation": "My Husband Lord is not pleased by these clothes, O Beloved; how can the soul-bride go to His bed? ||1||",
+      "lineNumber": 41
+    },
+    {
+      "id": "438",
+      "gurmukhi": "ਹੰਉ ਕੁਰਬਾਨੈ ਜਾਉ ਮਿਹਰਵਾਨਾ ਹੰਉ ਕੁਰਬਾਨੈ ਜਾਉ ॥",
+      "transliteration": "ha(n)au kurabaanai jaau miharavaanaa ha(n)au kurabaanai jaau ||",
+      "translation": "I am a sacrifice, O Dear Merciful Lord; I am a sacrifice to You.",
+      "lineNumber": 42
+    },
+    {
+      "id": "439",
+      "gurmukhi": "ਹੰਉ ਕੁਰਬਾਨੈ ਜਾਉ ਤਿਨਾ ਕੈ ਲੈਨਿ ਜੋ ਤੇਰਾ ਨਾਉ ॥",
+      "transliteration": "ha(n)au kurabaanai jaau tinaa kai lain jo teraa naau ||",
+      "translation": "I am a sacrifice to those who take to Your Name.",
+      "lineNumber": 43
+    },
+    {
+      "id": "440",
+      "gurmukhi": "ਲੈਨਿ ਜੋ ਤੇਰਾ ਨਾਉ ਤਿਨਾ ਕੈ ਹੰਉ ਸਦ ਕੁਰਬਾਨੈ ਜਾਉ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "lain jo teraa naau tinaa kai ha(n)au sadh kurabaanai jaau ||1|| rahaau ||",
+      "translation": "Unto those who take to Your Name, I am forever a sacrifice. ||1||Pause||",
+      "lineNumber": 44
+    },
+    {
+      "id": "441",
+      "gurmukhi": "ਕਾਇਆ ਰੰਙਣਿ ਜੇ ਥੀਐ ਪਿਆਰੇ ਪਾਈਐ ਨਾਉ ਮਜੀਠ ॥",
+      "transliteration": "kaiaa ra(n)n(g)n je theeaai piaare paieeaai naau majeeTh ||",
+      "translation": "If the body becomes the dyer's vat, O Beloved, and the Name is placed within it as the dye,",
+      "lineNumber": 45
+    },
+    {
+      "id": "442",
+      "gurmukhi": "ਰੰਙਣ ਵਾਲਾ ਜੇ ਰੰਙੈ ਸਾਹਿਬੁ ਐਸਾ ਰੰਗੁ ਨ ਡੀਠ ॥੨॥",
+      "transliteration": "ra(n)n(g)n vaalaa je ra(n)n(g)ai saahib aaisaa ra(n)g na ddeeTh ||2||",
+      "translation": "and if the Dyer who dyes this cloth is the Lord Master - O, such a color has never been seen before! ||2||",
+      "lineNumber": 46
+    },
+    {
+      "id": "443",
+      "gurmukhi": "ਜਿਨ ਕੇ ਚੋਲੇ ਰਤੜੇ ਪਿਆਰੇ ਕੰਤੁ ਤਿਨਾ ਕੈ ਪਾਸਿ ॥",
+      "transliteration": "jin ke chole rataRe piaare ka(n)t tinaa kai paas ||",
+      "translation": "Those whose shawls are so dyed, O Beloved, their Husband Lord is always with them.",
+      "lineNumber": 47
+    },
+    {
+      "id": "444",
+      "gurmukhi": "ਧੂੜਿ ਤਿਨਾ ਕੀ ਜੇ ਮਿਲੈ ਜੀ ਕਹੁ ਨਾਨਕ ਕੀ ਅਰਦਾਸਿ ॥੩॥",
+      "transliteration": "dhooR tinaa kee je milai jee kahu naanak kee aradhaas ||3||",
+      "translation": "Bless me with the dust of those humble beings, O Dear Lord. Says Nanak, this is my prayer. ||3||",
+      "lineNumber": 48
+    },
+    {
+      "id": "445",
+      "gurmukhi": "ਆਪੇ ਸਾਜੇ ਆਪੇ ਰੰਗੇ ਆਪੇ ਨਦਰਿ ਕਰੇਇ ॥",
+      "transliteration": "aape saaje aape ra(n)ge aape nadhar karei ||",
+      "translation": "He Himself creates, and He Himself imbues us. He Himself bestows His Glance of Grace.",
+      "lineNumber": 49
+    },
+    {
+      "id": "446",
+      "gurmukhi": "ਨਾਨਕ ਕਾਮਣਿ ਕੰਤੈ ਭਾਵੈ ਆਪੇ ਹੀ ਰਾਵੇਇ ॥੪॥੧॥੩॥",
+      "transliteration": "naanak kaaman ka(n)tai bhaavai aape hee raavei ||4||1||3||",
+      "translation": "O Nanak, if the soul-bride becomes pleasing to her Husband Lord, He Himself enjoys her. ||4||1||3||",
+      "lineNumber": 50
+    },
+    {
+      "id": "447",
+      "gurmukhi": "ਤਿਲੰਗ ਮਃ ੧ ॥",
+      "transliteration": "tila(n)g mahalaa pehilaa ||",
+      "translation": "Tilang, First Mehla:",
+      "lineNumber": 51
+    },
+    {
+      "id": "448",
+      "gurmukhi": "ਇਆਨੜੀਏ ਮਾਨੜਾ ਕਾਇ ਕਰੇਹਿ ॥",
+      "transliteration": "eiaanaRe'e maanaRaa kai kareh ||",
+      "translation": "O foolish and ignorant soul-bride, why are you so proud?",
+      "lineNumber": 52
+    },
+    {
+      "id": "449",
+      "gurmukhi": "ਆਪਨੜੈ ਘਰਿ ਹਰਿ ਰੰਗੋ ਕੀ ਨ ਮਾਣੇਹਿ ॥",
+      "transliteration": "aapanaRai ghar har ra(n)go kee na maaneh ||",
+      "translation": "Within the home of your own self, why do you not enjoy the Love of your Lord?",
+      "lineNumber": 53
+    },
+    {
+      "id": "450",
+      "gurmukhi": "ਸਹੁ ਨੇੜੈ ਧਨ ਕੰਮਲੀਏ ਬਾਹਰੁ ਕਿਆ ਢੂਢੇਹਿ ॥",
+      "transliteration": "sahu neRai dhan ka(n)male'ee baahar kiaa ddooddeh ||",
+      "translation": "Your Husband Lord is so very near, O foolish bride; why do you search for Him outside?",
+      "lineNumber": 54
+    },
+    {
+      "id": "451",
+      "gurmukhi": "ਭੈ ਕੀਆ ਦੇਹਿ ਸਲਾਈਆ ਨੈਣੀ ਭਾਵ ਕਾ ਕਰਿ ਸੀਗਾਰੋ ॥",
+      "transliteration": "bhai keeaa dheh salaieeaa nainee bhaav kaa kar seegaaro ||",
+      "translation": "Apply the Fear of God as the maascara to adorn your eyes, and make the Love of the Lord your ornament.",
+      "lineNumber": 55
+    },
+    {
+      "id": "452",
+      "gurmukhi": "ਤਾ ਸੋਹਾਗਣਿ ਜਾਣੀਐ ਲਾਗੀ ਜਾ ਸਹੁ ਧਰੇ ਪਿਆਰੋ ॥੧॥",
+      "transliteration": "taa sohaagan jaaneeaai laagee jaa sahu dhare piaaro ||1||",
+      "translation": "Then, you shall be known as a devoted and committed soul-bride, when you enshrine love for your Husband Lord. ||1||",
+      "lineNumber": 56
+    },
+    {
+      "id": "453",
+      "gurmukhi": "ਇਆਣੀ ਬਾਲੀ ਕਿਆ ਕਰੇ ਜਾ ਧਨ ਕੰਤ ਨ ਭਾਵੈ ॥",
+      "transliteration": "eiaanee baalee kiaa kare jaa dhan ka(n)t na bhaavai ||",
+      "translation": "What can the silly young bride do, if she is not pleasing to her Husband Lord?",
+      "lineNumber": 57
+    },
+    {
+      "id": "454",
+      "gurmukhi": "ਕਰਣ ਪਲਾਹ ਕਰੇ ਬਹੁਤੇਰੇ ਸਾ ਧਨ ਮਹਲੁ ਨ ਪਾਵੈ ॥",
+      "transliteration": "karan palaeh kare bahutere saa dhan mahal na paavai ||",
+      "translation": "She may plead and implore so many times, but still, such a bride shall not obtain the Mansion of the Lord's Presence.",
+      "lineNumber": 58
+    },
+    {
+      "id": "455",
+      "gurmukhi": "ਵਿਣੁ ਕਰਮਾ ਕਿਛੁ ਪਾਈਐ ਨਾਹੀ ਜੇ ਬਹੁਤੇਰਾ ਧਾਵੈ ॥",
+      "transliteration": "vin karamaa kichh paieeaai naahee je bahuteraa dhaavai ||",
+      "translation": "Without the karma of good deeds, nothing is obtained, although she may run around frantically.",
+      "lineNumber": 59
+    },
+    {
+      "id": "456",
+      "gurmukhi": "ਲਬ ਲੋਭ ਅਹੰਕਾਰ ਕੀ ਮਾਤੀ ਮਾਇਆ ਮਾਹਿ ਸਮਾਣੀ ॥",
+      "transliteration": "lab lobh aha(n)kaar kee maatee maiaa maeh samaanee ||",
+      "translation": "She is intoxicated with greed, pride and egotism, and engrossed in Maya.",
+      "lineNumber": 60
+    },
+    {
+      "id": "457",
+      "gurmukhi": "ਇਨੀ ਬਾਤੀ ਸਹੁ ਪਾਈਐ ਨਾਹੀ ਭਈ ਕਾਮਣਿ ਇਆਣੀ ॥੨॥",
+      "transliteration": "einee baatee sahu paieeaai naahee bhiee kaaman iaanee ||2||",
+      "translation": "She cannot obtain her Husband Lord in these ways; the young bride is so foolish! ||2||",
+      "lineNumber": 61
+    },
+    {
+      "id": "458",
+      "gurmukhi": "ਜਾਇ ਪੁਛਹੁ ਸੋਹਾਗਣੀ ਵਾਹੈ ਕਿਨੀ ਬਾਤੀ ਸਹੁ ਪਾਈਐ ॥",
+      "transliteration": "jai puchhahu sohaaganee vaahai kinee baatee sahu paieeaai ||",
+      "translation": "Go and ask the happy, pure soul-brides, how did they obtain their Husband Lord?",
+      "lineNumber": 62
+    },
+    {
+      "id": "459",
+      "gurmukhi": "ਜੋ ਕਿਛੁ ਕਰੇ ਸੋ ਭਲਾ ਕਰਿ ਮਾਨੀਐ ਹਿਕਮਤਿ ਹੁਕਮੁ ਚੁਕਾਈਐ ॥",
+      "transliteration": "jo kichh kare so bhalaa kar maaneeaai hikamat hukam chukaieeaai ||",
+      "translation": "Whatever the Lord does, accept that as good; do away with your own cleverness and self-will.",
+      "lineNumber": 63
+    },
+    {
+      "id": "460",
+      "gurmukhi": "ਜਾ ਕੈ ਪ੍ਰੇਮਿ ਪਦਾਰਥੁ ਪਾਈਐ ਤਉ ਚਰਣੀ ਚਿਤੁ ਲਾਈਐ ॥",
+      "transliteration": "jaa kai prem padhaarath paieeaai tau charanee chit laieeaai ||",
+      "translation": "By His Love, true wealth is obtained; link your consciousness to His lotus feet.",
+      "lineNumber": 64
+    },
+    {
+      "id": "461",
+      "gurmukhi": "ਸਹੁ ਕਹੈ ਸੋ ਕੀਜੈ ਤਨੁ ਮਨੋ ਦੀਜੈ ਐਸਾ ਪਰਮਲੁ ਲਾਈਐ ॥",
+      "transliteration": "sahu kahai so keejai tan mano dheejai aaisaa paramal laieeaai ||",
+      "translation": "As your Husband Lord directs, so you must act; surrender your body and mind to Him, and apply this perfume to yourself.",
+      "lineNumber": 65
+    },
+    {
+      "id": "462",
+      "gurmukhi": "ਏਵ ਕਹਹਿ ਸੋਹਾਗਣੀ ਭੈਣੇ ਇਨੀ ਬਾਤੀ ਸਹੁ ਪਾਈਐ ॥੩॥",
+      "transliteration": "ev kaheh sohaaganee bhaine inee baatee sahu paieeaai ||3||",
+      "translation": "So speaks the happy soul-bride, O sister; in this way, the Husband Lord is obtained. ||3||",
+      "lineNumber": 66
+    },
+    {
+      "id": "463",
+      "gurmukhi": "ਆਪੁ ਗਵਾਈਐ ਤਾ ਸਹੁ ਪਾਈਐ ਅਉਰੁ ਕੈਸੀ ਚਤੁਰਾਈ ॥",
+      "transliteration": "aap gavaieeaai taa sahu paieeaai aaur kaisee chaturaiee ||",
+      "translation": "Give up your selfhood, and so obtain your Husband Lord; what other clever tricks are of any use?",
+      "lineNumber": 67
+    },
+    {
+      "id": "464",
+      "gurmukhi": "ਸਹੁ ਨਦਰਿ ਕਰਿ ਦੇਖੈ ਸੋ ਦਿਨੁ ਲੇਖੈ ਕਾਮਣਿ ਨਉ ਨਿਧਿ ਪਾਈ ॥",
+      "transliteration": "sahu nadhar kar dhekhai so dhin lekhai kaaman nau nidh paiee ||",
+      "translation": "When the Husband Lord looks upon the soul-bride with His Gracious Glance, that day is historic - the bride obtains the nine treasures.",
+      "lineNumber": 68
+    },
+    {
+      "id": "465",
+      "gurmukhi": "ਆਪਣੇ ਕੰਤ ਪਿਆਰੀ ਸਾ ਸੋਹਾਗਣਿ ਨਾਨਕ ਸਾ ਸਭਰਾਈ ॥",
+      "transliteration": "aapane ka(n)t piaaree saa sohaagan naanak saa sabharaiee ||",
+      "translation": "She who is loved by her Husband Lord, is the true soul-bride; O Nanak, she is the queen of all.",
+      "lineNumber": 69
+    },
+    {
+      "id": "466",
+      "gurmukhi": "ਐਸੈ ਰੰਗਿ ਰਾਤੀ ਸਹਜ ਕੀ ਮਾਤੀ ਅਹਿਨਿਸਿ ਭਾਇ ਸਮਾਣੀ ॥",
+      "transliteration": "aaisai ra(n)g raatee sahaj kee maatee ahinis bhai samaanee ||",
+      "translation": "Thus she is imbued with His Love, intoxicated with delight; day and night, she is absorbed in His Love.",
+      "lineNumber": 70
+    },
+    {
+      "id": "467",
+      "gurmukhi": "ਸੁੰਦਰਿ ਸਾਇ ਸਰੂਪ ਬਿਚਖਣਿ ਕਹੀਐ ਸਾ ਸਿਆਣੀ ॥੪॥੨॥੪॥",
+      "transliteration": "su(n)dhar sai saroop bichakhan kaheeaai saa siaanee ||4||2||4||",
+      "translation": "She is beautiful, glorious and brilliant; she is known as truly wise. ||4||2||4||",
+      "lineNumber": 71
+    },
+    {
+      "id": "468",
+      "gurmukhi": "ਸੂਹੀ ਮਹਲਾ ੧ ॥",
+      "transliteration": "soohee mahalaa pehilaa ||",
+      "translation": "Soohee, First Mehla:",
+      "lineNumber": 72
+    },
+    {
+      "id": "469",
+      "gurmukhi": "ਕਉਣ ਤਰਾਜੀ ਕਵਣੁ ਤੁਲਾ ਤੇਰਾ ਕਵਣੁ ਸਰਾਫੁ ਬੁਲਾਵਾ ॥",
+      "transliteration": "kaun taraajee kavan tulaa teraa kavan saraaf bulaavaa ||",
+      "translation": "What scale, what weights, and what assayer shall I call for You, Lord?",
+      "lineNumber": 73
+    },
+    {
+      "id": "470",
+      "gurmukhi": "ਕਉਣੁ ਗੁਰੂ ਕੈ ਪਹਿ ਦੀਖਿਆ ਲੇਵਾ ਕੈ ਪਹਿ ਮੁਲੁ ਕਰਾਵਾ ॥੧॥",
+      "transliteration": "kaun guroo kai peh dheekhiaa levaa kai peh mul karaavaa ||1||",
+      "translation": "From what guru should I receive instruction? By whom should I have Your value appraised? ||1||",
+      "lineNumber": 74
+    },
+    {
+      "id": "471",
+      "gurmukhi": "ਮੇਰੇ ਲਾਲ ਜੀਉ ਤੇਰਾ ਅੰਤੁ ਨ ਜਾਣਾ ॥",
+      "transliteration": "mere laal jeeau teraa a(n)t na jaanaa ||",
+      "translation": "O my Dear Beloved Lord, Your limits are not known.",
+      "lineNumber": 75
+    },
+    {
+      "id": "472",
+      "gurmukhi": "ਤੂੰ ਜਲਿ ਥਲਿ ਮਹੀਅਲਿ ਭਰਿਪੁਰਿ ਲੀਣਾ ਤੂੰ ਆਪੇ ਸਰਬ ਸਮਾਣਾ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "too(n) jal thal maheeal bharipur leenaa too(n) aape sarab samaanaa ||1|| rahaau ||",
+      "translation": "You pervade the water, the land, and the sky; You Yourself are All-pervading. ||1||Pause||",
+      "lineNumber": 76
+    },
+    {
+      "id": "473",
+      "gurmukhi": "ਮਨੁ ਤਾਰਾਜੀ ਚਿਤੁ ਤੁਲਾ ਤੇਰੀ ਸੇਵ ਸਰਾਫੁ ਕਮਾਵਾ ॥",
+      "transliteration": "man taaraajee chit tulaa teree sev saraaf kamaavaa ||",
+      "translation": "Mind is the scale, consciousness the weights, and the performance of Your service is the appraiser.",
+      "lineNumber": 77
+    },
+    {
+      "id": "474",
+      "gurmukhi": "ਘਟ ਹੀ ਭੀਤਰਿ ਸੋ ਸਹੁ ਤੋਲੀ ਇਨ ਬਿਧਿ ਚਿਤੁ ਰਹਾਵਾ ॥੨॥",
+      "transliteration": "ghaT hee bheetar so sahu tolee in bidh chit rahaavaa ||2||",
+      "translation": "Deep within my heart, I weigh my Husband Lord; in this way I focus my consciousness. ||2||",
+      "lineNumber": 78
+    },
+    {
+      "id": "475",
+      "gurmukhi": "ਆਪੇ ਕੰਡਾ ਤੋਲੁ ਤਰਾਜੀ ਆਪੇ ਤੋਲਣਹਾਰਾ ॥",
+      "transliteration": "aape ka(n)ddaa tol taraajee aape tolanahaaraa ||",
+      "translation": "You Yourself are the balance, the weights and the scale; You Yourself are the weigher.",
+      "lineNumber": 79
+    },
+    {
+      "id": "476",
+      "gurmukhi": "ਆਪੇ ਦੇਖੈ ਆਪੇ ਬੂਝੈ ਆਪੇ ਹੈ ਵਣਜਾਰਾ ॥੩॥",
+      "transliteration": "aape dhekhai aape boojhai aape hai vanajaaraa ||3||",
+      "translation": "You Yourself see, and You Yourself understand; You Yourself are the trader. ||3||",
+      "lineNumber": 80
+    },
+    {
+      "id": "477",
+      "gurmukhi": "ਅੰਧੁਲਾ ਨੀਚ ਜਾਤਿ ਪਰਦੇਸੀ ਖਿਨੁ ਆਵੈ ਤਿਲੁ ਜਾਵੈ ॥",
+      "transliteration": "a(n)dhulaa neech jaat paradhesee khin aavai til jaavai ||",
+      "translation": "The blind, low class wandering soul, comes for a moment, and departs in an instant.",
+      "lineNumber": 81
+    },
+    {
+      "id": "478",
+      "gurmukhi": "ਤਾ ਕੀ ਸੰਗਤਿ ਨਾਨਕੁ ਰਹਦਾ ਕਿਉ ਕਰਿ ਮੂੜਾ ਪਾਵੈ ॥੪॥੨॥੯॥",
+      "transliteration": "taa kee sa(n)gat naanak rahadhaa kiau kar mooRaa paavai ||4||2||9||",
+      "translation": "In its company, Nanak dwells; how can the fool attain the Lord? ||4||2||9||",
+      "lineNumber": 82
+    },
+    {
+      "id": "479",
+      "gurmukhi": "ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ ॥",
+      "transliteration": "ikOankaar sat naam karataa purakh nirabhau niravair akaal moorat ajoonee saibha(n) gur prasaadh ||",
+      "translation": "One Universal Creator God. Truth Is The Name. Creative Being Personified. No Fear. No Hatred. Image Of The Undying. Beyond Birth. Self-Existent. By Guru's Grace:",
+      "lineNumber": 83
+    },
+    {
+      "id": "480",
+      "gurmukhi": "ਰਾਗੁ ਬਿਲਾਵਲੁ ਮਹਲਾ ੧ ਚਉਪਦੇ ਘਰੁ ੧ ॥",
+      "transliteration": "raag bilaaval mahalaa pehilaa chaupadhe ghar pehilaa ||",
+      "translation": "Raag Bilaaval, First Mehla, Chau-Padhay, First House:",
+      "lineNumber": 84
+    },
+    {
+      "id": "481",
+      "gurmukhi": "ਤੂ ਸੁਲਤਾਨੁ ਕਹਾ ਹਉ ਮੀਆ ਤੇਰੀ ਕਵਨ ਵਡਾਈ ॥",
+      "transliteration": "too sulataan kahaa hau meeaa teree kavan vaddaiee ||",
+      "translation": "You are the Emperor, and I call You a chief - how does this add to Your greatness?",
+      "lineNumber": 85
+    },
+    {
+      "id": "482",
+      "gurmukhi": "ਜੋ ਤੂ ਦੇਹਿ ਸੁ ਕਹਾ ਸੁਆਮੀ ਮੈ ਮੂਰਖ ਕਹਣੁ ਨ ਜਾਈ ॥੧॥",
+      "transliteration": "jo too dheh su kahaa suaamee mai moorakh kahan na jaiee ||1||",
+      "translation": "As You permit me, I praise You, O Lord and Master; I am ignorant, and I cannot chant Your Praises. ||1||",
+      "lineNumber": 86
+    },
+    {
+      "id": "483",
+      "gurmukhi": "ਤੇਰੇ ਗੁਣ ਗਾਵਾ ਦੇਹਿ ਬੁਝਾਈ ॥",
+      "transliteration": "tere gun gaavaa dheh bujhaiee ||",
+      "translation": "Please bless me with such understanding, that I may sing Your Glorious Praises.",
+      "lineNumber": 87
+    },
+    {
+      "id": "484",
+      "gurmukhi": "ਜੈਸੇ ਸਚ ਮਹਿ ਰਹਉ ਰਜਾਈ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "jaise sach meh rahau rajaiee ||1|| rahaau ||",
+      "translation": "May I dwell in Truth, according to Your Will. ||1||Pause||",
+      "lineNumber": 88
+    },
+    {
+      "id": "485",
+      "gurmukhi": "ਜੋ ਕਿਛੁ ਹੋਆ ਸਭੁ ਕਿਛੁ ਤੁਝ ਤੇ ਤੇਰੀ ਸਭ ਅਸਨਾਈ ॥",
+      "transliteration": "jo kichh hoaa sabh kichh tujh te teree sabh asanaiee ||",
+      "translation": "Whatever has happened, has all come from You. You are All-knowing.",
+      "lineNumber": 89
+    },
+    {
+      "id": "486",
+      "gurmukhi": "ਤੇਰਾ ਅੰਤੁ ਨ ਜਾਣਾ ਮੇਰੇ ਸਾਹਿਬ ਮੈ ਅੰਧੁਲੇ ਕਿਆ ਚਤੁਰਾਈ ॥੨॥",
+      "transliteration": "teraa a(n)t na jaanaa mere saahib mai a(n)dhule kiaa chaturaiee ||2||",
+      "translation": "Your limits cannot be known, O my Lord and Master; I am blind - what wisdom do I have? ||2||",
+      "lineNumber": 90
+    },
+    {
+      "id": "487",
+      "gurmukhi": "ਕਿਆ ਹਉ ਕਥੀ ਕਥੇ ਕਥਿ ਦੇਖਾ ਮੈ ਅਕਥੁ ਨ ਕਥਨਾ ਜਾਈ ॥",
+      "transliteration": "kiaa hau kathee kathe kath dhekhaa mai akath na kathanaa jaiee ||",
+      "translation": "What should I say? While talking, I talk of seeing, but I cannot describe the indescribable.",
+      "lineNumber": 91
+    },
+    {
+      "id": "488",
+      "gurmukhi": "ਜੋ ਤੁਧੁ ਭਾਵੈ ਸੋਈ ਆਖਾ ਤਿਲੁ ਤੇਰੀ ਵਡਿਆਈ ॥੩॥",
+      "transliteration": "jo tudh bhaavai soiee aakhaa til teree vaddiaaiee ||3||",
+      "translation": "As it pleases Your Will, I speak; it is just the tiniest bit of Your greatness. ||3||",
+      "lineNumber": 92
+    },
+    {
+      "id": "489",
+      "gurmukhi": "ਏਤੇ ਕੂਕਰ ਹਉ ਬੇਗਾਨਾ ਭਉਕਾ ਇਸੁ ਤਨ ਤਾਈ ॥",
+      "transliteration": "ete kookar hau begaanaa bhaukaa is tan taiee ||",
+      "translation": "Among so many dogs, I am an outcast; I bark for my body's belly.",
+      "lineNumber": 93
+    },
+    {
+      "id": "490",
+      "gurmukhi": "ਭਗਤਿ ਹੀਣੁ ਨਾਨਕੁ ਜੇ ਹੋਇਗਾ ਤਾ ਖਸਮੈ ਨਾਉ ਨ ਜਾਈ ॥੪॥੧॥",
+      "transliteration": "bhagat heen naanak je hoigaa taa khasamai naau na jaiee ||4||1||",
+      "translation": "Without devotional worship, O Nanak, even so, still, my Master's Name does not leave me. ||4||1||",
+      "lineNumber": 94
+    },
+    {
+      "id": "491",
+      "gurmukhi": "ਬਿਲਾਵਲੁ ਮਹਲਾ ੧ ॥",
+      "transliteration": "bilaaval mahalaa pehilaa ||",
+      "translation": "Bilaawal, First Mehla:",
+      "lineNumber": 95
+    },
+    {
+      "id": "492",
+      "gurmukhi": "ਮਨੁ ਮੰਦਰੁ ਤਨੁ ਵੇਸ ਕਲੰਦਰੁ ਘਟ ਹੀ ਤੀਰਥਿ ਨਾਵਾ ॥",
+      "transliteration": "man ma(n)dhar tan ves kala(n)dhar ghaT hee teerath naavaa ||",
+      "translation": "My mind is the temple, and my body is the simple cloth of the humble seeker; deep within my heart, I bathe at the sacred shrine.",
+      "lineNumber": 96
+    },
+    {
+      "id": "493",
+      "gurmukhi": "ਏਕੁ ਸਬਦੁ ਮੇਰੈ ਪ੍ਰਾਨਿ ਬਸਤੁ ਹੈ ਬਾਹੁੜਿ ਜਨਮਿ ਨ ਆਵਾ ॥੧॥",
+      "transliteration": "ek sabadh merai praan basat hai baahuR janam na aavaa ||1||",
+      "translation": "The One Word of the Shabad abides within my mind; I shall not come to be born again. ||1||",
+      "lineNumber": 97
+    },
+    {
+      "id": "494",
+      "gurmukhi": "ਮਨੁ ਬੇਧਿਆ ਦਇਆਲ ਸੇਤੀ ਮੇਰੀ ਮਾਈ ॥",
+      "transliteration": "man bedhiaa dhiaal setee meree maiee ||",
+      "translation": "My mind is pierced through by the Merciful Lord, O my mother!",
+      "lineNumber": 98
+    },
+    {
+      "id": "495",
+      "gurmukhi": "ਕਉਣੁ ਜਾਣੈ ਪੀਰ ਪਰਾਈ ॥",
+      "transliteration": "kaun jaanai peer paraiee ||",
+      "translation": "Who can know the pain of another?",
+      "lineNumber": 99
+    },
+    {
+      "id": "496",
+      "gurmukhi": "ਹਮ ਨਾਹੀ ਚਿੰਤ ਪਰਾਈ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "ham naahee chi(n)t paraiee ||1|| rahaau ||",
+      "translation": "I think of none other than the Lord. ||1||Pause||",
+      "lineNumber": 100
+    },
+    {
+      "id": "497",
+      "gurmukhi": "ਅਗਮ ਅਗੋਚਰ ਅਲਖ ਅਪਾਰਾ ਚਿੰਤਾ ਕਰਹੁ ਹਮਾਰੀ ॥",
+      "transliteration": "agam agochar alakh apaaraa chi(n)taa karahu hamaaree ||",
+      "translation": "O Lord, inaccessible, unfathomable, invisible and infinite: please, take care of me!",
+      "lineNumber": 101
+    },
+    {
+      "id": "498",
+      "gurmukhi": "ਜਲਿ ਥਲਿ ਮਹੀਅਲਿ ਭਰਿਪੁਰਿ ਲੀਣਾ ਘਟਿ ਘਟਿ ਜੋਤਿ ਤੁਮੑਾਰੀ ॥੨॥",
+      "transliteration": "jal thal maheeal bharipur leenaa ghaT ghaT jot tum(h)aaree ||2||",
+      "translation": "In the water, on the land and in sky, You are totally pervading. Your Light is in each and every heart. ||2||",
+      "lineNumber": 102
+    },
+    {
+      "id": "499",
+      "gurmukhi": "ਸਿਖ ਮਤਿ ਸਭ ਬੁਧਿ ਤੁਮੑਾਰੀ ਮੰਦਿਰ ਛਾਵਾ ਤੇਰੇ ॥",
+      "transliteration": "sikh mat sabh budh tum(h)aaree ma(n)dhir chhaavaa tere ||",
+      "translation": "All teachings, instructions and understandings are Yours; the mansions and sanctuaries are Yours as well.",
+      "lineNumber": 103
+    },
+    {
+      "id": "500",
+      "gurmukhi": "ਤੁਝ ਬਿਨੁ ਅਵਰੁ ਨ ਜਾਣਾ ਮੇਰੇ ਸਾਹਿਬਾ ਗੁਣ ਗਾਵਾ ਨਿਤ ਤੇਰੇ ॥੩॥",
+      "transliteration": "tujh bin avar na jaanaa mere saahibaa gun gaavaa nit tere ||3||",
+      "translation": "Without You, I know no other, O my Lord and Master; I continually sing Your Glorious Praises. ||3||",
+      "lineNumber": 104
+    },
+    {
+      "id": "501",
+      "gurmukhi": "ਜੀਅ ਜੰਤ ਸਭਿ ਸਰਣਿ ਤੁਮੑਾਰੀ ਸਰਬ ਚਿੰਤ ਤੁਧੁ ਪਾਸੇ ॥",
+      "transliteration": "jeea ja(n)t sabh saran tum(h)aaree sarab chi(n)t tudh paase ||",
+      "translation": "All beings and creatures seek the Protection of Your Sanctuary; all thought of their care rests with You.",
+      "lineNumber": 105
+    },
+    {
+      "id": "502",
+      "gurmukhi": "ਜੋ ਤੁਧੁ ਭਾਵੈ ਸੋਈ ਚੰਗਾ ਇਕ ਨਾਨਕ ਕੀ ਅਰਦਾਸੇ ॥੪॥੨॥",
+      "transliteration": "jo tudh bhaavai soiee cha(n)gaa ik naanak kee aradhaase ||4||2||",
+      "translation": "That which pleases Your Will is good; this alone is Nanak's prayer. ||4||2||",
+      "lineNumber": 106
+    }
+  ],
+  "totalVerses": 106
+}

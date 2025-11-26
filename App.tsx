@@ -10,6 +10,8 @@ import { theme } from './src/theme';
 import HomeScreen from './src/screens/HomeScreen';
 import NitnemScreen from './src/screens/NitnemScreen';
 import BaniDetailScreen from './src/screens/BaniDetailScreen';
+import DasamGranthScreen from './src/screens/DasamGranthScreen';
+import DasamGranthDetailScreen from './src/screens/DasamGranthDetailScreen';
 import LiveKirtanScreen from './src/screens/LiveKirtanScreen';
 import HukamnamaScreen from './src/screens/HukamnamaScreen';
 import CalendarScreen from './src/screens/CalendarScreen';
@@ -24,6 +26,21 @@ import HistoryArticleScreen from './src/screens/HistoryArticleScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+function HomeStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.primary },
+        headerTintColor: '#fff',
+      }}
+    >
+      <Stack.Screen name="HomeMain" component={HomeScreen} options={{ title: 'Home' }} />
+      <Stack.Screen name="Hukamnama" component={HukamnamaScreen} options={{ title: 'Daily Hukamnama' }} />
+      <Stack.Screen name="Live Kirtan" component={LiveKirtanScreen} options={{ title: 'Live Kirtan' }} />
+    </Stack.Navigator>
+  );
+}
+
 function NitnemStack() {
   return (
     <Stack.Navigator
@@ -34,6 +51,20 @@ function NitnemStack() {
     >
       <Stack.Screen name="NitnemList" component={NitnemScreen} options={{ title: 'Nitnem' }} />
       <Stack.Screen name="BaniDetail" component={BaniDetailScreen} options={{ title: 'Bani' }} />
+    </Stack.Navigator>
+  );
+}
+
+function DasamGranthStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.primary },
+        headerTintColor: '#fff',
+      }}
+    >
+      <Stack.Screen name="DasamGranthList" component={DasamGranthScreen} options={{ title: 'Dasam Granth' }} />
+      <Stack.Screen name="DasamGranthDetail" component={DasamGranthDetailScreen} options={{ title: 'Dasam Granth Bani' }} />
     </Stack.Navigator>
   );
 }
@@ -80,6 +111,8 @@ export default function App() {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'Nitnem') {
                 iconName = focused ? 'book' : 'book-outline';
+              } else if (route.name === 'Dasam Granth') {
+                iconName = focused ? 'library' : 'library-outline';
               } else if (route.name === 'History') {
                 iconName = focused ? 'time' : 'time-outline';
               } else if (route.name === 'Live Kirtan') {
@@ -98,11 +131,10 @@ export default function App() {
             headerTintColor: '#fff',
           })}
         >
-          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
           <Tab.Screen name="Nitnem" component={NitnemStack} options={{ headerShown: false }} />
+          <Tab.Screen name="Dasam Granth" component={DasamGranthStack} options={{ headerShown: false }} />
           <Tab.Screen name="History" component={HistoryStack} options={{ headerShown: false }} />
-          <Tab.Screen name="Live Kirtan" component={LiveKirtanScreen} />
-          <Tab.Screen name="Hukamnama" component={HukamnamaScreen} />
           <Tab.Screen name="More" component={MoreScreen} />
         </Tab.Navigator>
       </NavigationContainer>

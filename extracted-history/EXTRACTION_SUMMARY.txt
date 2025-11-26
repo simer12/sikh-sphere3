@@ -1,0 +1,229 @@
+═══════════════════════════════════════════════════════════════
+         EPUB OCR EXTRACTION SUMMARY
+═══════════════════════════════════════════════════════════════
+
+📚 Book Information:
+   Title: Jeevan Katha Sri Guru Nanak Dev Ji
+   Author: www.DiscoverSikhism.com
+   Publisher: Unknown
+   Date: Unknown
+   Extracted: 17/11/2025, 9:56:07 am
+
+🔧 Extraction Method:
+   OCR (Tesseract.js with Punjabi)
+   Total Pages: 412
+   Processed: 412
+   Success Rate: 100%
+
+📊 Content Statistics:
+   Total Sections: 42
+   Total Words: 1,59,616
+   Total Characters: 7,60,018
+   Average Words/Section: 3800
+
+📑 Sections:
+
+     1. Section 1 (Pages 1-10)
+        ID: section_1
+        Words: 2866
+
+     2. Section 2 (Pages 11-20)
+        ID: section_2
+        Words: 4107
+
+     3. Section 3 (Pages 21-30)
+        ID: section_3
+        Words: 3679
+
+     4. Section 4 (Pages 31-40)
+        ID: section_4
+        Words: 3901
+
+     5. Section 5 (Pages 41-50)
+        ID: section_5
+        Words: 3765
+
+     6. Section 6 (Pages 51-60)
+        ID: section_6
+        Words: 3314
+
+     7. Section 7 (Pages 61-70)
+        ID: section_7
+        Words: 4313
+
+     8. Section 8 (Pages 71-80)
+        ID: section_8
+        Words: 4070
+
+     9. Section 9 (Pages 81-90)
+        ID: section_9
+        Words: 3645
+
+    10. Section 10 (Pages 91-100)
+        ID: section_10
+        Words: 4445
+
+    11. Section 11 (Pages 101-110)
+        ID: section_11
+        Words: 4244
+
+    12. Section 12 (Pages 111-120)
+        ID: section_12
+        Words: 3745
+
+    13. Section 13 (Pages 121-130)
+        ID: section_13
+        Words: 4024
+
+    14. Section 14 (Pages 131-140)
+        ID: section_14
+        Words: 4104
+
+    15. Section 15 (Pages 141-150)
+        ID: section_15
+        Words: 3464
+
+    16. Section 16 (Pages 151-160)
+        ID: section_16
+        Words: 3800
+
+    17. Section 17 (Pages 161-170)
+        ID: section_17
+        Words: 3607
+
+    18. Section 18 (Pages 171-180)
+        ID: section_18
+        Words: 3904
+
+    19. Section 19 (Pages 181-190)
+        ID: section_19
+        Words: 3829
+
+    20. Section 20 (Pages 191-200)
+        ID: section_20
+        Words: 3873
+
+    21. Section 21 (Pages 201-210)
+        ID: section_21
+        Words: 4232
+
+    22. Section 22 (Pages 211-220)
+        ID: section_22
+        Words: 4085
+
+    23. Section 23 (Pages 221-230)
+        ID: section_23
+        Words: 3584
+
+    24. Section 24 (Pages 231-240)
+        ID: section_24
+        Words: 3921
+
+    25. Section 25 (Pages 241-250)
+        ID: section_25
+        Words: 3616
+
+    26. Section 26 (Pages 251-260)
+        ID: section_26
+        Words: 3869
+
+    27. Section 27 (Pages 261-270)
+        ID: section_27
+        Words: 4055
+
+    28. Section 28 (Pages 271-280)
+        ID: section_28
+        Words: 4044
+
+    29. Section 29 (Pages 281-290)
+        ID: section_29
+        Words: 3844
+
+    30. Section 30 (Pages 291-300)
+        ID: section_30
+        Words: 4009
+
+    31. Section 31 (Pages 301-310)
+        ID: section_31
+        Words: 3711
+
+    32. Section 32 (Pages 311-320)
+        ID: section_32
+        Words: 4058
+
+    33. Section 33 (Pages 321-330)
+        ID: section_33
+        Words: 4146
+
+    34. Section 34 (Pages 331-340)
+        ID: section_34
+        Words: 3940
+
+    35. Section 35 (Pages 341-350)
+        ID: section_35
+        Words: 3723
+
+    36. Section 36 (Pages 351-360)
+        ID: section_36
+        Words: 4357
+
+    37. Section 37 (Pages 361-370)
+        ID: section_37
+        Words: 4037
+
+    38. Section 38 (Pages 371-380)
+        ID: section_38
+        Words: 4110
+
+    39. Section 39 (Pages 381-390)
+        ID: section_39
+        Words: 3925
+
+    40. Section 40 (Pages 391-400)
+        ID: section_40
+        Words: 3626
+
+    41. Section 41 (Pages 401-410)
+        ID: section_41
+        Words: 3568
+
+    42. Section 42 (Pages 411-412)
+        ID: section_42
+        Words: 457
+
+
+⚠️  IMPORTANT - OCR ACCURACY NOTICE
+═══════════════════════════════════════════════════════════════
+
+This content was extracted using OCR (Optical Character Recognition).
+OCR may produce errors, especially with:
+   • Gurmukhi script characters
+   • Special diacritical marks
+   • Poor quality scans
+   • Complex page layouts
+
+REQUIRED ACTIONS:
+   1. ✅ Review all extracted text carefully
+   2. 🔍 Correct OCR errors and typos
+   3. 📝 Add proper formatting and paragraph breaks
+   4. 🏷️  Give meaningful titles to sections (not just "Section 1")
+   5. 🔤 Add Gurmukhi translations for titles
+   6. 📚 Add proper source attribution
+
+
+═══════════════════════════════════════════════════════════════
+                    NEXT STEPS
+═══════════════════════════════════════════════════════════════
+
+1. 📝 Open: extracted-history/history-article-code.ts
+2. 🔍 REVIEW OCR text for errors (IMPORTANT!)
+3. ✏️  Correct any mistakes in the Gurmukhi text
+4. 🏷️  Add meaningful section titles
+5. 📋 Copy the corrected article object
+6. 📂 Paste into src/data/history.ts
+7. 🔤 Add Gurmukhi translations for titles
+8. 💾 Save and test in your app
+
+📱 After review, the article will show as a table of contents
+   with 42 clickable sections!
+

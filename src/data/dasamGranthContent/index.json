@@ -1,0 +1,55 @@
+{
+  "banis": [
+    {
+      "id": 4,
+      "name": "Jaap Sahib",
+      "nameGurmukhi": "ਜਾਪੁ ਸਾਹਿਬ",
+      "verses": 808
+    },
+    {
+      "id": 28,
+      "name": "Akal Ustat",
+      "nameGurmukhi": "ਅਕਾਲ ਉਸਤਤ",
+      "verses": 54
+    },
+    {
+      "id": 5,
+      "name": "Tav Prasad Savaiye",
+      "nameGurmukhi": "ਤ੍ਵ ਪ੍ਰਸਾਦਿ ਸਵੱਯੇ",
+      "verses": 89
+    },
+    {
+      "id": 6,
+      "name": "Chaupai Sahib",
+      "nameGurmukhi": "ਚੌਪਈ ਸਾਹਿਬ",
+      "verses": 43
+    },
+    {
+      "id": 3,
+      "name": "Shabd Hazare",
+      "nameGurmukhi": "ਸ਼ਬਦ ਹਜ਼ਾਰੇ",
+      "verses": 106
+    },
+    {
+      "id": 12,
+      "name": "Ath Chandi Charitar",
+      "nameGurmukhi": "ਅਠ ਚੰਡੀ ਚਰਿਤ੍ਰ",
+      "verses": 26
+    },
+    {
+      "id": 13,
+      "name": "Chandi Di Vaar",
+      "nameGurmukhi": "ਚੰਡੀ ਦੀ ਵਾਰ",
+      "verses": 357
+    },
+    {
+      "id": 19,
+      "name": "Shastar Naam Mala",
+      "nameGurmukhi": "ਸ਼ਸਤਰ ਨਾਮ ਮਾਲਾ",
+      "verses": 61
+    }
+  ],
+  "totalBanis": 8,
+  "totalVerses": 1544,
+  "lastUpdated": "2025-11-14T05:38:42.464Z"
+}

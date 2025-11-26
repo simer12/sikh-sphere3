@@ -1,189 +1,40 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../theme';
-import { Audio } from 'expo-av';
-
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-const VERSES_PER_PAGE = 12; // Optimal verses per page for readability
 
 export default function BaniDetailScreen({ route }: any) {
   const { bani } = route.params;
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
-  const translateX = useRef(new Animated.Value(0)).current;
-  
-  // Keep a ref to current page for gesture handlers
-  const currentPageRef = useRef(currentPage);
-  currentPageRef.current = currentPage;
 
-  // Split content into verses (by double newline)
-  const verses = bani.gurmukhi.split('\n\n').filter((v: string) => v.trim());
-  
-  // Calculate total pages - fewer verses per page like real Gutka
-  const totalPages = Math.ceil(verses.length / VERSES_PER_PAGE);
-
-  // Get verses for current page
-  const getPageVerses = (pageIndex: number) => {
-    const startIdx = pageIndex * VERSES_PER_PAGE;
-    const endIdx = Math.min(startIdx + VERSES_PER_PAGE, verses.length);
-    return verses.slice(startIdx, endIdx);
-  };
-
-  // Navigation functions - use callback form to avoid stale closures
-  const goToNextPage = () => {
-    setCurrentPage(prevPage => {
-      if (prevPage < totalPages - 1) {
-        const nextPage = prevPage + 1;
-        
-        // Animate from left
-        translateX.setValue(SCREEN_WIDTH);
-        Animated.timing(translateX, {
-          toValue: 0,
-          duration: 250,
-          useNativeDriver: true,
-        }).start();
-        
-        return nextPage;
-      }
-      return prevPage;
-    });
-  };
-
-  const goToPreviousPage = () => {
-    setCurrentPage(prevPage => {
-      if (prevPage > 0) {
-        const newPage = prevPage - 1;
-        
-        // Animate from right
-        translateX.setValue(-SCREEN_WIDTH);
-        Animated.timing(translateX, {
-          toValue: 0,
-          duration: 250,
-          useNativeDriver: true,
-        }).start();
-        
-        return newPage;
-      }
-      return prevPage;
-    });
-  };
-
-  // Pan responder for swipe gestures - recreated when currentPage changes
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: (_, gestureState) => {
-        return Math.abs(gestureState.dx) > Math.abs(gestureState.dy) && Math.abs(gestureState.dx) > 10;
-      },
-      onPanResponderMove: (_, gestureState) => {
-        translateX.setValue(gestureState.dx);
-      },
-      onPanResponderRelease: (_, gestureState) => {
-        const swipeThreshold = 100;
-        const currentPageValue = currentPageRef.current;
-        
-        if (gestureState.dx > swipeThreshold) {
-          // Swipe right - previous page
-          if (currentPageValue > 0) {
-            goToPreviousPage();
-          } else {
-            // Snap back if at first page
-            Animated.spring(translateX, {
-              toValue: 0,
-              useNativeDriver: true,
-              tension: 50,
-              friction: 7,
-            }).start();
-          }
-        } else if (gestureState.dx < -swipeThreshold) {
-          // Swipe left - next page
-          if (currentPageValue < totalPages - 1) {
-            goToNextPage();
-          } else {
-            // Snap back if at last page
-            Animated.spring(translateX, {
-              toValue: 0,
-              useNativeDriver: true,
-              tension: 50,
-              friction: 7,
-            }).start();
-          }
-        } else {
-          // Snap back to current position
-          Animated.spring(translateX, {
-            toValue: 0,
-            useNativeDriver: true,
-            tension: 50,
-            friction: 7,
-          }).start();
-        }
-      },
-    })
-  ).current;
-
-  const togglePlayback = async () => {
-    if (sound) {
-      if (isPlaying) {
-        await sound.pauseAsync();
-      } else {
-        await sound.playAsync();
-      }
-      setIsPlaying(!isPlaying);
-    } else if (bani.audioUrl) {
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: bani.audioUrl },
-        { shouldPlay: true }
-      );
-      setSound(newSound);
-      setIsPlaying(true);
-    }
-  };
-
-  const pageVerses = getPageVerses(currentPage);
+  // Split content into verses (by double newline) and filter empty ones
+  const allVerses = bani.gurmukhi.split('\n\n').filter((v: string) => v.trim().length > 0);
 
   return (
     <View style={styles.container}>
-      {/* Main Content Area - Full Screen Clean Sundar Gutka Style */}
-      <View style={styles.contentWrapper}>
-        <Animated.View
-          style={[styles.contentContainer, { transform: [{ translateX }] }]}
-          {...panResponder.panHandlers}
-        >
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
-          >
-            {pageVerses.map((verse: string, index: number) => {
-              const verseIndex = currentPage * VERSES_PER_PAGE + index;
-              return (
-                <View key={verseIndex} style={styles.verseBlock}>
-                  <Text style={styles.gurmukhiText}>{verse}</Text>
-                </View>
-              );
-            })}
-          </ScrollView>
-        </Animated.View>
+      {/* Header with Bani info */}
+      <View style={styles.header}>
+        <Text style={styles.baniName}>{bani.nameGurmukhi}</Text>
+        <Text style={styles.verseCount}>{allVerses.length} verses</Text>
       </View>
 
-      {/* Page Dots Indicator */}
-      <View style={styles.dotsContainer}>
-        {Array.from({ length: Math.min(totalPages, 7) }).map((_, index) => {
-          const dotIndex = totalPages > 7 
-            ? Math.floor((currentPage / totalPages) * 7)
-            : currentPage;
-          return (
-            <View
-              key={index}
-              style={[
-                styles.dot,
-                index === dotIndex && styles.dotActive,
-              ]}
-            />
-          );
-        })}
-      </View>
+      {/* Continuous scrolling content - Traditional Gutka style */}
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+      >
+        {allVerses.map((verse: string, index: number) => (
+          <View key={`verse-${index}`} style={styles.verseBlock}>
+            <Text style={styles.gurmukhiText}>{verse}</Text>
+          </View>
+        ))}
+        
+        {/* End marker */}
+        <View style={styles.endMarker}>
+          <Text style={styles.endText}>॥ ਸਮਾਪਤ ॥</Text>
+          <Text style={styles.endTextEnglish}>End of {bani.name}</Text>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -191,54 +42,65 @@ export default function BaniDetailScreen({ route }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5', // Clean cream background like Sundar Gutka
+    backgroundColor: '#faf8f5', // Clean cream background like traditional Gutka
   },
-  // Sundar Gutka Style - Clean and Simple, Full Screen
-  contentWrapper: {
-    flex: 1,
+  header: {
+    backgroundColor: '#fff',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: theme.colors.primary,
+    alignItems: 'center',
   },
-  contentContainer: {
-    flex: 1,
+  baniName: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: theme.colors.primary,
+  },
+  verseCount: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
   },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: 28,
-    paddingVertical: 32,
-    paddingTop: 40,
-    paddingBottom: 40,
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+    paddingBottom: 60,
   },
   verseBlock: {
-    marginBottom: 24,
+    marginBottom: 20,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e8e4dd',
   },
   gurmukhiText: {
-    fontSize: 26, // Larger, more readable like Sundar Gutka
+    fontSize: 24,
     fontWeight: '400',
     color: '#1a1a1a',
-    lineHeight: 42, // Comfortable line spacing
+    lineHeight: 40,
     textAlign: 'left',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  endMarker: {
+    marginTop: 40,
+    marginBottom: 20,
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingBottom: 16,
-    backgroundColor: '#faf8f5',
+    paddingVertical: 20,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: theme.colors.primary,
   },
-  dot: {
-    width: 7,
-    height: 7,
-    borderRadius: 3.5,
-    backgroundColor: '#d0c9c0',
-    marginHorizontal: 4,
+  endText: {
+    fontSize: 28,
+    fontWeight: '600',
+    color: theme.colors.primary,
   },
-  dotActive: {
-    backgroundColor: theme.colors.primary,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+  endTextEnglish: {
+    fontSize: 16,
+    color: '#666',
+    marginTop: 8,
   },
 });

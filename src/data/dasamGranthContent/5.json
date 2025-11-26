@@ -1,0 +1,632 @@
+{
+  "id": 5,
+  "name": "Tav Prasad Savaiye",
+  "nameGurmukhi": "ਤ੍ਵ ਪ੍ਰਸਾਦਿ ਸਵੱਯੇ",
+  "description": "Tav Prasad Savaiye from Sri Dasam Granth Sahib",
+  "verses": [
+    {
+      "id": "1324",
+      "gurmukhi": "ਸ਼ਬਦ ਹਜ਼ਾਰੇ ਪਾਤਿਸ਼ਾਹੀ ੧੦",
+      "transliteration": "shabadh hazaare paatishaahee 10",
+      "translation": "",
+      "lineNumber": 1
+    },
+    {
+      "id": "1313",
+      "gurmukhi": "ੴ ਸਤਿਗੁਰਪ੍ਰਸਾਦਿ ॥",
+      "transliteration": "ikOankaar satiguraprasaadh ||",
+      "translation": "The Lord is One the Victory is of the Lord.",
+      "lineNumber": 2
+    },
+    {
+      "id": "1314",
+      "gurmukhi": "ਸ੍ਰੀ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹ ॥",
+      "transliteration": "sree vaahiguroo jee kee fateh ||",
+      "translation": "Victory is the Lord's.",
+      "lineNumber": 3
+    },
+    {
+      "id": "1315",
+      "gurmukhi": "ਰਾਮਕਲੀ ਪਾਤਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raamakalee paatasaahee 10 ||",
+      "translation": "RAMKALI OF THE TENTH KING",
+      "lineNumber": 4
+    },
+    {
+      "id": "1316",
+      "gurmukhi": "ਰੇ ਮਨ ਐਸੋ ਕਰ ਸੰਨਿਆਸਾ ॥",
+      "transliteration": "re man aaiso kar sa(n)niaasaa ||",
+      "translation": "O mind! the asceticism be practised in this way :",
+      "lineNumber": 5
+    },
+    {
+      "id": "1317",
+      "gurmukhi": "ਬਨ ਸੇ ਸਦਨ ਸਬੈ ਕਰ ਸਮਝਹੁ ਮਨ ਹੀ ਮਾਹਿ ਉਦਾਸਾ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "ban se sadhan sabai kar samajhahu man hee maeh udhaasaa ||1|| rahaau ||",
+      "translation": "Consider your house as the forest and remain unattached within yourself…..Pause.",
+      "lineNumber": 6
+    },
+    {
+      "id": "1318",
+      "gurmukhi": "ਜਤ ਕੀ ਜਟਾ ਜੋਗ ਕੋ ਮੰਜਨੁ ਨੇਮ ਕੇ ਨਖਨ ਬਢਾਓ ॥",
+      "transliteration": "jat kee jaTaa jog ko ma(n)jan nem ke nakhan baddaao ||",
+      "translation": "Consider continence as the matted hair, Yoga as the ablution and daily observances as your nails,",
+      "lineNumber": 7
+    },
+    {
+      "id": "1319",
+      "gurmukhi": "ਗਿਆਨ ਗੁਰੂ ਆਤਮ ਉਪਦੇਸਹੁ ਨਾਮ ਬਿਭੂਤ ਲਗਾਓ ॥੧॥",
+      "transliteration": "giaan guroo aatam upadhesahu naam bibhoot lagaao ||1||",
+      "translation": "Consider the knowledge as the preceptor giving lessons to you and apply the Name of the Lord as ashes.1.",
+      "lineNumber": 8
+    },
+    {
+      "id": "1320",
+      "gurmukhi": "ਅਲਪ ਅਹਾਰ ਸੁਲਪ ਸੀ ਨਿੰਦ੍ਰਾ ਦਯਾ ਛਿਮਾ ਤਨ ਪ੍ਰੀਤਿ ॥",
+      "transliteration": "alap ahaar sulap see ni(n)dhraa dhayaa chhimaa tan preet ||",
+      "translation": "Eat less and sleep less, cherish mercy and forgiveness",
+      "lineNumber": 9
+    },
+    {
+      "id": "1321",
+      "gurmukhi": "ਸੀਲ ਸੰਤੋਖ ਸਦਾ ਨਿਰਬਾਹਿਬੋ ਹ੍ਵੈਬੋ ਤ੍ਰਿਗੁਣ ਅਤੀਤ ॥੨॥",
+      "transliteration": "seel sa(n)tokh sadhaa nirabaahibo havaibo tiragun ateet ||2||",
+      "translation": "Practise gentleness and contentment and remain free from three modes.2.",
+      "lineNumber": 10
+    },
+    {
+      "id": "1322",
+      "gurmukhi": "ਕਾਮ ਕ੍ਰੋਧ ਹੰਕਾਰ ਲੋਭ ਹਠ ਮੋਹ ਨ ਮਨ ਸਿਉ ਲ੍ਯਾਵੈ ॥",
+      "transliteration": "kaam krodh ha(n)kaar lobh haTh moh na man siau layaavai ||",
+      "translation": "Keep your mind unattached from lust, anger, greed, insistence and infatuation,",
+      "lineNumber": 11
+    },
+    {
+      "id": "1323",
+      "gurmukhi": "ਤਬ ਹੀ ਆਤਮ ਤਤ ਕੋ ਦਰਸੇ ਪਰਮ ਪੁਰਖ ਕਹ ਪਾਵੈ ॥੩॥੧॥",
+      "transliteration": "tab hee aatam tat ko dharase param purakh keh paavai ||3||1||",
+      "translation": "Then you will visualize the supreme essence and realise the supreme Purusha.3.1.",
+      "lineNumber": 12
+    },
+    {
+      "id": "1325",
+      "gurmukhi": "ਰਾਮਕਲੀ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raamakalee paatisaahee 10 ||",
+      "translation": "RAMKALI OF THE TENTH KING",
+      "lineNumber": 13
+    },
+    {
+      "id": "1326",
+      "gurmukhi": "ਰੇ ਮਨ ਇਹ ਬਿਧਿ ਜੋਗੁ ਕਮਾਓ ॥",
+      "transliteration": "re man ieh bidh jog kamaao ||",
+      "translation": "O Mind! the Yoga be practised in this way :",
+      "lineNumber": 14
+    },
+    {
+      "id": "1327",
+      "gurmukhi": "ਸਿੰਙੀ ਸਾਚੁ ਅਕਪਟ ਕੰਠਲਾ ਧਿਆਨ ਬਿਭੂਤ ਚੜਾਓ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "si(n)n(g)ee saach akapaT ka(n)Thalaa dhiaan bibhoot chaRaao ||1|| rahaau ||",
+      "translation": "Consider the Truth as the horn, sincerity the necklace and meditation as ashes to be applied to your body…...Pause.",
+      "lineNumber": 15
+    },
+    {
+      "id": "1328",
+      "gurmukhi": "ਤਾਤੀ ਗਹੁ ਆਤਮ ਬਸਿ ਕਰ ਕੀ ਭਿੱਛਾ ਨਾਮ ਅਧਾਰੰ ॥",
+      "transliteration": "taatee gahu aatam bas kar kee bhi'chhaa naam adhaara(n) ||",
+      "translation": "Make self-control your lyre and the prop of the Name as your alms,",
+      "lineNumber": 16
+    },
+    {
+      "id": "1329",
+      "gurmukhi": "ਬਾਜੇ ਪਰਮ ਤਾਰ ਤਤੁ ਹਰਿ ਕੋ ਉਪਜੈ ਰਾਗ ਰਸਾਰੰ ॥੧॥",
+      "transliteration": "baaje param taar tat har ko upajai raag rasaara(n) ||1||",
+      "translation": "Then the supreme essence will be played like the main string creating savoury divine music.1.",
+      "lineNumber": 17
+    },
+    {
+      "id": "1330",
+      "gurmukhi": "ਉਘਟੈ ਤਾਨ ਤਰੰਗ ਰੰਗਿ ਅਤਿ ਗਿਆਨ ਗੀਤ ਬੰਧਾਨੰ ॥",
+      "transliteration": "aughaTai taan tara(n)g ra(n)g at giaan geet ba(n)dhaana(n) ||",
+      "translation": "The wave of colourful tune will arise, manifesting the song of knowledge,",
+      "lineNumber": 18
+    },
+    {
+      "id": "1331",
+      "gurmukhi": "ਚਕਿ ਚਕਿ ਰਹੇ ਦੇਵ ਦਾਨਵ ਮੁਨਿ ਛਕਿ ਛਕਿ ਬ੍ਯੋਮ ਬਿਵਾਨੰ ॥੨॥",
+      "transliteration": "chak chak rahe dhev dhaanav mun chhak chhak bayom bivaana(n) ||2||",
+      "translation": "The gods, demons and sages would be amazed enjoying their ride in heavenly chariots.2.",
+      "lineNumber": 19
+    },
+    {
+      "id": "1332",
+      "gurmukhi": "ਆਤਮ ਉਪਦੇਸ ਭੇਸੁ ਸੰਜਮ ਕੋ ਜਾਪ ਸੁ ਅਜਪਾ ਜਾਪੈ ॥",
+      "transliteration": "aatam upadhes bhes sa(n)jam ko jaap su ajapaa jaapai ||",
+      "translation": "While instructing the self in the garb of self-restraint and reciting God’s Name inwardly,",
+      "lineNumber": 20
+    },
+    {
+      "id": "1333",
+      "gurmukhi": "ਸਦਾ ਰਹੈ ਕੰਚਨ ਸੀ ਕਾਯਾ ਕਾਲ ਨ ਕਬਹੂੰ ਬ੍ਯਾਪੈ ॥੩॥੨॥",
+      "transliteration": "sadhaa rahai ka(n)chan see kaayaa kaal na kabahoo(n) bayaapai ||3||2||",
+      "translation": "The body will always remain like gold and become immortal.3.2.",
+      "lineNumber": 21
+    },
+    {
+      "id": "1334",
+      "gurmukhi": "ਰਾਮਕਲੀ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raamakalee paatisaahee 10 ||",
+      "translation": "RAMKALI OF THE TENTH KING",
+      "lineNumber": 22
+    },
+    {
+      "id": "1335",
+      "gurmukhi": "ਪ੍ਰਾਨੀ ਪਰਮ ਪੁਰਖ ਪਗਿ ਲਾਗੋ ॥",
+      "transliteration": "praanee param purakh pag laago ||",
+      "translation": "O Man! fall at the feet of the supreme Purusha,",
+      "lineNumber": 23
+    },
+    {
+      "id": "1336",
+      "gurmukhi": "ਸੋਵਤ ਕਹਾ ਮੋਹ ਨਿੰਦ੍ਰਾ ਮੈ ਕਬਹੂੰ ਸੁਚਿਤ ਹ੍ਵੈ ਜਾਗੋ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "sovat kahaa moh ni(n)dhraa mai kabahoo(n) suchit havai jaago ||1|| rahaau ||",
+      "translation": "Why are you sleeping in worldly attachment, awake sometimes and be vigilant ?.....Pause.",
+      "lineNumber": 24
+    },
+    {
+      "id": "1337",
+      "gurmukhi": "ਔਰਨ ਕਹਾ ਉਪਦੇਸਤ ਹੈ ਪਸੁ ਤੋਹਿ ਪ੍ਰਬੋਧ ਨ ਲਾਗੋ ॥",
+      "transliteration": "aauaran kahaa upadhesat hai pas toh prabodh na laago ||",
+      "translation": "O Animal! why do you preach to others, when you are quite ignorant",
+      "lineNumber": 25
+    },
+    {
+      "id": "1338",
+      "gurmukhi": "ਸਿੰਚਤ ਕਹਾ ਪਰੇ ਬਿਖਿਯਨ ਕਹ ਕਬਹੁ ਬਿਖੈ ਰਸ ਤ੍ਯਾਗੋ ॥੧॥",
+      "transliteration": "si(n)chat kahaa pare bikhiyan keh kabahu bikhai ras tayaago ||1||",
+      "translation": "Why are you gathering the sins ? Forsake sometimes the poisonous enjoyment.1.",
+      "lineNumber": 26
+    },
+    {
+      "id": "1339",
+      "gurmukhi": "ਕੇਵਲ ਕਰਮ ਭਰਮ ਸੇ ਚੀਨਹੁ ਧਰਮ ਕਰਮ ਅਨੁਰਾਗੋ ॥",
+      "transliteration": "keval karam bharam se cheenahu dharam karam anuraago ||",
+      "translation": "Consider these actions as illusions and devote yourself to righteous actions,",
+      "lineNumber": 27
+    },
+    {
+      "id": "1340",
+      "gurmukhi": "ਸੰਗ੍ਰਹ ਕਰੋ ਸਦਾ ਸਿਮਰਨ ਕੋ ਪਰਮ ਪਾਪ ਤਜਿ ਭਾਗੋ ॥੨॥",
+      "transliteration": "sa(n)greh karo sadhaa simaran ko param paap taj bhaago ||2||",
+      "translation": "Absorb yourself in the remembrance of the name of the Lord and abandon and run away from sins.2.",
+      "lineNumber": 28
+    },
+    {
+      "id": "1341",
+      "gurmukhi": "ਜਾ ਤੇ ਦੂਖ ਪਾਪ ਨਹਿ ਭੇਟੈ ਕਾਲ ਜਾਲ ਤੇ ਤਾਗੋ ॥",
+      "transliteration": "jaa te dhookh paap neh bheTai kaal jaal te taago ||",
+      "translation": "So that the sorrows and sins do not afflict you and you may escape the trap of death",
+      "lineNumber": 29
+    },
+    {
+      "id": "1342",
+      "gurmukhi": "ਜੌ ਸੁਖ ਚਾਹੋ ਸਦਾ ਸਭਨ ਕੌ ਤੌ ਹਰਿ ਕੇ ਰਸਿ ਪਾਗੋ ॥੩॥੩॥",
+      "transliteration": "jau sukh chaaho sadhaa sabhan kau tau har ke ras paago ||3||3||",
+      "translation": "If you want to enjoy all comforts, then absorb yourself in the love of the Lord.3.3.",
+      "lineNumber": 30
+    },
+    {
+      "id": "1343",
+      "gurmukhi": "ਰਾਗੁ ਸੋਰਠਿ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raag soraTh paatisaahee 10 ||",
+      "translation": "RAGA SORATH OF THE TENTH KING",
+      "lineNumber": 31
+    },
+    {
+      "id": "1344",
+      "gurmukhi": "ਪ੍ਰਭ ਜੂ ਤੋ ਕਹ ਲਾਜ ਹਮਾਰੀ ॥",
+      "transliteration": "prabh joo to keh laaj hamaaree ||",
+      "translation": "O Lord! You alone can protect my honour! O blue-throated Lord of men! O the Lord of forests wearing blue vests! Pause.",
+      "lineNumber": 32
+    },
+    {
+      "id": "1345",
+      "gurmukhi": "ਨੀਲ ਕੰਠ ਨਰਹਰਿ ਨਾਰਾਇਣ ਨੀਲ ਬਸਨ ਬਨਵਾਰੀ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "neel ka(n)Th narahar naarain neel basan banavaaree ||1|| rahaau ||",
+      "translation": "O Supreme Purusha! Supreme Ishwara! Master of all! Holiest Divinity! living on air",
+      "lineNumber": 33
+    },
+    {
+      "id": "1346",
+      "gurmukhi": "ਪਰਮ ਪੁਰਖ ਪਰਮੇਸਰ ਸੁਆਮੀ ਪਾਵਨ ਪਉਨ ਅਹਾਰੀ ॥",
+      "transliteration": "param purakh paramesar suaamee paavan paun ahaaree ||",
+      "translation": "O the Lord of Lakshmi! the greatest Light! ,",
+      "lineNumber": 34
+    },
+    {
+      "id": "1347",
+      "gurmukhi": "ਮਾਧਵ ਮਹਾ ਜੋਤਿ ਮਧੁ ਮਰਦਨ ਮਾਨ ਮੁਕੰਦ ਮੁਰਾਰੀ ॥੧॥",
+      "transliteration": "maadhav mahaa jot madh maradhan maan muka(n)dh muraaree ||1||",
+      "translation": "The Destroyer of the demons Madhu and Mus! and the bestower of salvation!1.",
+      "lineNumber": 35
+    },
+    {
+      "id": "1348",
+      "gurmukhi": "ਨਿਰਬਿਕਾਰ ਨਿਰਜੁਰ ਨਿੰਦ੍ਰਾ ਬਿਨੁ ਨਿਰਬਿਖ ਨਰਕ ਨਿਵਾਰੀ ॥",
+      "transliteration": "nirabikaar nirajur ni(n)dhraa bin nirabikh narak nivaaree ||",
+      "translation": "O the Lord without evil, without decay, without sleep, without poison and the Saviour from hell!",
+      "lineNumber": 36
+    },
+    {
+      "id": "1349",
+      "gurmukhi": "ਕ੍ਰਿਪਾ ਸਿੰਧ ਕਾਲ ਤ੍ਰੈ ਦਰਸੀ ਕੁਕ੍ਰਿਤ ਪ੍ਰਨਾਸਨਕਾਰੀ ॥੨॥",
+      "transliteration": "kirapaa si(n)dh kaal trai dharasee kukirat pranaasanakaaree ||2||",
+      "translation": "O the ocean of Mercy! the seer of all times! and the Destroyer of evil actions!....2.",
+      "lineNumber": 37
+    },
+    {
+      "id": "1350",
+      "gurmukhi": "ਧਨੁਰਪਾਨਿ ਧ੍ਰਿਤਮਾਨ ਧਰਾਧਰ ਅਨਬਿਕਾਰ ਅਸਿਧਾਰੀ ॥",
+      "transliteration": "dhanurapaan dhiratamaan dharaadhar anabikaar asidhaaree ||",
+      "translation": "O the wielder of bow! the Patient! the Prop of earth! the Lord without evil! and wielder of the sword!",
+      "lineNumber": 38
+    },
+    {
+      "id": "1351",
+      "gurmukhi": "ਹੌ ਮਤਿ ਮੰਦ ਚਰਨ ਸਰਨਾਗਤਿ ਕਰ ਗਹਿ ਲੇਹੁ ਉਬਾਰੀ ॥੩॥੧॥੪॥",
+      "transliteration": "hau mat ma(n)dh charan saranaagat kar geh leh ubaaree ||3||1||4||",
+      "translation": "I am unwise, I take refuge at Thy feet, catch hold of my hand and save me.3.",
+      "lineNumber": 39
+    },
+    {
+      "id": "1352",
+      "gurmukhi": "ਰਾਗੁ ਕਲਿਆਣ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raag kaliaan paatisaahee 10 ||",
+      "translation": "RAGA KALYAN OF THE TENTH KING",
+      "lineNumber": 40
+    },
+    {
+      "id": "1353",
+      "gurmukhi": "ਬਿਨ ਕਰਤਾਰ ਨ ਕਿਰਤਮ ਮਾਨੋ ॥",
+      "transliteration": "bin karataar na kiratam maano ||",
+      "translation": "Do not accept anyone else except God as the Creator of the universe",
+      "lineNumber": 41
+    },
+    {
+      "id": "1354",
+      "gurmukhi": "ਆਦਿ ਅਜੋਨਿ ਅਜੈ ਅਬਿਨਾਸੀ ਤਿਹ ਪਰਮੇਸਰ ਜਾਨੋ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "aadh ajon ajai abinaasee teh paramesar jaano ||1|| rahaau ||",
+      "translation": "He, the Unborn, Unconquerable and Immortal, was in the beginning, consider Him as Supreme Ishvara……Pause.",
+      "lineNumber": 42
+    },
+    {
+      "id": "1355",
+      "gurmukhi": "ਕਹਾ ਭਯੋ ਜੋ ਆਨ ਜਗਤ ਮੈ ਦਸਕ ਅਸੁਰ ਹਰਿ ਘਾਏ ॥",
+      "transliteration": "kahaa bhayo jo aan jagat mai dhasak asur har ghaae ||",
+      "translation": "What then, if on coming into the world, one killed about ten demons",
+      "lineNumber": 43
+    },
+    {
+      "id": "1356",
+      "gurmukhi": "ਅਧਿਕ ਪ੍ਰਪੰਚ ਦਿਖਾਇ ਸਭਨ ਕਹ ਆਪਹਿ ਬ੍ਰਹਮੁ ਕਹਾਏ ॥੧॥",
+      "transliteration": "adhik prapa(n)ch dhikhai sabhan keh aapeh braham kahaae ||1||",
+      "translation": "And displayed several phenomena to all and caused others to call Him Brahm (God).1.",
+      "lineNumber": 44
+    },
+    {
+      "id": "1357",
+      "gurmukhi": "ਭੰਜਨ ਗੜ੍ਹਨ ਸਮਰਥ ਸਦਾ ਪ੍ਰਭੁ ਸੋ ਕਿਮ ਜਾਤਿ ਗਿਨਾਯੋ ॥",
+      "transliteration": "bha(n)jan gaRhan samarath sadhaa prabh so kim jaat ginaayo ||",
+      "translation": "How can He be called God, the Destroyer, the Creator, the Almighty and Eternal,",
+      "lineNumber": 45
+    },
+    {
+      "id": "1358",
+      "gurmukhi": "ਤਾ ਤੇ ਸਰਬ ਕਾਲ ਕੇ ਅਸਿ ਕੋ ਘਾਇ ਬਚਾਇ ਨ ਆਯੋ ॥੨॥",
+      "transliteration": "taa te sarab kaal ke as ko ghai bachai na aayo ||2||",
+      "translation": "Who could not save himself from the wound-causing sword of mighty Death.2.",
+      "lineNumber": 46
+    },
+    {
+      "id": "1359",
+      "gurmukhi": "ਕੈਸੇ ਤੋਹਿ ਤਾਰਿਹੈ ਸੁਨਿ ਜੜ ਆਪ ਡੁਬਿਯੋ ਭਵ ਸਾਗਰ ॥",
+      "transliteration": "kaise toh taarihai sun jaR aap ddubiyo bhav saagar ||",
+      "translation": "O fool! listen, how can he cause you to cause the dreadful ocean of Sansara (world), when he himself is drowned in great ocean?",
+      "lineNumber": 47
+    },
+    {
+      "id": "1360",
+      "gurmukhi": "ਛੁਟਿਹੋ ਕਾਲ ਫਾਸ ਤੇ ਤਬ ਹੀ ਗਹੋ ਸਰਨਿ ਜਗਤਾਗਰ ॥੩॥੧॥੫॥",
+      "transliteration": "chhuTiho kaal faas te tab hee gaho saran jagataagar ||3||1||5||",
+      "translation": "You can escape the trap of death only when you catch hold of the prop of the world and take refuge in Him.3.",
+      "lineNumber": 48
+    },
+    {
+      "id": "1361",
+      "gurmukhi": "ਖਿਆਲ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "khiaal paatisaahee 10 ||",
+      "translation": "KHYAL OF THE TENTH KING",
+      "lineNumber": 49
+    },
+    {
+      "id": "1362",
+      "gurmukhi": "ਮਿਤ੍ਰ ਪਿਆਰੇ ਨੂੰ ਹਾਲੁ ਮੁਰੀਦਾਂ ਦਾ ਕਹਣਾ ॥",
+      "transliteration": "mitr piaare noo(n) haal mureedhaa(n) dhaa kahanaa ||",
+      "translation": "Convey to the dear friend the condition of the disciples,",
+      "lineNumber": 50
+    },
+    {
+      "id": "1363",
+      "gurmukhi": "ਤੁਧ ਬਿਨੁ ਰੋਗੁ ਰਜਾਈਆਂ ਦਾ ਓਢਣੁ ਨਾਗ ਨਿਵਾਸਾਂ ਦੇ ਰਹਣਾ ॥",
+      "transliteration": "tudh bin rog rajaieeaa(n) dhaa oddan naag nivaasaa(n) dhe rahanaa ||",
+      "translation": "Without Thee, the taking over of quilt is like disease and living in the house is like living with serpents",
+      "lineNumber": 51
+    },
+    {
+      "id": "1364",
+      "gurmukhi": "ਸੂਲ ਸੁਰਾਹੀ ਖੰਜਰੁ ਪਿਯਾਲਾ ਬਿੰਗ ਕਸਾਈਯਾਂ ਦਾ ਸਹਣਾ ॥",
+      "transliteration": "sool suraahee kha(n)jar piyaalaa bi(n)g kasaieeyaa(n) dhaa sahanaa ||",
+      "translation": "The flask is like the spike, the cup is like a dagger and (the separation) is like enduring the chopper of the butchers,",
+      "lineNumber": 52
+    },
+    {
+      "id": "1365",
+      "gurmukhi": "ਯਾਰੜੇ ਦਾ ਸਾਨੂੰ ਸੱਥਰ ਚੰਗਾ ਭੱਠ ਖੇੜਿਆਂ ਦਾ ਰਹਣਾ ॥੧॥੧॥੬॥",
+      "transliteration": "yaaraRe dhaa saanoo(n) sa'thar cha(n)gaa bha'Th kheRiaa(n) dhaa rahanaa ||1||1||6||",
+      "translation": "The pallet of the beloved Friend is most pleasing and the worldly pleasures are like furnace.1.1",
+      "lineNumber": 53
+    },
+    {
+      "id": "1366",
+      "gurmukhi": "ਤਿਲੰਗ ਕਾਫੀ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "tila(n)g kaafee paatisaahee 10 ||",
+      "translation": "TILNG KAFI OF THE TENTH KING",
+      "lineNumber": 54
+    },
+    {
+      "id": "1367",
+      "gurmukhi": "ਕੇਵਲ ਕਾਲਈ ਕਰਤਾਰ ॥",
+      "transliteration": "keval kaaliee karataar ||",
+      "translation": "The supreme Destroyer is alone the Creator,",
+      "lineNumber": 55
+    },
+    {
+      "id": "1368",
+      "gurmukhi": "ਆਦਿ ਅੰਤ ਅਨੰਤ ਮੂਰਤਿ ਗੜ੍ਹਨ ਭੰਜਨਹਾਰ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "aadh a(n)t ana(n)t moorat gaRhan bha(n)janahaar ||1|| rahaau ||",
+      "translation": "He is in the beginning and in the end, He is the infinite entity, the Creator and the Destroyer…Pause.",
+      "lineNumber": 56
+    },
+    {
+      "id": "1369",
+      "gurmukhi": "ਨਿੰਦ ਉਸਤਤ ਜਉਨ ਕੇ ਸਮ ਸਤ੍ਰ ਮਿਤ੍ਰ ਨ ਕੋਇ ॥",
+      "transliteration": "ni(n)dh usatat jaun ke sam satr mitr na koi ||",
+      "translation": "The calumny and Praise are equal to him and he has no friend, no foe,",
+      "lineNumber": 57
+    },
+    {
+      "id": "1370",
+      "gurmukhi": "ਕਉਨ ਬਾਟ ਪਰੀ ਤਿਸੈ ਪਥ ਸਾਰਥੀ ਰਥ ਹੋਇ ॥੧॥",
+      "transliteration": "kaun baaT paree tisai path saarathee rath hoi ||1||",
+      "translation": "Of what crucial necessity, He became the charioteer ?1.",
+      "lineNumber": 58
+    },
+    {
+      "id": "1371",
+      "gurmukhi": "ਤਾਤ ਮਾਤ ਨ ਜਾਤ ਜਾਕਰ ਪੁਤ੍ਰ ਪੌਤ੍ਰ ਮੁਕੰਦ ॥",
+      "transliteration": "taat maat na jaat jaakar putr pauatr muka(n)dh ||",
+      "translation": "He, the Giver of salvation, has no father, no mother, no son and no grandson",
+      "lineNumber": 59
+    },
+    {
+      "id": "1372",
+      "gurmukhi": "ਕਉਨ ਕਾਜ ਕਹਾਹਿਂਗੇ ਤੇ ਆਨ ਦੇਵਿਕ ਨੰਦ ॥੨॥",
+      "transliteration": "kaun kaaj kahaahi(n)ge te aan dhevik na(n)dh ||2||",
+      "translation": "O what necessity he caused others to call Him the son of Devaki ?2.",
+      "lineNumber": 60
+    },
+    {
+      "id": "1373",
+      "gurmukhi": "ਦੇਵ ਦੈਤ ਦਿਸਾ ਵਿਸਾ ਜਿਹ ਕੀਨ ਸਰਬ ਪਸਾਰ ॥",
+      "transliteration": "dhev dhait dhisaa visaa jeh keen sarab pasaar ||",
+      "translation": "He, who has created gods, demons, directions and the whole expanse,",
+      "lineNumber": 61
+    },
+    {
+      "id": "1374",
+      "gurmukhi": "ਕਉਨ ਉਪਮਾ ਤੌਨ ਕੌ ਮੁਖ ਲੇਤ ਨਾਮੁ ਮੁਰਾਰ ॥੩॥੧॥੭॥",
+      "transliteration": "kaun upamaa tauan kau mukh let naam muraar ||3||1||7||",
+      "translation": "On what analogy should he be called Murar? 3.",
+      "lineNumber": 62
+    },
+    {
+      "id": "1375",
+      "gurmukhi": "ਰਾਗ ਬਿਲਾਵਲ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raag bilaaval paatisaahee 10 ||",
+      "translation": "RAGA BILAWAL OF THE TENTH KING",
+      "lineNumber": 63
+    },
+    {
+      "id": "1376",
+      "gurmukhi": "ਸੋ ਕਿਮ ਮਾਨਸ ਰੂਪ ਕਹਾਏ ॥",
+      "transliteration": "so kim maanas roop kahaae ||",
+      "translation": "How can He be said to come in human form?",
+      "lineNumber": 64
+    },
+    {
+      "id": "1377",
+      "gurmukhi": "ਸਿਧ ਸਮਾਧਿ ਸਾਧ ਕਰ ਹਾਰੇ ਕ੍ਯੋਹੂੰ ਨ ਦੇਖਨ ਪਾਏ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "sidh samaadh saadh kar haare kayohoo(n) na dhekhan paae ||1|| rahaau ||",
+      "translation": "The Siddha (adept) in deep meditation became tired of the discipline on not seeing Him in any way…..Pause.",
+      "lineNumber": 65
+    },
+    {
+      "id": "1378",
+      "gurmukhi": "ਨਾਰਦ ਬਿਆਸ ਪਰਾਸਰ ਧ੍ਰੂਅ ਸੇ ਧਿਆਵਤ ਧਿਆਨ ਲਗਾਏ ॥",
+      "transliteration": "naaradh biaas paraasar dhraooa se dhiaavat dhiaan lagaae ||",
+      "translation": "Narad, Vyas, Prashar, Dhru, all meditated on Him,",
+      "lineNumber": 66
+    },
+    {
+      "id": "1379",
+      "gurmukhi": "ਬੇਦ ਪੁਰਾਨ ਹਾਰਿ ਹਠ ਛਾਡਿਓ ਤਦਪਿ ਧਿਆਨ ਨ ਆਏ ॥੧॥",
+      "transliteration": "bedh puraan haar haTh chhaaddio tadhap dhiaan na aae ||1||",
+      "translation": "The Vedas and Puranas, became tired and forsook insistence, since He could not be visualized.1.",
+      "lineNumber": 67
+    },
+    {
+      "id": "1380",
+      "gurmukhi": "ਦਾਨਵ ਦੇਵ ਪਿਸਾਚ ਪ੍ਰੇਤ ਤੇ ਨੇਤਹ ਨੇਤ ਕਹਾਏ ॥",
+      "transliteration": "dhaanav dhev pisaach pret te neteh net kahaae ||",
+      "translation": "By demons, gods, ghosts, spirits, He was called indescribable,",
+      "lineNumber": 68
+    },
+    {
+      "id": "1381",
+      "gurmukhi": "ਸੂਛਮ ਤੇ ਸੂਛਮ ਕਰ ਚੀਨੇ ਬ੍ਰਿਧਨ ਬ੍ਰਿਧ ਬਤਾਏ ॥੨॥",
+      "transliteration": "soochham te soochham kar cheene biradhan biradh bataae ||2||",
+      "translation": "He was considered the finest of the fine and the biggest of the big.2.",
+      "lineNumber": 69
+    },
+    {
+      "id": "1382",
+      "gurmukhi": "ਭੂਮ ਅਕਾਸ ਪਤਾਲ ਸਭੈ ਸਜਿ ਏਕ ਅਨੇਕ ਸਦਾਏ ॥",
+      "transliteration": "bhoom akaas pataal sabhai saj ek anek sadhaae ||",
+      "translation": "He, the One, Created the earth, heaven and the nether-world and was called “Many”",
+      "lineNumber": 70
+    },
+    {
+      "id": "1383",
+      "gurmukhi": "ਸੋ ਨਰ ਕਾਲ ਫਾਸ ਤੇ ਬਾਚੇ ਜੋ ਹਰਿ ਸਰਣਿ ਸਿਧਾਏ ॥੩॥੧॥੮॥",
+      "transliteration": "so nar kaal faas te baache jo har saran sidhaae ||3||1||8||",
+      "translation": "That man is saved from the noose of death, who takes refuge in the Lord.3.",
+      "lineNumber": 71
+    },
+    {
+      "id": "1384",
+      "gurmukhi": "ਰਾਗ ਦੇਵਗੰਧਾਰੀ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raag dhevaga(n)dhaaree paatisaahee 10 ||",
+      "translation": "RAGA DEVGANDHARI OF THE TENTH KING",
+      "lineNumber": 72
+    },
+    {
+      "id": "1385",
+      "gurmukhi": "ਇਕ ਬਿਨ ਦੂਸਰ ਸੋ ਨ ਚਿਨਾਰ ॥",
+      "transliteration": "eik bin dhoosar so na chinaar ||",
+      "translation": "Do not recognize anyone except ONE",
+      "lineNumber": 73
+    },
+    {
+      "id": "1386",
+      "gurmukhi": "ਭੰਜਨ ਗੜਨ ਸਮਰਥ ਸਦਾ ਪ੍ਰਭ ਜਾਨਤ ਹੈ ਕਰਤਾਰ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "bha(n)jan gaRan samarath sadhaa prabh jaanat hai karataar ||1|| rahaau ||",
+      "translation": "He is always the Destroyer, the Creator and the Almighty  he the Creator is Omniscient…..Pause.",
+      "lineNumber": 74
+    },
+    {
+      "id": "1387",
+      "gurmukhi": "ਕਹਾ ਭਇਓ ਜੋ ਅਤ ਹਿਤ ਚਿਤ ਕਰ ਬਹੁ ਬਿਧ ਸਿਲਾ ਪੁਜਾਈ ॥",
+      "transliteration": "kahaa bhio jo at hit chit kar bahu bidh silaa pujaiee ||",
+      "translation": "Of what use is the worship of the stones with devotion and sincerity in various ways?",
+      "lineNumber": 75
+    },
+    {
+      "id": "1388",
+      "gurmukhi": "ਪ੍ਰਾਨ ਥਕਿਓ ਪਾਹਨ ਕਹ ਪਰਸਤ ਕਛੁ ਕਰਿ ਸਿਧ ਨ ਆਈ ॥੧॥",
+      "transliteration": "praan thakio paahan keh parasat kachh kar sidh na aaiee ||1||",
+      "translation": "The hand became tired of touching the stones, because no spiritual powr accrued.1.",
+      "lineNumber": 76
+    },
+    {
+      "id": "1389",
+      "gurmukhi": "ਅਛਤ ਧੂਪ ਦੀਪ ਅਰਪਤ ਹੈ ਪਾਹਨ ਕਛੂ ਨ ਖੈਹੈ ॥",
+      "transliteration": "achhat dhoop dheep arapat hai paahan kachhoo na khaihai ||",
+      "translation": "Rice, incense and lamps are offered, but the stones do not eat anything,",
+      "lineNumber": 77
+    },
+    {
+      "id": "1390",
+      "gurmukhi": "ਤਾ ਮੈਂ ਕਹਾਂ ਸਿਧ ਹੈ ਰੇ ਜੜ ਤੋਹਿ ਕਛੂ ਬਰ ਦੈਹੈ ॥੨॥",
+      "transliteration": "taa mai(n) kahaa(n) sidh hai re jaR toh kachhoo bar dhaihai ||2||",
+      "translation": "O fool! where is the spiritual power in them, so that they may bless you with some boon.2.",
+      "lineNumber": 78
+    },
+    {
+      "id": "1391",
+      "gurmukhi": "ਜੌ ਜੀਯ ਹੋਤ ਤੌ ਦੇਤ ਕਛੁ ਤੁਹਿ ਕਰ ਮਨ ਬਚ ਕਰਮ ਬਿਚਾਰ ॥",
+      "transliteration": "jau jeey hot tau dhet kachh tuh kar man bach karam bichaar ||",
+      "translation": "Ponder in mind, speech and action  if they had any life they could have given you something,",
+      "lineNumber": 79
+    },
+    {
+      "id": "1392",
+      "gurmukhi": "ਕੇਵਲ ਏਕ ਸਰਣ ਸੁਆਮੀ ਬਿਨੁ ਯੌ ਨਹਿ ਕਤਹਿ ਉਧਾਰ ॥੩॥੧॥੯॥",
+      "transliteration": "keval ek saran suaamee bin yau neh kateh udhaar ||3||1||9||",
+      "translation": "None can get salvation in any way without taking refuge in one Lord.3.1.",
+      "lineNumber": 80
+    },
+    {
+      "id": "1393",
+      "gurmukhi": "ਰਾਗ ਦੇਵਗੰਧਾਰੀ ਪਾਤਿਸਾਹੀ ੧੦ ॥",
+      "transliteration": "raag dhevaga(n)dhaaree paatisaahee 10 ||",
+      "translation": "RAGA DEVGANDHARI OF THE TENTH KING",
+      "lineNumber": 81
+    },
+    {
+      "id": "1394",
+      "gurmukhi": "ਬਿਨੁ ਹਰਿ ਨਾਮ ਨ ਬਾਚਨ ਪੈਹੈ ॥",
+      "transliteration": "bin har naam na baachan paihai ||",
+      "translation": "None can be saved without the Name of the Lord,",
+      "lineNumber": 82
+    },
+    {
+      "id": "1395",
+      "gurmukhi": "ਚੌਦਹਿ ਲੋਕ ਜਾਹਿ ਬਸ ਕੀਨੇ ਤਾ ਤੇ ਕਹਾਂ ਪਲੈਹੈ ॥੧॥ ਰਹਾਉ ॥",
+      "transliteration": "chauadheh lok jaeh bas keene taa te kahaa(n) palaihai ||1|| rahaau ||",
+      "translation": "He, who control al the fourteen worlds, how can you run away from Him?...Pause.",
+      "lineNumber": 83
+    },
+    {
+      "id": "1396",
+      "gurmukhi": "ਰਾਮ ਰਹੀਮ ਉਬਾਰ ਨ ਸਕਹੈ ਜਾ ਕਰ ਨਾਮ ਰਟੈ ਹੈ ॥",
+      "transliteration": "raam raheem ubaar na sakahai jaa kar naam raTai hai ||",
+      "translation": "You cannot be save by repeating the Names of Ram and Rahim,",
+      "lineNumber": 84
+    },
+    {
+      "id": "1397",
+      "gurmukhi": "ਬ੍ਰਹਮਾ ਬਿਸਨ ਰੁਦ੍ਰ ਸੂਰਜ ਸਸਿ ਤੇ ਬਸਿ ਕਾਲ ਸਬੈ ਹੈ ॥੧॥",
+      "transliteration": "brahamaa bisan rudhr sooraj sas te bas kaal sabai hai ||1||",
+      "translation": "Brahma, Vishnu Shiva, Sun and Moon, all are subject to the power of Death.1.",
+      "lineNumber": 85
+    },
+    {
+      "id": "1398",
+      "gurmukhi": "ਬੇਦ ਪੁਰਾਨ ਕੁਰਾਨ ਸਬੈ ਮਤ ਜਾਕਹ ਨੇਤ ਕਹੈ ਹੈ ॥",
+      "transliteration": "bedh puraan kuraan sabai mat jaakeh net kahai hai ||",
+      "translation": "Vedas, Puranas and holy Quran and all religious system proclaim Him as indescribeable,2.",
+      "lineNumber": 86
+    },
+    {
+      "id": "1399",
+      "gurmukhi": "ਇੰਦ੍ਰ ਫਨਿੰਦ੍ਰ ਮੁਨਿੰਦ੍ਰ ਕਲਪ ਬਹੁ ਧਿਆਵਤ ਧਿਆਨ ਨ ਐਹੈ ॥੨॥",
+      "transliteration": "ei(n)dhr fani(n)dhr muni(n)dhr kalap bahu dhiaavat dhiaan na aaihai ||2||",
+      "translation": "Indra, Sheshnaga and the Supreme sage meditated on Him for ages, but could not visualize Him.2.",
+      "lineNumber": 87
+    },
+    {
+      "id": "1400",
+      "gurmukhi": "ਜਾਕਰ ਰੂਪ ਰੰਗ ਨਹਿ ਜਨਿਯਤ ਸੋ ਕਿਮ ਸ੍ਯਾਮ ਕਹੈ ਹੈ ॥",
+      "transliteration": "jaakar roop ra(n)g neh janiyat so kim sayaam kahai hai ||",
+      "translation": "He, whose form and colour are not, how can he be called black?",
+      "lineNumber": 88
+    },
+    {
+      "id": "1401",
+      "gurmukhi": "ਛੁਟਹੋ ਕਾਲ ਜਾਲ ਤੇ ਤਬ ਹੀ ਤਾਂਹਿ ਚਰਨ ਲਪਟੈਹੈ ॥੩॥੧॥੧੦॥",
+      "transliteration": "chhuTaho kaal jaal te tab hee taa(n)h charan lapaTaihai ||3||1||10||",
+      "translation": "You can only be liberated from the noose of Death, when you cling to His feet.3.2.",
+      "lineNumber": 89
+    }
+  ],
+  "totalVerses": 89
+}
