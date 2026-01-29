@@ -30,7 +30,7 @@ export default function HomeScreen({ navigation }: any) {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>ੴ</Text>
-        <Text style={styles.headerSubtitle}>SikhSphere</Text>
+        <Text style={styles.headerSubtitle}>Akaal Seva</Text>
         <Text style={styles.headerTagline}>Your Spiritual Companion</Text>
       </View>
 

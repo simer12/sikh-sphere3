@@ -1,0 +1,642 @@
+{
+  "metadata": {
+    "title": "Jeevan Katha Sri Guru Nanak Dev Ji",
+    "titleGurmukhi": "ਜੀਵਨ ਕਥਾ ਸ੍ਰੀ ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ",
+    "totalParts": 12,
+    "totalChapters": 54,
+    "totalPages": 412,
+    "totalWords": 346602
+  },
+  "parts": [
+    {
+      "id": "part-1-historical-context",
+      "titleGurmukhi": "ਸਮੇਂ ਦੀ ਹਾਲਤ",
+      "titleEnglish": "Historical Context",
+      "chapters": [
+        1,
+        2
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_1",
+          "number": 1,
+          "titleGurmukhi": "ਸਮੇਂ ਦੀ ਹਾਲਤ-1",
+          "titleEnglish": "Historical Context - Part 1",
+          "pageRange": "5-14",
+          "wordCount": 6882
+        },
+        {
+          "id": "chapter_2",
+          "number": 2,
+          "titleGurmukhi": "ਸਮੇਂ ਦੀ ਹਾਲਤ-2",
+          "titleEnglish": "Historical Context - Part 2",
+          "pageRange": "15-21",
+          "wordCount": 7696
+        }
+      ],
+      "totalChapters": 2,
+      "totalWords": 14578
+    },
+    {
+      "id": "part-2-early-life",
+      "titleGurmukhi": "ਸ਼ੁਰੂਆਤੀ ਜੀਵਨ",
+      "titleEnglish": "Early Life",
+      "chapters": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_3",
+          "number": 3,
+          "titleGurmukhi": "ਜਨਮ ਤੇ ਬਾਲ-ਲੀਲਾ",
+          "titleEnglish": "Birth and Childhood",
+          "pageRange": "22-30",
+          "wordCount": 3620
+        },
+        {
+          "id": "chapter_4",
+          "number": 4,
+          "titleGurmukhi": "ਆਪਣੇ ਉਸਤਾਦਾਂ ਦੇ ਉਸਤਾਦ-1",
+          "titleEnglish": "Teacher of Teachers - Part 1",
+          "pageRange": "31-36",
+          "wordCount": 3854
+        },
+        {
+          "id": "chapter_5",
+          "number": 5,
+          "titleGurmukhi": "ਆਪਣੇ ਉਸਤਾਦਾਂ ਦੇ ਉਸਤਾਦ-2",
+          "titleEnglish": "Teacher of Teachers - Part 2",
+          "pageRange": "37-41",
+          "wordCount": 7589
+        },
+        {
+          "id": "chapter_6",
+          "number": 6,
+          "titleGurmukhi": "ਮੱਝਾਂ ਦਾ ਵਾਗੀ",
+          "titleEnglish": "Buffalo Herding",
+          "pageRange": "42-44",
+          "wordCount": 3735
+        },
+        {
+          "id": "chapter_7",
+          "number": 7,
+          "titleGurmukhi": "ਜਨੇਊ",
+          "titleEnglish": "Sacred Thread",
+          "pageRange": "45-51",
+          "wordCount": 6987
+        },
+        {
+          "id": "chapter_8",
+          "number": 8,
+          "titleGurmukhi": "ਅਨੋਖੇ ਦੁਨਿਆਵੀ ਕਿੱਤੇ",
+          "titleEnglish": "Unique Worldly Activities",
+          "pageRange": "52-57",
+          "wordCount": 3252
+        },
+        {
+          "id": "chapter_9",
+          "number": 9,
+          "titleGurmukhi": "ਵੈਦ ਦਾ ਰੋਗ ਦੂਰ ਕੀਤਾ",
+          "titleEnglish": "Cured the Physician's Disease",
+          "pageRange": "58-63",
+          "wordCount": 7531
+        },
+        {
+          "id": "chapter_10",
+          "number": 10,
+          "titleGurmukhi": "ਖਰਾ (ਸੱਚਾ) ਸੌਦਾ",
+          "titleEnglish": "The True Bargain",
+          "pageRange": "64-72",
+          "wordCount": 8315
+        }
+      ],
+      "totalChapters": 8,
+      "totalWords": 44883
+    },
+    {
+      "id": "part-3-sultanpur",
+      "titleGurmukhi": "ਸੁਲਤਾਨਪੁਰ ਕਾਲ",
+      "titleEnglish": "Sultanpur Period",
+      "chapters": [
+        11,
+        12
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_11",
+          "number": 11,
+          "titleGurmukhi": "ਸੁਲਤਾਨਪੁਰ ਵਾਸ",
+          "titleEnglish": "Stay at Sultanpur",
+          "pageRange": "73-80",
+          "wordCount": 4036
+        },
+        {
+          "id": "chapter_12",
+          "number": 12,
+          "titleGurmukhi": "ਰੱਬੀ ਸੱਦੜਾ",
+          "titleEnglish": "Divine Call",
+          "pageRange": "81-87",
+          "wordCount": 3612
+        }
+      ],
+      "totalChapters": 2,
+      "totalWords": 7648
+    },
+    {
+      "id": "part-4-first-udasi",
+      "titleGurmukhi": "ਪਹਿਲੀ ਉਦਾਸੀ - ਪੂਰਬ",
+      "titleEnglish": "First Udasi (Eastern Journey)",
+      "chapters": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_13",
+          "number": 13,
+          "titleGurmukhi": "ਚੜ੍ਹਿਆ ਸੋਧਣ ਧਰਤ ਲੁਕਾਈ",
+          "titleEnglish": "Rising to Purify Humanity",
+          "pageRange": "88-99",
+          "wordCount": 8027
+        },
+        {
+          "id": "chapter_14",
+          "number": 14,
+          "titleGurmukhi": "ਨੀਚੋਂ ਊਚ ਕੀਤੋ ਨੇ",
+          "titleEnglish": "Raised from Low to High",
+          "pageRange": "100-110",
+          "wordCount": 8634
+        },
+        {
+          "id": "chapter_15",
+          "number": 15,
+          "titleGurmukhi": "ਤਲਵੇਡੀ, ਤੁਲੰਬਾ (ਸੱਜਣ ਠੱਗ)",
+          "titleEnglish": "Talwandi, Tulamba (Sajjan the Thug)",
+          "pageRange": "111-119",
+          "wordCount": 3710
+        },
+        {
+          "id": "chapter_16",
+          "number": 16,
+          "titleGurmukhi": "ਪਾਕ ਪਟਨ ਫੇਰੀ",
+          "titleEnglish": "Visit to Pak Patan",
+          "pageRange": "120-125",
+          "wordCount": 7704
+        },
+        {
+          "id": "chapter_17",
+          "number": 17,
+          "titleGurmukhi": "ਪਹਿਲੀ ਉਦਾਸੀ: ਕੁਰਕਸ਼ੇਤਰ",
+          "titleEnglish": "First Udasi: Kurukshetra",
+          "pageRange": "126-133",
+          "wordCount": 8056
+        },
+        {
+          "id": "chapter_18",
+          "number": 18,
+          "titleGurmukhi": "ਪਾਨੀਪਤ ਤੇ ਦਿੱਲੀ",
+          "titleEnglish": "Panipat and Delhi",
+          "pageRange": "134-141",
+          "wordCount": 7481
+        },
+        {
+          "id": "chapter_19",
+          "number": 19,
+          "titleGurmukhi": "ਹਰਿਦਵਾਰ",
+          "titleEnglish": "Haridwar",
+          "pageRange": "142-148",
+          "wordCount": 3419
+        },
+        {
+          "id": "chapter_20",
+          "number": 20,
+          "titleGurmukhi": "ਬਨਾਰਸ (ਪੰਡਿਤ ਚਤੁਰਦਾਸ)",
+          "titleEnglish": "Banaras (Pandit Chaturdas)",
+          "pageRange": "149-152",
+          "wordCount": 7184
+        },
+        {
+          "id": "chapter_21",
+          "number": 21,
+          "titleGurmukhi": "ਗਯਾ ਠੱਗਾਂ ਦਾ ਨਿਸਤਾਰਾ",
+          "titleEnglish": "Gaya - Salvation of Thugs",
+          "pageRange": "153-156",
+          "wordCount": 3765
+        },
+        {
+          "id": "chapter_22",
+          "number": 22,
+          "titleGurmukhi": "ਪਟਨੇ ਦਾ ਸਾਲਿਸ ਰਾਇ ਜੌਹਰੀ",
+          "titleEnglish": "Salis Rai Jauhari of Patna",
+          "pageRange": "157-162",
+          "wordCount": 7324
+        },
+        {
+          "id": "chapter_23",
+          "number": 23,
+          "titleGurmukhi": "ਕਾਮਰੂਪ ਨੂਰਸ਼ਾਹ ਨਿਸਤਾਰਾ",
+          "titleEnglish": "Kamrup - Nurshah's Salvation",
+          "pageRange": "163-173",
+          "wordCount": 7418
+        },
+        {
+          "id": "chapter_24",
+          "number": 24,
+          "titleGurmukhi": "ਪੁਰੀ ਜਗਨਨਾਥ",
+          "titleEnglish": "Puri Jagannath",
+          "pageRange": "174-180",
+          "wordCount": 3859
+        }
+      ],
+      "totalChapters": 12,
+      "totalWords": 76581
+    },
+    {
+      "id": "part-5-return-punjab",
+      "titleGurmukhi": "ਪੰਜਾਬ ਵਾਪਸੀ",
+      "titleEnglish": "Return to Punjab",
+      "chapters": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_25",
+          "number": 25,
+          "titleGurmukhi": "ਪੰਜਾਬ ਨੂੰ ਵਾਪਸੀ",
+          "titleEnglish": "Return to Punjab",
+          "pageRange": "181-187",
+          "wordCount": 3781
+        },
+        {
+          "id": "chapter_26",
+          "number": 26,
+          "titleGurmukhi": "ਸ਼ੇਖ਼ ਬ੍ਰਹਮ ਨਾਲ ਫੇਰ ਗੋਸ਼ਟ",
+          "titleEnglish": "Again Discourse with Sheikh Brahm",
+          "pageRange": "188-194",
+          "wordCount": 7621
+        },
+        {
+          "id": "chapter_27",
+          "number": 27,
+          "titleGurmukhi": "ਕੋੜ੍ਹਾ ਤਾਰਿਆ",
+          "titleEnglish": "Cured the Leper",
+          "pageRange": "195-198",
+          "wordCount": 3840
+        },
+        {
+          "id": "chapter_28",
+          "number": 28,
+          "titleGurmukhi": "ਸੁਲਤਾਨਪੁਰ, ਕਿੜੀ ਪਠਾਣਾ, ਸੈਦਪੁਰ",
+          "titleEnglish": "Sultanpur, Kiri Pathana, Saidpur",
+          "pageRange": "199-201",
+          "wordCount": 8039
+        },
+        {
+          "id": "chapter_29",
+          "number": 29,
+          "titleGurmukhi": "ਹਮਜ਼ਾ ਗੌਸ ਤੇ ਮੂਲਾ ਕਿਰਾੜ",
+          "titleEnglish": "Hamza Gaus and Mulla Qirad",
+          "pageRange": "202-208",
+          "wordCount": 4199
+        },
+        {
+          "id": "chapter_30",
+          "number": 30,
+          "titleGurmukhi": "ਮੀਆਂ ਮਿਠੇ ਨਾਲ ਗੋਸ਼ਟ",
+          "titleEnglish": "Discourse with Mian Mithe",
+          "pageRange": "209-215",
+          "wordCount": 8261
+        },
+        {
+          "id": "chapter_31",
+          "number": 31,
+          "titleGurmukhi": "ਦੁਨੀ ਚੰਦ ਤੇ ਕਰੋੜੀਆ",
+          "titleEnglish": "Duni Chand and the Crorepati",
+          "pageRange": "216-223",
+          "wordCount": 7613
+        },
+        {
+          "id": "chapter_32",
+          "number": 32,
+          "titleGurmukhi": "ਕਰਤਾਰਪੁਰ",
+          "titleEnglish": "Kartarpur",
+          "pageRange": "224-228",
+          "wordCount": 3551
+        }
+      ],
+      "totalChapters": 8,
+      "totalWords": 46905
+    },
+    {
+      "id": "part-6-second-udasi",
+      "titleGurmukhi": "ਦੂਜੀ ਉਦਾਸੀ - ਦੱਖਣ",
+      "titleEnglish": "Second Udasi (Southern Journey)",
+      "chapters": [
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_33",
+          "number": 33,
+          "titleGurmukhi": "ਦੂਜੀ ਉਦਾਸੀ ਦੱਖਣ ਦੀ-1",
+          "titleEnglish": "Second Udasi (South) - Part 1",
+          "pageRange": "229-233",
+          "wordCount": 7424
+        },
+        {
+          "id": "chapter_34",
+          "number": 34,
+          "titleGurmukhi": "ਜੈਨੀ ਸਾਧੂ, ਪੀਰ ਮਖ਼ਦੂਮ",
+          "titleEnglish": "Jain Sadhus and Pir Makhdum",
+          "pageRange": "234-239",
+          "wordCount": 3873
+        },
+        {
+          "id": "chapter_35",
+          "number": 35,
+          "titleGurmukhi": "ਆਦਮ-ਖਾਣਾ ਕੌਡਾ",
+          "titleEnglish": "Adam Khana Kauda",
+          "pageRange": "240-242",
+          "wordCount": 7457
+        },
+        {
+          "id": "chapter_36",
+          "number": 36,
+          "titleGurmukhi": "ਦੂਜੀ ਉਦਾਸੀ ਦੱਖਣ ਦੀ-2",
+          "titleEnglish": "Second Udasi (South) - Part 2",
+          "pageRange": "243-251",
+          "wordCount": 7423
+        },
+        {
+          "id": "chapter_37",
+          "number": 37,
+          "titleGurmukhi": "ਦੱਖਣ ਤੋਂ ਵਾਪਸੀ",
+          "titleEnglish": "Return from South",
+          "pageRange": "252-258",
+          "wordCount": 3839
+        }
+      ],
+      "totalChapters": 5,
+      "totalWords": 30016
+    },
+    {
+      "id": "part-7-third-udasi",
+      "titleGurmukhi": "ਤੀਜੀ ਉਦਾਸੀ - ਉੱਤਰ",
+      "titleEnglish": "Third Udasi (Northern Journey)",
+      "chapters": [
+        38,
+        39,
+        40
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_38",
+          "number": 38,
+          "titleGurmukhi": "ਤੀਜੀ ਉਦਾਸੀ ਉੱਤਰ ਦੀ-1",
+          "titleEnglish": "Third Udasi (North) - Part 1",
+          "pageRange": "259-263",
+          "wordCount": 7867
+        },
+        {
+          "id": "chapter_39",
+          "number": 39,
+          "titleGurmukhi": "ਤੀਜੀ ਉਦਾਸੀ ਉੱਤਰ ਦੀ-2",
+          "titleEnglish": "Third Udasi (North) - Part 2",
+          "pageRange": "264-271",
+          "wordCount": 8045
+        },
+        {
+          "id": "chapter_40",
+          "number": 40,
+          "titleGurmukhi": "ਤੀਜੀ ਉਦਾਸੀ ਉੱਤਰ ਦੀ-3",
+          "titleEnglish": "Third Udasi (North) - Part 3",
+          "pageRange": "272-278",
+          "wordCount": 4017
+        }
+      ],
+      "totalChapters": 3,
+      "totalWords": 19929
+    },
+    {
+      "id": "part-8-fourth-udasi",
+      "titleGurmukhi": "ਚੌਥੀ ਉਦਾਸੀ - ਪੱਛਮ",
+      "titleEnglish": "Fourth Udasi (Western Journey)",
+      "chapters": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_41",
+          "number": 41,
+          "titleGurmukhi": "ਚੌਥੀ ਉਦਾਸੀ ਪੱਛਮ ਦੀ-1",
+          "titleEnglish": "Fourth Udasi (West) - Part 1",
+          "pageRange": "279-286",
+          "wordCount": 7831
+        },
+        {
+          "id": "chapter_42",
+          "number": 42,
+          "titleGurmukhi": "ਚੌਥੀ ਉਦਾਸੀ ਪੱਛਮ ਦੀ-2",
+          "titleEnglish": "Fourth Udasi (West) - Part 2",
+          "pageRange": "287-295",
+          "wordCount": 7791
+        },
+        {
+          "id": "chapter_43",
+          "number": 43,
+          "titleGurmukhi": "ਚੌਥੀ ਉਦਾਸੀ ਪੱਛਮ ਦੀ-3",
+          "titleEnglish": "Fourth Udasi (West) - Part 3",
+          "pageRange": "296-299",
+          "wordCount": 3977
+        },
+        {
+          "id": "chapter_44",
+          "number": 44,
+          "titleGurmukhi": "ਸ੍ਰੀ ਪੰਜਾ ਸਾਹਿਬ",
+          "titleEnglish": "Sri Panja Sahib",
+          "pageRange": "300-304",
+          "wordCount": 7661
+        }
+      ],
+      "totalChapters": 4,
+      "totalWords": 27260
+    },
+    {
+      "id": "part-9-babur",
+      "titleGurmukhi": "ਬਾਬਰ ਦਾ ਹਮਲਾ",
+      "titleEnglish": "Babur's Invasion",
+      "chapters": [
+        45
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_45",
+          "number": 45,
+          "titleGurmukhi": "ਬਾਬਰ ਦਾ ਹਮਲਾ",
+          "titleEnglish": "Babur's Invasion",
+          "pageRange": "305-317",
+          "wordCount": 7716
+        }
+      ],
+      "totalChapters": 1,
+      "totalWords": 7716
+    },
+    {
+      "id": "part-10-kartarpur",
+      "titleGurmukhi": "ਕਰਤਾਰਪੁਰ ਅਵਸਥਾ",
+      "titleEnglish": "Kartarpur Period",
+      "chapters": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_46",
+          "number": 46,
+          "titleGurmukhi": "ਕਰਤਾਰਪੁਰ ਵਾਸ",
+          "titleEnglish": "Stay at Kartarpur",
+          "pageRange": "318-326",
+          "wordCount": 8140
+        },
+        {
+          "id": "chapter_47",
+          "number": 47,
+          "titleGurmukhi": "ਕਰਤਾਰਪੁਰ ਵਿੱਚ ਇਲਾਹੀ ਦਰਬਾਰ",
+          "titleEnglish": "Divine Court at Kartarpur",
+          "pageRange": "327-332",
+          "wordCount": 8021
+        },
+        {
+          "id": "chapter_48",
+          "number": 48,
+          "titleGurmukhi": "ਹੋਰ ਪ੍ਰੇਮ ਜਿੱਤਾਂ",
+          "titleEnglish": "More Victories of Love",
+          "pageRange": "333-338",
+          "wordCount": 3913
+        },
+        {
+          "id": "chapter_49",
+          "number": 49,
+          "titleGurmukhi": "ਸੱਚ ਖੰਡ ਵਾਪਸੀ",
+          "titleEnglish": "Return to Sach Khand",
+          "pageRange": "339-349",
+          "wordCount": 7615
+        }
+      ],
+      "totalChapters": 4,
+      "totalWords": 27689
+    },
+    {
+      "id": "part-11-legacy",
+      "titleGurmukhi": "ਵਿਰਾਸਤ ਤੇ ਸਿੱਖਿਆਵਾਂ",
+      "titleEnglish": "Legacy and Teachings",
+      "chapters": [
+        50,
+        51,
+        52
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_50",
+          "number": 50,
+          "titleGurmukhi": "ਸੰਖੇਪ ਵਿਚਾਰ",
+          "titleEnglish": "Summary Reflections",
+          "pageRange": "350-358",
+          "wordCount": 8029
+        },
+        {
+          "id": "chapter_51",
+          "number": 51,
+          "titleGurmukhi": "ਗੁਰੂ ਜੀ ਦੀ ਸ਼ਖ਼ਸੀਅਤ",
+          "titleEnglish": "Guru Ji's Personality",
+          "pageRange": "359-376",
+          "wordCount": 12418
+        },
+        {
+          "id": "chapter_52",
+          "number": 52,
+          "titleGurmukhi": "ਗੁਰੂ ਨਾਨਕ ਜੀ ਦਾ ਥਰਮ",
+          "titleEnglish": "Guru Nanak Ji's Dharma",
+          "pageRange": "377-389",
+          "wordCount": 7981
+        }
+      ],
+      "totalChapters": 3,
+      "totalWords": 28428
+    },
+    {
+      "id": "part-12-appendices",
+      "titleGurmukhi": "ਅੰਤਕਾ",
+      "titleEnglish": "Appendices",
+      "chapters": [
+        53,
+        54
+      ],
+      "subsections": [],
+      "chapterDetails": [
+        {
+          "id": "chapter_53",
+          "number": 53,
+          "titleGurmukhi": "ਅੰਤਕਾ-1: ਕੱਤਕ ਕਿ ਵਿਸਾਖ",
+          "titleEnglish": "Appendix 1: Kattak or Vaisakh",
+          "pageRange": "390-391",
+          "wordCount": 7474
+        },
+        {
+          "id": "chapter_54",
+          "number": 54,
+          "titleGurmukhi": "ਅੰਤਕਾ-2: ਕਰਾਮਾਤਾਂ ਬਾਰੇ",
+          "titleEnglish": "Appendix 2: About Miracles",
+          "pageRange": "392-412",
+          "wordCount": 7495
+        }
+      ],
+      "totalChapters": 2,
+      "totalWords": 14969
+    }
+  ]
+}

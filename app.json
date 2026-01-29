@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "SikhSphere",
+    "name": "Akaal Seva",
     "slug": "sikhsphere",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,7 +11,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.sikhsphere.app"
+      "bundleIdentifier": "com.akaalseva.app"
     },
     "android": {
       "permissions": [
@@ -19,7 +19,7 @@
         "ACCESS_COARSE_LOCATION",
         "NOTIFICATIONS"
       ],
-      "package": "com.sikhsphere.app"
+      "package": "com.akaalseva.app"
     },
     "updates": {
       "url": "https://u.expo.dev/e2c3f2c3-5f8a-4289-b733-26a8f6c6c208"

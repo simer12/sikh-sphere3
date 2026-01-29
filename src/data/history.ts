@@ -626,38 +626,11 @@ The Sikh diaspora remains connected to Punjab while being rooted in their adopte
 export const historyEras: HistoryEra[] = [
   {
     id: 'gurus',
-    title: 'The Age of the Gurus',
-    titleGurmukhi: 'ਗੁਰੂਆਂ ਦਾ ਯੁੱਗ',
-    period: '1469-1708',
-    description: 'The foundation of Sikhism through ten enlightened Gurus, from Guru Nanak Dev Ji to Guru Gobind Singh Ji, who established the core spiritual and temporal principles of the faith.',
+    title: 'Guru Nanak Dev Ji',
+    titleGurmukhi: 'ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ',
+    period: '1469-1539',
+    description: 'The life and teachings of Guru Nanak Dev Ji, the founder of Sikhism and the first of the ten Sikh Gurus.',
     icon: '🙏',
-    articles: ['guru-nanak-jeevan-katha', 'ten_gurus', 'guru_gobind_singh']
-  },
-  {
-    id: 'warriors',
-    title: 'The Warrior Era',
-    titleGurmukhi: 'ਯੋਧਿਆਂ ਦਾ ਯੁੱਗ',
-    period: '1708-1849',
-    description: 'From Banda Singh Bahadur through the Misls to the mighty Sikh Empire under Maharaja Ranjit Singh - an era of valor, sovereignty, and military prowess.',
-    icon: '⚔️',
-    articles: ['banda_singh_bahadur', 'misl_period', 'sikh_empire', 'anglo_sikh_wars']
-  },
-  {
-    id: 'modern',
-    title: 'Modern Sikh History',
-    titleGurmukhi: 'ਆਧੁਨਿਕ ਇਤਿਹਾਸ',
-    period: '1849-1984',
-    description: 'Sikhs under British rule, their role in India\'s independence, contributions to nation-building, and the Green Revolution that transformed Punjab.',
-    icon: '🌾',
-    articles: ['british_colonial_period', 'post_independence', 'sikh_diaspora']
-  },
-  {
-    id: '1984',
-    title: '1984 and Its Aftermath',
-    titleGurmukhi: '1984 ਅਤੇ ਬਾਅਦ',
-    period: '1984-Present',
-    description: 'A painful chapter in Sikh history involving Operation Blue Star and subsequent violence. This section documents these tragic events and the ongoing quest for justice and healing.',
-    icon: '🕊️',
-    articles: ['operation_bluestar', 'anti_sikh_riots_1984', 'aftermath_1984']
+    articles: ['guru-nanak-jeevan-katha']
   }
 ];

@@ -1,4 +1,4 @@
-# SikhSphere - Complete Sikh Religious App
+# Akaal Seva - Complete Sikh Religious App
 
 A comprehensive React Native Expo app for the Sikh community.
 
