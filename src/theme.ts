@@ -1,18 +1,19 @@
 import { DefaultTheme } from 'react-native-paper';
+import { lightColors, darkColors } from './theme/colors';
 
-export const theme = {
+export const lightTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#FF9933', // Saffron
-    secondary: '#000080', // Navy Blue
-    accent: '#FFFFFF',
-    background: '#F5F5F5',
-    surface: '#FFFFFF',
-    text: '#333333',
-    disabled: '#CCCCCC',
-    placeholder: '#999999',
-    backdrop: 'rgba(0, 0, 0, 0.5)',
+    primary: lightColors.primary,
+    accent: lightColors.accent,
+    background: lightColors.background,
+    surface: lightColors.surface,
+    text: lightColors.text,
+    disabled: lightColors.disabled,
+    placeholder: lightColors.placeholder,
+    backdrop: lightColors.backdrop,
+    notification: lightColors.notification,
   },
   dark: false,
 };
@@ -21,15 +22,18 @@ export const darkTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#FF9933',
-    secondary: '#4169E1',
-    accent: '#FFFFFF',
-    background: '#1A1A1A',
-    surface: '#2C2C2C',
-    text: '#FFFFFF',
-    disabled: '#666666',
-    placeholder: '#888888',
-    backdrop: 'rgba(0, 0, 0, 0.7)',
+    primary: darkColors.primary,
+    accent: darkColors.accent,
+    background: darkColors.background,
+    surface: darkColors.surface,
+    text: darkColors.text,
+    disabled: darkColors.disabled,
+    placeholder: darkColors.placeholder,
+    backdrop: darkColors.backdrop,
+    notification: darkColors.notification,
   },
   dark: true,
 };
+
+// Legacy export for backward compatibility
+export const theme = lightTheme;

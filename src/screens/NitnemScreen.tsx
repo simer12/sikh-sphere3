@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
 import { nitnemBanisMetadata, Bani } from '../data/banis';
 import { fetchBaniFromAPI, convertBaniDBToBani } from '../services/banidb';
+import { useApp } from '../hooks/useApp';
+import { AppText } from '../components/AppText';
+import { SearchBar } from '../components/SearchBar';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { CardSkeleton } from '../components/LoadingSkeleton';
 
 export default function NitnemScreen({ navigation }: any) {
+  const { t, fontSize, colors } = useApp();
   const [banis, setBanis] = useState<Bani[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     loadBanisFromAPI();
@@ -17,7 +24,8 @@ export default function NitnemScreen({ navigation }: any) {
 
   const loadBanisFromAPI = async () => {
     try {
-      setLoading(true);
+      setLoading(!refreshing);
+      setRefreshing(true);
       setError(null);
       const loadedBanis: Bani[] = [];
 
@@ -41,75 +49,93 @@ export default function NitnemScreen({ navigation }: any) {
       setError('Failed to load Banis from BaniDB API. Please check your internet connection.');
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
   if (loading) {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name="book" size={40} color={theme.colors.primary} />
-          <Text style={styles.headerText}>Daily Prayers</Text>
-          <Text style={styles.subheaderText}>Nitnem Banis</Text>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+          <Ionicons name="book" size={40} color={colors.primary} />
+          <AppText variant="title" style={[styles.headerText, { color: colors.text }]}>{t.dailyPrayers}</AppText>
+          <AppText variant="subtitle" style={[styles.subheaderText, { color: colors.textSecondary }]}>{t.nitnemBanis}</AppText>
         </View>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-          <Text style={styles.loadingText}>Loading authentic Gurbani from BaniDB...</Text>
-          <Text style={styles.loadingSubtext}>Please wait while we fetch the prayers</Text>
-        </View>
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
       </View>
     );
   }
 
   if (error) {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons name="book" size={40} color={theme.colors.primary} />
-          <Text style={styles.headerText}>Daily Prayers</Text>
-          <Text style={styles.subheaderText}>Nitnem Banis</Text>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+          <Ionicons name="book" size={40} color={colors.primary} />
+          <AppText variant="title" style={[styles.headerText, { color: colors.text }]}>{t.dailyPrayers}</AppText>
+          <AppText variant="subtitle" style={[styles.subheaderText, { color: colors.textSecondary }]}>{t.nitnemBanis}</AppText>
         </View>
-        <View style={styles.errorContainer}>
-          <Ionicons name="cloud-offline" size={60} color="#FF6B6B" />
-          <Text style={styles.errorTitle}>Connection Error</Text>
-          <Text style={styles.errorMessage}>{error}</Text>
-          <TouchableOpacity style={styles.retryButton} onPress={loadBanisFromAPI}>
-            <Text style={styles.retryButtonText}>Retry</Text>
-          </TouchableOpacity>
-        </View>
+        <ErrorMessage
+          title={t.connectionError}
+          message={error}
+          onRetry={loadBanisFromAPI}
+          retryLabel={t.retry}
+        />
       </View>
     );
   }
 
+  const filteredBanis = banis.filter(bani =>
+    bani.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    bani.nameGurmukhi.includes(searchQuery) ||
+    bani.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons name="book" size={40} color={theme.colors.primary} />
-        <Text style={styles.headerText}>Daily Prayers</Text>
-        <Text style={styles.subheaderText}>Nitnem Banis</Text>
-        <Text style={styles.successText}>✓ Loaded from BaniDB API</Text>
+    <ScrollView 
+      style={[styles.container, { backgroundColor: colors.background }]}
+      refreshControl={
+        <RefreshControl 
+          refreshing={refreshing} 
+          onRefresh={loadBanisFromAPI}
+          tintColor={colors.primary}
+          colors={[colors.primary]}
+        />
+      }
+    >
+      <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+        <Ionicons name="book" size={40} color={colors.primary} />
+        <AppText variant="title" style={[styles.headerText, { color: colors.text }]}>{t.dailyPrayers}</AppText>
+        <AppText variant="subtitle" style={[styles.subheaderText, { color: colors.textSecondary }]}>{t.nitnemBanis}</AppText>
+        <AppText variant="caption" style={[styles.successText, { color: colors.success }]}>✓ {t.loadedFromAPI}</AppText>
       </View>
 
-      {banis.map((bani) => (
-        <Card key={bani.id} style={styles.card}>
+      <SearchBar
+        placeholder="Search Banis..."
+        onSearch={setSearchQuery}
+      />
+
+      {filteredBanis.map((bani) => (
+        <Card key={bani.id} style={[styles.card, { backgroundColor: colors.card }]}>
           <TouchableOpacity onPress={() => navigation.navigate('BaniDetail', { bani })}>
             <Card.Content>
               <View style={styles.cardHeader}>
                 <View style={styles.cardTitleContainer}>
-                  <Title style={styles.baniName}>{bani.name}</Title>
-                  <Text style={styles.baniNameGurmukhi}>{bani.nameGurmukhi}</Text>
+                  <Title style={[styles.baniName, { color: colors.primary }]}>{bani.name}</Title>
+                  <Text style={[styles.baniNameGurmukhi, { color: colors.text }]}>{bani.nameGurmukhi}</Text>
                 </View>
-                <Ionicons name="chevron-forward" size={24} color={theme.colors.primary} />
+                <Ionicons name="chevron-forward" size={24} color={colors.primary} />
               </View>
-              <Paragraph style={styles.description}>{bani.description}</Paragraph>
+              <Paragraph style={[styles.description, { color: colors.textSecondary }]}>{bani.description}</Paragraph>
               <View style={styles.infoRow}>
                 <View style={styles.infoItem}>
-                  <Ionicons name="time-outline" size={16} color="#666" />
-                  <Text style={styles.infoText}>{bani.time}</Text>
+                  <Ionicons name="time-outline" size={16} color={colors.textSecondary} />
+                  <Text style={[styles.infoText, { color: colors.textSecondary }]}>{bani.time}</Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <Ionicons name="hourglass-outline" size={16} color="#666" />
-                  <Text style={styles.infoText}>{bani.duration}</Text>
+                  <Ionicons name="hourglass-outline" size={16} color={colors.textSecondary} />
+                  <Text style={[styles.infoText, { color: colors.textSecondary }]}>{bani.duration}</Text>
                 </View>
               </View>
             </Card.Content>
@@ -123,34 +149,27 @@ export default function NitnemScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#fff',
     padding: 20,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     marginTop: 10,
   },
   subheaderText: {
     fontSize: 16,
-    color: '#666',
     marginTop: 5,
   },
   successText: {
     fontSize: 12,
-    color: '#4CAF50',
     marginTop: 5,
   },
   errorText: {
     fontSize: 12,
-    color: '#FF6B6B',
     marginTop: 5,
   },
   loadingContainer: {
@@ -160,14 +179,12 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 16,
-    color: '#666',
     marginTop: 16,
     textAlign: 'center',
     fontWeight: '600',
   },
   loadingSubtext: {
     fontSize: 14,
-    color: '#999',
     marginTop: 8,
     textAlign: 'center',
   },
@@ -179,18 +196,15 @@ const styles = StyleSheet.create({
   errorTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FF6B6B',
     marginTop: 16,
   },
   errorMessage: {
     fontSize: 14,
-    color: '#666',
     marginTop: 8,
     textAlign: 'center',
   },
   retryButton: {
     marginTop: 20,
-    backgroundColor: theme.colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 8,
@@ -216,16 +230,13 @@ const styles = StyleSheet.create({
   baniName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: theme.colors.primary,
   },
   baniNameGurmukhi: {
     fontSize: 20,
-    color: '#333',
     marginTop: 4,
   },
   description: {
     fontSize: 14,
-    color: '#666',
     marginBottom: 12,
   },
   infoRow: {
@@ -239,7 +250,6 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 12,
-    color: '#666',
     marginLeft: 4,
   },
 });

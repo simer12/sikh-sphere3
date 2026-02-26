@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Card, ProgressBar } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
+import { useApp } from '../hooks/useApp';
 
 interface Lesson {
   id: string;
@@ -13,6 +13,7 @@ interface Lesson {
 }
 
 export default function LearnScreen() {
+  const { colors } = useApp();
   const [lessons, setLessons] = useState<Lesson[]>([
     {
       id: '1',
@@ -76,26 +77,26 @@ export default function LearnScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons name="school" size={40} color={theme.colors.primary} />
-        <Text style={styles.headerText}>Learn Gurmukhi</Text>
-        <Text style={styles.subheaderText}>Master the Sacred Script</Text>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+        <Ionicons name="school" size={40} color={colors.primary} />
+        <Text style={[styles.headerText, { color: colors.text }]}>Learn Gurmukhi</Text>
+        <Text style={[styles.subheaderText, { color: colors.textSecondary }]}>Master the Sacred Script</Text>
       </View>
 
-      <Card style={styles.progressCard}>
+      <Card style={[styles.progressCard, { backgroundColor: colors.card }]}>
         <Card.Content>
-          <Text style={styles.progressTitle}>Your Progress</Text>
-          <ProgressBar progress={progress} color={theme.colors.primary} style={styles.progressBar} />
-          <Text style={styles.progressText}>
+          <Text style={[styles.progressTitle, { color: colors.text }]}>Your Progress</Text>
+          <ProgressBar progress={progress} color={colors.primary} style={styles.progressBar} />
+          <Text style={[styles.progressText, { color: colors.textSecondary }]}>
             {completedCount} of {lessons.length} lessons completed
           </Text>
         </Card.Content>
       </Card>
 
-      <View style={styles.alphabetCard}>
-        <Text style={styles.alphabetTitle}>Gurmukhi Alphabet</Text>
-        <Text style={styles.alphabetText}>
+      <View style={[styles.alphabetCard, { backgroundColor: colors.card }]}>
+        <Text style={[styles.alphabetTitle, { color: colors.primary }]}>Gurmukhi Alphabet</Text>
+        <Text style={[styles.alphabetText, { color: colors.text }]}>
           ੳ ਅ ੲ ਸ ਹ ਕ ਖ ਗ ਘ ਙ {'\n'}
           ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ {'\n'}
           ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ {'\n'}
@@ -104,25 +105,25 @@ export default function LearnScreen() {
       </View>
 
       <View style={styles.lessonsContainer}>
-        <Text style={styles.sectionTitle}>Lessons</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Lessons</Text>
         {lessons.map((lesson) => (
-          <Card key={lesson.id} style={styles.lessonCard}>
+          <Card key={lesson.id} style={[styles.lessonCard, { backgroundColor: colors.card }]}>
             <TouchableOpacity onPress={() => toggleLesson(lesson.id)}>
               <Card.Content>
                 <View style={styles.lessonHeader}>
                   <View style={styles.lessonInfo}>
-                    <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                    <Text style={[styles.lessonTitle, { color: colors.text }]}>{lesson.title}</Text>
                     <View style={styles.levelBadge}>
                       <Text style={[styles.levelText, { color: getLevelColor(lesson.level) }]}>
                         {lesson.level.toUpperCase()}
                       </Text>
                     </View>
-                    <Text style={styles.lessonContent}>{lesson.content}</Text>
+                    <Text style={[styles.lessonContent, { color: colors.textSecondary }]}>{lesson.content}</Text>
                   </View>
                   <Ionicons 
                     name={lesson.completed ? 'checkmark-circle' : 'play-circle-outline'} 
                     size={40} 
-                    color={lesson.completed ? '#4CAF50' : theme.colors.primary} 
+                    color={lesson.completed ? '#4CAF50' : colors.primary} 
                   />
                 </View>
               </Card.Content>
@@ -131,16 +132,16 @@ export default function LearnScreen() {
         ))}
       </View>
 
-      <Card style={styles.quizCard}>
+      <Card style={[styles.quizCard, { backgroundColor: colors.surface }]}>
         <TouchableOpacity>
           <Card.Content>
             <View style={styles.quizContent}>
               <Ionicons name="trophy" size={40} color="#FFD700" />
               <View style={styles.quizInfo}>
-                <Text style={styles.quizTitle}>Take a Quiz</Text>
-                <Text style={styles.quizDescription}>Test your Gurmukhi knowledge</Text>
+                <Text style={[styles.quizTitle, { color: colors.text }]}>Take a Quiz</Text>
+                <Text style={[styles.quizDescription, { color: colors.textSecondary }]}>Test your Gurmukhi knowledge</Text>
               </View>
-              <Ionicons name="chevron-forward" size={24} color="#ccc" />
+              <Ionicons name="chevron-forward" size={24} color={colors.textTertiary} />
             </View>
           </Card.Content>
         </TouchableOpacity>
@@ -152,24 +153,19 @@ export default function LearnScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#fff',
     padding: 20,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     marginTop: 10,
   },
   subheaderText: {
     fontSize: 14,
-    color: '#666',
     marginTop: 5,
   },
   progressCard: {
@@ -179,7 +175,6 @@ const styles = StyleSheet.create({
   progressTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   progressBar: {
@@ -188,12 +183,10 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 14,
-    color: '#666',
     marginTop: 8,
     textAlign: 'center',
   },
   alphabetCard: {
-    backgroundColor: '#fff',
     margin: 16,
     padding: 16,
     borderRadius: 8,
@@ -202,12 +195,10 @@ const styles = StyleSheet.create({
   alphabetTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginBottom: 12,
   },
   alphabetText: {
     fontSize: 24,
-    color: '#333',
     lineHeight: 40,
     textAlign: 'center',
   },
@@ -217,7 +208,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   lessonCard: {
@@ -235,7 +225,6 @@ const styles = StyleSheet.create({
   lessonTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
   },
   levelBadge: {
     marginTop: 4,
@@ -247,13 +236,11 @@ const styles = StyleSheet.create({
   },
   lessonContent: {
     fontSize: 18,
-    color: '#666',
     marginTop: 4,
   },
   quizCard: {
     margin: 16,
     elevation: 3,
-    backgroundColor: '#FFF9E6',
   },
   quizContent: {
     flexDirection: 'row',
@@ -266,11 +253,9 @@ const styles = StyleSheet.create({
   quizTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
   },
   quizDescription: {
     fontSize: 14,
-    color: '#666',
     marginTop: 4,
   },
 });

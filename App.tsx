@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
+import { View, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { theme } from './src/theme';
+import { AuthProvider, useAuth } from './src/contexts/AuthContext';
+import { BookmarksProvider } from './src/contexts/BookmarksContext';
+import { ReadingHistoryProvider } from './src/contexts/ReadingHistoryContext';
+import { PreferencesProvider, usePreferences } from './src/contexts/PreferencesContext';
+import { ThemeProvider } from './src/components/ThemeProvider';
+import { OnboardingFlow } from './src/components/OnboardingFlow';
 
 // Import screens
 import HomeScreen from './src/screens/HomeScreen';
@@ -22,6 +30,15 @@ import GuruDetailScreen from './src/screens/GuruDetailScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
 import HistoryEraScreen from './src/screens/HistoryEraScreen';
 import HistoryArticleScreen from './src/screens/HistoryArticleScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import ProfileSetupScreen from './src/screens/ProfileSetupScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
+import PreferencesScreen from './src/screens/PreferencesScreen';
+import ReadingHistoryScreen from './src/screens/ReadingHistoryScreen';
+import BookmarksScreen from './src/screens/BookmarksScreen';
+import NotificationsScreen from './src/screens/NotificationsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -100,45 +117,118 @@ function HistoryStack() {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName: any;
-              
-              if (route.name === 'Home') {
-                iconName = focused ? 'home' : 'home-outline';
-              } else if (route.name === 'Nitnem') {
-                iconName = focused ? 'book' : 'book-outline';
-              } else if (route.name === 'Dasam Granth') {
-                iconName = focused ? 'library' : 'library-outline';
-              } else if (route.name === 'History') {
-                iconName = focused ? 'time' : 'time-outline';
-              } else if (route.name === 'Live Kirtan') {
-                iconName = focused ? 'radio' : 'radio-outline';
-              } else if (route.name === 'Hukamnama') {
-                iconName = focused ? 'newspaper' : 'newspaper-outline';
-              } else if (route.name === 'More') {
-                iconName = focused ? 'menu' : 'menu-outline';
-              }
-              
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarActiveTintColor: theme.colors.primary,
-            tabBarInactiveTintColor: 'gray',
-            headerStyle: { backgroundColor: theme.colors.primary },
-            headerTintColor: '#fff',
-          })}
-        >
-          <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
-          <Tab.Screen name="Nitnem" component={NitnemStack} options={{ headerShown: false }} />
-          <Tab.Screen name="Dasam Granth" component={DasamGranthStack} options={{ headerShown: false }} />
-          <Tab.Screen name="History" component={HistoryStack} options={{ headerShown: false }} />
-          <Tab.Screen name="More" component={MoreScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <AuthProvider>
+      <PreferencesProvider>
+        <ThemeProvider>
+          <BookmarksProvider>
+            <ReadingHistoryProvider>
+              <AppNavigator />
+            </ReadingHistoryProvider>
+          </BookmarksProvider>
+        </ThemeProvider>
+      </PreferencesProvider>
+    </AuthProvider>
+  );
+}
+
+// Main App Navigator with Auth Check
+function AppNavigator() {
+  const { user, userData, loading } = useAuth();
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [checkingOnboarding, setCheckingOnboarding] = useState(true);
+
+  useEffect(() => {
+    checkOnboardingStatus();
+  }, []);
+
+  const checkOnboardingStatus = async () => {
+    try {
+      const completed = await AsyncStorage.getItem('onboardingCompleted');
+      setShowOnboarding(!completed);
+    } catch (error) {
+      console.error('Error checking onboarding status:', error);
+      setShowOnboarding(false);
+    } finally {
+      setCheckingOnboarding(false);
+    }
+  };
+
+  const handleOnboardingComplete = async () => {
+    setShowOnboarding(false);
+  };
+
+  if (loading || checkingOnboarding) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+      </View>
+    );
+  }
+
+  // Show onboarding on first launch
+  if (showOnboarding) {
+    return <OnboardingFlow onComplete={handleOnboardingComplete} />;
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {!user ? (
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="Main" component={MainTabs} />
+          </>
+        ) : !userData ? (
+          <>
+            <Stack.Screen name="ProfileSetup" component={ProfileSetupScreen} />
+            <Stack.Screen name="Main" component={MainTabs} />
+          </>
+        ) : (
+          <Stack.Screen name="Main" component={MainTabs} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+// Main Tabs (existing tab navigator)
+function MainTabs() {
+  const { preferences } = usePreferences();
+  const t = require('./src/i18n/translations').translations[preferences.language];
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: any;
+          
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Nitnem') {
+            iconName = focused ? 'book' : 'book-outline';
+          } else if (route.name === 'Dasam Granth') {
+            iconName = focused ? 'library' : 'library-outline';
+          } else if (route.name === 'History') {
+            iconName = focused ? 'time' : 'time-outline';
+          } else if (route.name === 'More') {
+            iconName = focused ? 'menu' : 'menu-outline';
+          }
+          
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: 'gray',
+        headerStyle: { backgroundColor: theme.colors.primary },
+        headerTintColor: '#fff',
+      })}
+    >
+      <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false, title: t.home }} />
+      <Tab.Screen name="Nitnem" component={NitnemStack} options={{ headerShown: false, title: t.nitnem }} />
+      <Tab.Screen name="Dasam Granth" component={DasamGranthStack} options={{ headerShown: false, title: t.dasamGranth }} />
+      <Tab.Screen name="History" component={HistoryStack} options={{ headerShown: false, title: t.history }} />
+      <Tab.Screen name="More" component={MoreScreen} options={{ title: t.more }} />
+    </Tab.Navigator>
   );
 }
 
@@ -152,6 +242,12 @@ function MoreScreen({ navigation }: any) {
       }}
     >
       <Stack.Screen name="MoreList" component={MoreListScreen} options={{ title: 'More' }} />
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
+      <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile' }} />
+      <Stack.Screen name="Preferences" component={PreferencesScreen} options={{ title: 'Preferences' }} />
+      <Stack.Screen name="ReadingHistory" component={ReadingHistoryScreen} options={{ title: 'Reading History' }} />
+      <Stack.Screen name="Bookmarks" component={BookmarksScreen} options={{ title: 'My Bookmarks' }} />
+      <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ title: 'Notifications' }} />
       <Stack.Screen name="Calendar" component={CalendarScreen} options={{ title: 'Sikh Calendar' }} />
       <Stack.Screen name="GurdwaraFinder" component={GurdwaraFinderScreen} options={{ title: 'Find Gurdwara' }} />
       <Stack.Screen name="Learn" component={LearnScreen} options={{ title: 'Learn Gurmukhi' }} />
@@ -164,6 +260,7 @@ function MoreListScreen({ navigation }: any) {
   const { ScrollView, View, TouchableOpacity, Text, StyleSheet } = require('react-native');
   
   const menuItems = [
+    { title: 'Profile', icon: 'person', screen: 'Profile' },
     { title: 'Sikh Calendar', icon: 'calendar', screen: 'Calendar' },
     { title: 'Find Gurdwara', icon: 'location', screen: 'GurdwaraFinder' },
     { title: 'Learn Gurmukhi', icon: 'school', screen: 'Learn' },

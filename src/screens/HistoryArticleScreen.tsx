@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
+import { useApp } from '../hooks/useApp';
 import { HistoryArticle, historyArticles, HistorySection } from '../data/history';
 
 export default function HistoryArticleScreen({ route, navigation }: any) {
+  const { colors } = useApp();
   const { article }: { article: HistoryArticle } = route.params;
   const [showWarning, setShowWarning] = useState(article.contentWarning ? true : false);
   const [selectedSection, setSelectedSection] = useState<HistorySection | null>(null);
@@ -38,25 +39,25 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
     if (hasOldFormat) {
       return (
         <View style={styles.tocContainer}>
-          <Text style={styles.tocTitle}>📖 Table of Contents</Text>
-          <Text style={styles.tocSubtitle}>ਸਮੱਗਰੀ ਸੂਚੀ</Text>
-          <View style={styles.tocList}>
+          <Text style={[styles.tocTitle, { color: colors.text }]}>📖 Table of Contents</Text>
+          <Text style={[styles.tocSubtitle, { color: colors.primary }]}>ਸਮੱਗਰੀ ਸੂਚੀ</Text>
+          <View style={[styles.tocList, { backgroundColor: colors.card }]}>
             {article.sections!.map((section, index) => (
               <TouchableOpacity
                 key={section.id}
-                style={styles.tocItem}
+                style={[styles.tocItem, { borderBottomColor: colors.border }]}
                 onPress={() => handleSectionClick(section)}
               >
-                <View style={styles.tocNumber}>
+                <View style={[styles.tocNumber, { backgroundColor: colors.primary }]}>
                   <Text style={styles.tocNumberText}>{index + 1}</Text>
                 </View>
                 <View style={styles.tocContent}>
-                  <Text style={styles.tocItemTitle}>{section.title}</Text>
+                  <Text style={[styles.tocItemTitle, { color: colors.text }]}>{section.title}</Text>
                   {section.titleGurmukhi && (
-                    <Text style={styles.tocItemGurmukhi}>{section.titleGurmukhi}</Text>
+                    <Text style={[styles.tocItemGurmukhi, { color: colors.textSecondary }]}>{section.titleGurmukhi}</Text>
                   )}
                 </View>
-                <Ionicons name="chevron-forward" size={20} color={theme.colors.primary} />
+                <Ionicons name="chevron-forward" size={20} color={colors.primary} />
               </TouchableOpacity>
             ))}
           </View>
@@ -68,36 +69,36 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
     if (hasNewFormat) {
       return (
         <View style={styles.tocContainer}>
-          <Text style={styles.tocTitle}>📖 Table of Contents</Text>
-          <Text style={styles.tocSubtitle}>ਸਮੱਗਰੀ ਸੂਚੀ</Text>
+          <Text style={[styles.tocTitle, { color: colors.text }]}>📖 Table of Contents</Text>
+          <Text style={[styles.tocSubtitle, { color: colors.primary }]}>ਸਮੱਗਰੀ ਸੂਚੀ</Text>
           {article.tableOfContents!.map((part: any, partIndex: number) => (
             <View key={part.id} style={styles.partContainer}>
-              <Text style={styles.partTitle}>{part.title}</Text>
+              <Text style={[styles.partTitle, { color: colors.primary }]}>{part.title}</Text>
               {part.titleEnglish && (
-                <Text style={styles.partTitleEnglish}>{part.titleEnglish}</Text>
+                <Text style={[styles.partTitleEnglish, { color: colors.textSecondary }]}>{part.titleEnglish}</Text>
               )}
-              <View style={styles.tocList}>
+              <View style={[styles.tocList, { backgroundColor: colors.card }]}>
                 {part.chapters.map((chapter: any, chapterIndex: number) => {
                   const chapterData = article.chapters?.find((c: any) => c.id === chapter.id);
                   return (
                     <TouchableOpacity
                       key={chapter.id}
-                      style={styles.tocItem}
+                      style={[styles.tocItem, { borderBottomColor: colors.border }]}
                       onPress={() => setSelectedChapter(chapterData)}
                     >
-                      <View style={styles.tocNumber}>
+                      <View style={[styles.tocNumber, { backgroundColor: colors.primary }]}>
                         <Text style={styles.tocNumberText}>{chapterData?.number || (chapterIndex + 1)}</Text>
                       </View>
                       <View style={styles.tocContent}>
-                        <Text style={styles.tocItemTitle}>{chapter.title}</Text>
+                        <Text style={[styles.tocItemTitle, { color: colors.text }]}>{chapter.title}</Text>
                         {chapter.titleEnglish && (
-                          <Text style={styles.tocItemGurmukhi}>{chapter.titleEnglish}</Text>
+                          <Text style={[styles.tocItemGurmukhi, { color: colors.textSecondary }]}>{chapter.titleEnglish}</Text>
                         )}
                         {chapter.pageRange && (
-                          <Text style={styles.pageRange}>Pages: {chapter.pageRange}</Text>
+                          <Text style={[styles.pageRange, { color: colors.textTertiary }]}>Pages: {chapter.pageRange}</Text>
                         )}
                       </View>
-                      <Ionicons name="chevron-forward" size={20} color={theme.colors.primary} />
+                      <Ionicons name="chevron-forward" size={20} color={colors.primary} />
                     </TouchableOpacity>
                   );
                 })}
@@ -117,14 +118,14 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
       return (
         <View style={styles.sectionContentContainer}>
           <TouchableOpacity
-            style={styles.backToTocButton}
+            style={[styles.backToTocButton, { backgroundColor: colors.card }]}
             onPress={() => setSelectedSection(null)}
           >
-            <Ionicons name="arrow-back" size={20} color={theme.colors.primary} />
-            <Text style={styles.backToTocText}>Back to Contents</Text>
+            <Ionicons name="arrow-back" size={20} color={colors.primary} />
+            <Text style={[styles.backToTocText, { color: colors.primary }]}>Back to Contents</Text>
           </TouchableOpacity>
           
-          <Card style={styles.sectionCard}>
+          <Card style={[styles.sectionCard, { backgroundColor: colors.card }]}>
             <Card.Content>
               <Text style={styles.sectionTitle}>{selectedSection.title}</Text>
               {selectedSection.titleGurmukhi && (
@@ -143,14 +144,14 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
       return (
         <View style={styles.sectionContentContainer}>
           <TouchableOpacity
-            style={styles.backToTocButton}
+            style={[styles.backToTocButton, { backgroundColor: colors.card }]}
             onPress={() => setSelectedChapter(null)}
           >
-            <Ionicons name="arrow-back" size={20} color={theme.colors.primary} />
-            <Text style={styles.backToTocText}>Back to Contents</Text>
+            <Ionicons name="arrow-back" size={20} color={colors.primary} />
+            <Text style={[styles.backToTocText, { color: colors.primary }]}>Back to Contents</Text>
           </TouchableOpacity>
           
-          <Card style={styles.sectionCard}>
+          <Card style={[styles.sectionCard, { backgroundColor: colors.card }]}>
             <Card.Content>
               <View style={styles.chapterHeader}>
                 <Text style={styles.chapterNumber}>Chapter {selectedChapter.number}</Text>
@@ -175,20 +176,20 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
   if (showWarning && article.contentWarning) {
     return (
       <View style={styles.warningContainer}>
-        <View style={styles.warningBox}>
+        <View style={[styles.warningBox, { backgroundColor: colors.card }]}>
           <Ionicons name="warning" size={64} color="#ff9800" />
           <Text style={styles.warningTitle}>Content Warning</Text>
-          <Text style={styles.warningMessage}>{article.contentWarning}</Text>
-          <Text style={styles.warningDescription}>
+          <Text style={[styles.warningMessage, { color: colors.text }]}>{article.contentWarning}</Text>
+          <Text style={[styles.warningDescription, { color: colors.textSecondary }]}>
             This article contains information about historical events that may be disturbing.
             It includes descriptions of violence and traumatic events.
           </Text>
-          <Text style={styles.warningDescription}>
+          <Text style={[styles.warningDescription, { color: colors.textSecondary }]}>
             The content is presented for educational and historical purposes with respect
             for all affected communities.
           </Text>
           <TouchableOpacity
-            style={styles.continueButton}
+            style={[styles.continueButton, { backgroundColor: colors.primary }]}
             onPress={() => setShowWarning(false)}
           >
             <Text style={styles.continueButtonText}>I Understand, Continue</Text>
@@ -197,7 +198,7 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
             style={styles.goBackButton}
             onPress={() => navigation.goBack()}
           >
-            <Text style={styles.goBackButtonText}>Go Back</Text>
+            <Text style={[styles.goBackButtonText, { color: colors.textSecondary }]}>Go Back</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -205,8 +206,8 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { backgroundColor: colors.primary }]}>
         <Text style={styles.title}>{article.title}</Text>
         {article.titleGurmukhi && (
           <Text style={styles.titleGurmukhi}>{article.titleGurmukhi}</Text>
@@ -222,33 +223,33 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
             {hasOldFormat || hasNewFormat ? (
               renderTableOfContents()
             ) : (
-              <Card style={styles.contentCard}>
+              <Card style={[styles.contentCard, { backgroundColor: colors.card }]}>
                 <Card.Content>
-                  <Text style={styles.contentText}>{article.content}</Text>
+                  <Text style={[styles.contentText, { color: colors.text }]}>{article.content}</Text>
                 </Card.Content>
               </Card>
             )}
 
             {/* Sources Section */}
             <View style={styles.sourcesSection}>
-              <Text style={styles.sectionTitleText}>📚 Sources & References</Text>
-              <Text style={styles.sourcesNote}>
+              <Text style={[styles.sectionTitleText, { color: colors.text }]}>📚 Sources & References</Text>
+              <Text style={[styles.sourcesNote, { color: colors.textSecondary }]}>
                 This article is based on the following scholarly sources:
               </Text>
               {article.sources.map((source, index) => (
-                <Card key={index} style={styles.sourceCard}>
+                <Card key={index} style={[styles.sourceCard, { backgroundColor: colors.surface }]}>
                   <Card.Content>
-                    <Text style={styles.sourceTitle}>{source.title}</Text>
-                    <Text style={styles.sourceAuthor}>Author: {source.author}</Text>
-                    <Text style={styles.sourceYear}>Year: {source.year}</Text>
-                    <Text style={styles.sourceLicense}>License: {source.license}</Text>
+                    <Text style={[styles.sourceTitle, { color: colors.text }]}>{source.title}</Text>
+                    <Text style={[styles.sourceAuthor, { color: colors.textSecondary }]}>Author: {source.author}</Text>
+                    <Text style={[styles.sourceYear, { color: colors.textSecondary }]}>Year: {source.year}</Text>
+                    <Text style={[styles.sourceLicense, { color: colors.textTertiary }]}>License: {source.license}</Text>
                     {source.link && source.link !== 'Various archives' && (
                       <TouchableOpacity
                         style={styles.sourceLink}
                         onPress={() => handleSourceClick(source.link)}
                       >
-                        <Ionicons name="link" size={16} color={theme.colors.primary} />
-                        <Text style={styles.sourceLinkText}>View Source</Text>
+                        <Ionicons name="link" size={16} color={colors.primary} />
+                        <Text style={[styles.sourceLinkText, { color: colors.primary }]}>View Source</Text>
                       </TouchableOpacity>
                     )}
                   </Card.Content>
@@ -259,16 +260,16 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
             {/* Related Articles */}
             {relatedArticlesData.length > 0 && (
               <View style={styles.relatedSection}>
-                <Text style={styles.sectionTitleText}>🔗 Related Articles</Text>
+                <Text style={[styles.sectionTitleText, { color: colors.text }]}>🔗 Related Articles</Text>
                 {relatedArticlesData.map((related) => (
                   <TouchableOpacity
                     key={related.id}
                     onPress={() => navigation.push('HistoryArticle', { article: related })}
                   >
-                    <Card style={styles.relatedCard}>
+                    <Card style={[styles.relatedCard, { backgroundColor: colors.card }]}>
                       <Card.Content>
-                        <Text style={styles.relatedTitle}>{related.title}</Text>
-                        <Text style={styles.relatedPeriod}>{related.period}</Text>
+                        <Text style={[styles.relatedTitle, { color: colors.primary }]}>{related.title}</Text>
+                        <Text style={[styles.relatedPeriod, { color: colors.textSecondary }]}>{related.period}</Text>
                       </Card.Content>
                     </Card>
                   </TouchableOpacity>
@@ -277,8 +278,8 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
             )}
 
             {/* Disclaimer */}
-            <View style={styles.disclaimer}>
-              <Text style={styles.disclaimerText}>
+            <View style={[styles.disclaimer, { backgroundColor: colors.surface }]}>
+              <Text style={[styles.disclaimerText, { color: colors.primary }]}>
                 ℹ️ This content is summarized from various scholarly and historical sources
                 with proper attribution. Original sources are linked above for further reading.
                 Multiple perspectives exist on historical events.
@@ -294,10 +295,8 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: theme.colors.primary,
     padding: 20,
     paddingTop: 24,
     paddingBottom: 24,
@@ -329,7 +328,6 @@ const styles = StyleSheet.create({
   },
   contentText: {
     fontSize: 16,
-    color: '#333',
     lineHeight: 26,
   },
   // Table of Contents Styles
@@ -339,19 +337,16 @@ const styles = StyleSheet.create({
   tocTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 4,
     textAlign: 'center',
   },
   tocSubtitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: theme.colors.primary,
     marginBottom: 20,
     textAlign: 'center',
   },
   tocList: {
-    backgroundColor: '#fff',
     borderRadius: 12,
     elevation: 2,
     overflow: 'hidden',
@@ -361,13 +356,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
   },
   tocNumber: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: theme.colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -383,17 +376,14 @@ const styles = StyleSheet.create({
   tocItemTitle: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#333',
     marginBottom: 2,
   },
   tocItemGurmukhi: {
     fontSize: 13,
-    color: '#666',
     fontWeight: '500',
   },
   pageRange: {
     fontSize: 11,
-    color: '#999',
     marginTop: 2,
   },
   partContainer: {
@@ -402,13 +392,11 @@ const styles = StyleSheet.create({
   partTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginBottom: 4,
     paddingHorizontal: 8,
   },
   partTitleEnglish: {
     fontSize: 15,
-    color: '#666',
     marginBottom: 12,
     paddingHorizontal: 8,
     fontStyle: 'italic',
@@ -422,19 +410,15 @@ const styles = StyleSheet.create({
   chapterNumber: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: theme.colors.primary,
-    backgroundColor: '#e3f2fd',
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
   },
   pageRangeHeader: {
     fontSize: 12,
-    color: '#666',
   },
   wordCount: {
     fontSize: 12,
-    color: '#999',
     marginBottom: 12,
     fontStyle: 'italic',
   },
@@ -447,14 +431,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     marginBottom: 16,
-    backgroundColor: '#fff',
     borderRadius: 8,
     elevation: 2,
   },
   backToTocText: {
     fontSize: 16,
     fontWeight: '600',
-    color: theme.colors.primary,
     marginLeft: 8,
   },
   sectionCard: {
@@ -465,24 +447,20 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 8,
   },
   sectionGurmukhi: {
     fontSize: 17,
     fontWeight: '600',
-    color: theme.colors.primary,
     marginBottom: 12,
   },
   sectionDivider: {
     height: 2,
-    backgroundColor: theme.colors.primary,
     marginBottom: 16,
     opacity: 0.3,
   },
   sectionContent: {
     fontSize: 16,
-    color: '#333',
     lineHeight: 26,
   },
   sourcesSection: {
@@ -491,12 +469,10 @@ const styles = StyleSheet.create({
   sectionTitleText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   sourcesNote: {
     fontSize: 14,
-    color: '#666',
     marginBottom: 16,
     fontStyle: 'italic',
   },
@@ -504,27 +480,22 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     elevation: 2,
     borderRadius: 8,
-    backgroundColor: '#fafafa',
   },
   sourceTitle: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 6,
   },
   sourceAuthor: {
     fontSize: 14,
-    color: '#555',
     marginBottom: 3,
   },
   sourceYear: {
     fontSize: 14,
-    color: '#555',
     marginBottom: 3,
   },
   sourceLicense: {
     fontSize: 13,
-    color: '#777',
     marginBottom: 8,
     fontStyle: 'italic',
   },
@@ -535,7 +506,6 @@ const styles = StyleSheet.create({
   },
   sourceLinkText: {
     fontSize: 14,
-    color: theme.colors.primary,
     fontWeight: '600',
     marginLeft: 6,
   },
@@ -550,22 +520,18 @@ const styles = StyleSheet.create({
   relatedTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: theme.colors.primary,
     marginBottom: 4,
   },
   relatedPeriod: {
     fontSize: 13,
-    color: '#666',
   },
   disclaimer: {
-    backgroundColor: '#e3f2fd',
     padding: 16,
     borderRadius: 8,
     marginBottom: 20,
   },
   disclaimerText: {
     fontSize: 13,
-    color: '#1565c0',
     lineHeight: 20,
   },
   // Warning Screen Styles
@@ -577,7 +543,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   warningBox: {
-    backgroundColor: '#fff',
     borderRadius: 16,
     padding: 24,
     alignItems: 'center',
@@ -592,20 +557,17 @@ const styles = StyleSheet.create({
   },
   warningMessage: {
     fontSize: 16,
-    color: '#333',
     textAlign: 'center',
     marginBottom: 16,
     fontWeight: '600',
   },
   warningDescription: {
     fontSize: 14,
-    color: '#555',
     textAlign: 'center',
     lineHeight: 22,
     marginBottom: 12,
   },
   continueButton: {
-    backgroundColor: theme.colors.primary,
     paddingVertical: 14,
     paddingHorizontal: 32,
     borderRadius: 8,
@@ -624,7 +586,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   goBackButtonText: {
-    color: '#666',
     fontSize: 15,
     fontWeight: '600',
     textAlign: 'center',

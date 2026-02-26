@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
+import { useApp } from '../hooks/useApp';
 
 export default function BaniDetailScreen({ route }: any) {
   const { bani } = route.params;
+  const { colors } = useApp();
 
   // Split content into verses (by double newline) and filter empty ones
   const allVerses = bani.gurmukhi.split('\n\n').filter((v: string) => v.trim().length > 0);
@@ -42,24 +43,19 @@ export default function BaniDetailScreen({ route }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5', // Clean cream background like traditional Gutka
   },
   header: {
-    backgroundColor: '#fff',
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderBottomWidth: 2,
-    borderBottomColor: theme.colors.primary,
     alignItems: 'center',
   },
   baniName: {
     fontSize: 24,
     fontWeight: '600',
-    color: theme.colors.primary,
   },
   verseCount: {
     fontSize: 14,
-    color: '#666',
     marginTop: 4,
   },
   scrollView: {
@@ -74,12 +70,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#e8e4dd',
   },
   gurmukhiText: {
     fontSize: 24,
     fontWeight: '400',
-    color: '#1a1a1a',
     lineHeight: 40,
     textAlign: 'left',
     letterSpacing: 0.3,
@@ -91,16 +85,13 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderTopWidth: 2,
     borderBottomWidth: 2,
-    borderColor: theme.colors.primary,
   },
   endText: {
     fontSize: 28,
     fontWeight: '600',
-    color: theme.colors.primary,
   },
   endTextEnglish: {
     fontSize: 16,
-    color: '#666',
     marginTop: 8,
   },
 });

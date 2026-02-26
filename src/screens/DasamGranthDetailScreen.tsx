@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, StyleSheet, ActivityIndicator, Alert, Text } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useApp } from '../hooks/useApp';
 import { fetchDasamGranthBani, DasamGranthBaniDetail } from '../services/dasamGranthService';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 
 const DasamGranthDetailScreen: React.FC<Props> = ({ route }) => {
   const { bani: baniInfo } = route.params;
-  const theme = useTheme();
+  const { colors } = useApp();
   const [bani, setBani] = useState<DasamGranthBaniDetail | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -64,9 +64,9 @@ const DasamGranthDetailScreen: React.FC<Props> = ({ route }) => {
 
   if (loading) {
     return (
-      <View style={[styles.container, styles.centerContent]}>
-        <ActivityIndicator size="large" color={theme.colors.primary} />
-        <Text style={[styles.loadingText, { color: theme.colors.primary }]}>
+      <View style={[styles.container, styles.centerContent, { backgroundColor: colors.background }]}>
+        <ActivityIndicator size="large" color={colors.primary} />
+        <Text style={[styles.loadingText, { color: colors.primary }]}>
           Loading {baniInfo.nameGurmukhi}...
         </Text>
       </View>
@@ -75,9 +75,9 @@ const DasamGranthDetailScreen: React.FC<Props> = ({ route }) => {
 
   if (!bani || !bani.gurmukhi) {
     return (
-      <View style={[styles.container, styles.centerContent]}>
-        <Text style={styles.errorText}>ਸਮੱਗਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ</Text>
-        <Text style={styles.errorSubtext}>Content not available yet</Text>
+      <View style={[styles.container, styles.centerContent, { backgroundColor: colors.background }]}>
+        <Text style={[styles.errorText, { color: colors.textSecondary }]}>ਸਮੱਗਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ</Text>
+        <Text style={[styles.errorSubtext, { color: colors.textTertiary }]}>Content not available yet</Text>
       </View>
     );
   }
@@ -86,11 +86,11 @@ const DasamGranthDetailScreen: React.FC<Props> = ({ route }) => {
   const allVerses = bani.gurmukhi.split('\n\n').filter((v: string) => v.trim().length > 0);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header with Bani info */}
-      <View style={styles.header}>
-        <Text style={styles.baniName}>{bani.nameGurmukhi}</Text>
-        <Text style={styles.verseCount}>{allVerses.length} verses</Text>
+      <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.primary }]}>
+        <Text style={[styles.baniName, { color: colors.primary }]}>{bani.nameGurmukhi}</Text>
+        <Text style={[styles.verseCount, { color: colors.textSecondary }]}>{allVerses.length} verses</Text>
       </View>
 
       {/* Continuous scrolling content - Traditional Gutka style */}
@@ -100,15 +100,15 @@ const DasamGranthDetailScreen: React.FC<Props> = ({ route }) => {
         showsVerticalScrollIndicator={true}
       >
         {allVerses.map((verse: string, index: number) => (
-          <View key={`verse-${index}`} style={styles.verseBlock}>
-            <Text style={styles.gurmukhiText}>{verse}</Text>
+          <View key={`verse-${index}`} style={[styles.verseBlock, { borderBottomColor: colors.border }]}>
+            <Text style={[styles.gurmukhiText, { color: colors.text }]}>{verse}</Text>
           </View>
         ))}
 
         {/* End marker */}
-        <View style={styles.endMarker}>
-          <Text style={styles.endText}>॥ ਸਮਾਪਤ ॥</Text>
-          <Text style={styles.endTextEnglish}>End of {bani.name}</Text>
+        <View style={[styles.endMarker, { borderTopColor: colors.primary }]}>
+          <Text style={[styles.endText, { color: colors.primary }]}>॥ ਸਮਾਪਤ ॥</Text>
+          <Text style={[styles.endTextEnglish, { color: colors.textSecondary }]}>End of {bani.name}</Text>
         </View>
       </ScrollView>
     </View>
@@ -118,7 +118,6 @@ const DasamGranthDetailScreen: React.FC<Props> = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5', // Clean cream background like traditional Gutka
   },
   centerContent: {
     justifyContent: 'center',
@@ -132,31 +131,25 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#666',
     textAlign: 'center',
     marginBottom: 8,
   },
   errorSubtext: {
     fontSize: 16,
-    color: '#999',
     textAlign: 'center',
   },
   header: {
-    backgroundColor: '#fff',
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderBottomWidth: 2,
-    borderBottomColor: '#FF9933',
     alignItems: 'center',
   },
   baniName: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#FF9933',
   },
   verseCount: {
     fontSize: 14,
-    color: '#666',
     marginTop: 4,
   },
   scrollView: {
@@ -169,12 +162,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#e8e4df',
   },
   gurmukhiText: {
     fontSize: 22,
     lineHeight: 36,
-    color: '#000',
     textAlign: 'left',
   },
   endMarker: {
@@ -183,17 +174,14 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     paddingTop: 20,
     borderTopWidth: 3,
-    borderTopColor: '#FF9933',
   },
   endText: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#FF9933',
     marginBottom: 8,
   },
   endTextEnglish: {
     fontSize: 14,
-    color: '#666',
     fontStyle: 'italic',
   },
 });

@@ -5,13 +5,34 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "scheme": "akaalseva",
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.akaalseva.app"
+      "bundleIdentifier": "com.akaalseva.app",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.736447515274-0lpc5b8h7v756ijpqjh7h1ngpsmd2722"
+            ]
+          },
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.736447515274-0lpc5b8h7v756ijpqjh7h1ngpsmd2722"
+            ]
+          }
+        ],
+        "UIBackgroundModes": [
+          "audio",
+          "audio"
+        ],
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "permissions": [

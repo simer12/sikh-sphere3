@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Share, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Share, RefreshControl } from 'react-native';
 import { Card, Button } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
 import { fetchHukamnama as fetchHukamnamaFromSGPC } from '../services/hukamnama';
+import { useApp } from '../hooks/useApp';
+import { CardSkeleton } from '../components/LoadingSkeleton';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 export default function HukamnamaScreen() {
+  const { colors } = useApp();
   const [hukamnama, setHukamnama] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -88,73 +91,78 @@ export default function HukamnamaScreen() {
 
   if (loading && !hukamnama) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={theme.colors.primary} />
-        <Text style={styles.loadingText}>Loading today's Hukamnama from Golden Temple...</Text>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+          <Ionicons name="newspaper" size={40} color={colors.primary} />
+          <Text style={[styles.headerText, { color: colors.text }]}>Daily Hukamnama</Text>
+          <Text style={[styles.subheaderText, { color: colors.textSecondary }]}>Sri Harmandir Sahib, Amritsar</Text>
+        </View>
+        <CardSkeleton />
+        <CardSkeleton />
       </View>
     );
   }
 
   return (
     <ScrollView 
-      style={styles.container}
+      style={[styles.container, { backgroundColor: colors.background }]}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <View style={styles.header}>
-        <Ionicons name="newspaper" size={40} color={theme.colors.primary} />
-        <Text style={styles.headerText}>Daily Hukamnama</Text>
-        <Text style={styles.subheaderText}>Sri Harmandir Sahib, Amritsar</Text>
-        <Text style={styles.dateText}>{hukamnama?.date}</Text>
+      <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+        <Ionicons name="newspaper" size={40} color={colors.primary} />
+        <Text style={[styles.headerText, { color: colors.text }]}>Daily Hukamnama</Text>
+        <Text style={[styles.subheaderText, { color: colors.textSecondary }]}>Sri Harmandir Sahib, Amritsar</Text>
+        <Text style={[styles.dateText, { color: colors.primary }]}>{hukamnama?.date}</Text>
         {error && (
-          <View style={styles.errorBanner}>
+          <View style={[styles.errorBanner, { backgroundColor: colors.error }]}>
             <Ionicons name="alert-circle" size={16} color="#fff" />
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
       </View>
 
-      <Card style={styles.card}>
+      <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <Card.Content>
           {hukamnama?.raag && (
             <>
-              <Text style={styles.sectionLabel}>ਰਾਗ (Raag)</Text>
-              <Text style={styles.raagText}>{hukamnama.raag}</Text>
+              <Text style={[styles.sectionLabel, { color: colors.primary }]}>ਰਾਗ (Raag)</Text>
+              <Text style={[styles.raagText, { color: colors.text }]}>{hukamnama.raag}</Text>
             </>
           )}
           
-          <Text style={styles.sectionLabel}>ਗੁਰਮੁਖੀ (Gurmukhi)</Text>
-          <Text style={styles.gurmukhiText}>{hukamnama?.gurmukhi}</Text>
+          <Text style={[styles.sectionLabel, { color: colors.primary }]}>ਗੁਰਮੁਖੀ (Gurmukhi)</Text>
+          <Text style={[styles.gurmukhiText, { color: colors.text }]}>{hukamnama?.gurmukhi}</Text>
           
           {hukamnama?.transliteration && (
             <>
-              <Text style={styles.sectionLabel}>Transliteration</Text>
-              <Text style={styles.transliterationText}>{hukamnama?.transliteration}</Text>
+              <Text style={[styles.sectionLabel, { color: colors.primary }]}>Transliteration</Text>
+              <Text style={[styles.transliterationText, { color: colors.textSecondary }]}>{hukamnama?.transliteration}</Text>
             </>
           )}
           
-          <Text style={styles.sectionLabel}>English Translation</Text>
-          <Text style={styles.translationText}>{hukamnama?.english}</Text>
+          <Text style={[styles.sectionLabel, { color: colors.primary }]}>English Translation</Text>
+          <Text style={[styles.translationText, { color: colors.text }]}>{hukamnama?.english}</Text>
           
-          <Text style={styles.sectionLabel}>ਪੰਜਾਬੀ (Punjabi)</Text>
-          <Text style={styles.translationText}>{hukamnama?.punjabi}</Text>
+          <Text style={[styles.sectionLabel, { color: colors.primary }]}>ਪੰਜਾਬੀ (Punjabi)</Text>
+          <Text style={[styles.translationText, { color: colors.text }]}>{hukamnama?.punjabi}</Text>
           
           {hukamnama?.hindi && (
             <>
-              <Text style={styles.sectionLabel}>हिन्दी (Hindi)</Text>
-              <Text style={styles.translationText}>{hukamnama?.hindi}</Text>
+              <Text style={[styles.sectionLabel, { color: colors.primary }]}>हिन्दी (Hindi)</Text>
+              <Text style={[styles.translationText, { color: colors.text }]}>{hukamnama?.hindi}</Text>
             </>
           )}
           
-          <Text style={styles.reference}>{hukamnama?.reference}</Text>
+          <Text style={[styles.reference, { color: colors.primary }]}>{hukamnama?.reference}</Text>
         </Card.Content>
       </Card>
 
-      <Card style={styles.card}>
+      <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <Card.Content>
-          <Text style={styles.teekaTitle}>📖 Teeka (Explanation)</Text>
-          <Text style={styles.teekaText}>{hukamnama?.teeka}</Text>
+          <Text style={[styles.teekaTitle, { color: colors.text }]}>📖 Teeka (Explanation)</Text>
+          <Text style={[styles.teekaText, { color: colors.textSecondary }]}>{hukamnama?.teeka}</Text>
         </Card.Content>
       </Card>
 
@@ -164,7 +172,7 @@ export default function HukamnamaScreen() {
           icon="share-variant"
           onPress={shareHukamnama}
           style={styles.shareButton}
-          buttonColor={theme.colors.primary}
+          buttonColor={colors.primary}
         >
           Share Hukamnama
         </Button>
@@ -172,8 +180,8 @@ export default function HukamnamaScreen() {
           mode="outlined"
           icon="refresh"
           onPress={fetchHukamnama}
-          style={styles.refreshButton}
-          textColor={theme.colors.primary}
+          style={[styles.refreshButton, { borderColor: colors.primary }]}
+          textColor={colors.primary}
         >
           Refresh
         </Button>
@@ -185,49 +193,40 @@ export default function HukamnamaScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#666',
     textAlign: 'center',
     paddingHorizontal: 20,
   },
   header: {
-    backgroundColor: '#fff',
     padding: 20,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     marginTop: 10,
   },
   subheaderText: {
     fontSize: 14,
-    color: '#666',
     marginTop: 5,
   },
   dateText: {
     fontSize: 14,
-    color: theme.colors.primary,
     fontWeight: 'bold',
     marginTop: 8,
   },
   errorBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ff6b6b',
     padding: 8,
     borderRadius: 4,
     marginTop: 12,
@@ -245,36 +244,30 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginTop: 16,
     marginBottom: 8,
   },
   raagText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#444',
     marginBottom: 8,
   },
   gurmukhiText: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#333',
     lineHeight: 36,
   },
   transliterationText: {
     fontSize: 16,
     fontStyle: 'italic',
-    color: '#666',
     lineHeight: 24,
   },
   translationText: {
     fontSize: 16,
-    color: '#333',
     lineHeight: 24,
   },
   reference: {
     fontSize: 14,
-    color: theme.colors.primary,
     fontStyle: 'italic',
     marginTop: 16,
     textAlign: 'right',
@@ -282,12 +275,10 @@ const styles = StyleSheet.create({
   teekaTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   teekaText: {
     fontSize: 16,
-    color: '#666',
     lineHeight: 24,
   },
   actionsContainer: {
@@ -297,6 +288,5 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   refreshButton: {
-    borderColor: theme.colors.primary,
   },
 });

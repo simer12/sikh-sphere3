@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
 import { dailyQuotes } from '../data/banis';
+import { useApp } from '../hooks/useApp';
+import { AppText } from '../components/AppText';
 
 export default function HomeScreen({ navigation }: any) {
   const [currentQuote, setCurrentQuote] = useState(dailyQuotes[0]);
+  const { t, fontSize, colors } = useApp();
 
   useEffect(() => {
     // Rotate quotes daily
@@ -15,39 +17,47 @@ export default function HomeScreen({ navigation }: any) {
   }, []);
 
   const features = [
-    { title: 'Nitnem Banis', icon: 'book', screen: 'Nitnem', color: '#FF9933' },
-    { title: 'Sikh History', icon: 'time', screen: 'History', color: '#8B4513' },
-    { title: 'Live Kirtan', icon: 'radio', screen: 'Live Kirtan', color: '#000080' },
-    { title: 'Daily Hukamnama', icon: 'newspaper', screen: 'Hukamnama', color: '#FF6B6B' },
-    { title: 'Sikh Calendar', icon: 'calendar', screen: 'Calendar', color: '#4ECDC4' },
-    { title: 'Find Gurdwara', icon: 'location', screen: 'GurdwaraFinder', color: '#95E1D3' },
-    { title: 'Learn Gurmukhi', icon: 'school', screen: 'Learn', color: '#F38181' },
-    { title: 'About Sikhism', icon: 'information-circle', screen: 'AboutSikhism', color: '#9B59B6' },
+    { title: t.nitnem, titleEn: 'Nitnem Banis', icon: 'book', screen: 'Nitnem', color: '#FF9933' },
+    { title: t.history, titleEn: 'Sikh History', icon: 'time', screen: 'History', color: '#8B4513' },
+    { title: t.liveKirtan, titleEn: 'Live Kirtan', icon: 'radio', screen: 'Live Kirtan', color: '#000080' },
+    { title: t.dailyHukamnama, titleEn: 'Daily Hukamnama', icon: 'newspaper', screen: 'Hukamnama', color: '#FF6B6B' },
+    { title: t.sikhCalendar, titleEn: 'Sikh Calendar', icon: 'calendar', screen: 'Calendar', color: '#4ECDC4' },
+    { title: 'Find Gurdwara', titleEn: 'Find Gurdwara', icon: 'location', screen: 'GurdwaraFinder', color: '#95E1D3' },
+    { title: 'Learn Gurmukhi', titleEn: 'Learn Gurmukhi', icon: 'school', screen: 'Learn', color: '#F38181' },
+    { title: 'About Sikhism', titleEn: 'About Sikhism', icon: 'information-circle', screen: 'AboutSikhism', color: '#9B59B6' },
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
-      <View style={styles.header}>
+      <View style={[styles.header, { backgroundColor: colors.primary }]}>
         <Text style={styles.headerTitle}>ੴ</Text>
         <Text style={styles.headerSubtitle}>Akaal Seva</Text>
         <Text style={styles.headerTagline}>Your Spiritual Companion</Text>
       </View>
 
       {/* Daily Quote */}
-      <Card style={styles.quoteCard}>
+      <Card style={[styles.quoteCard, { backgroundColor: colors.card }]}>
         <Card.Content>
-          <Title style={styles.quoteTitle}>Daily Inspiration</Title>
-          <Text style={styles.gurmukhiText}>{currentQuote.gurmukhi}</Text>
-          <Text style={styles.transliteration}>{currentQuote.transliteration}</Text>
-          <Paragraph style={styles.englishText}>{currentQuote.english}</Paragraph>
-          <Text style={styles.reference}>{currentQuote.reference}</Text>
+          <Title style={[styles.quoteTitle, { fontSize: fontSize + 2, color: colors.primary }]}>Daily Inspiration</Title>
+          <AppText variant="body" style={[styles.gurmukhiText, { fontSize: fontSize + 4, color: colors.text }]}>
+            {currentQuote.gurmukhi}
+          </AppText>
+          <AppText variant="caption" style={[styles.transliteration, { color: colors.textSecondary }]}>
+            {currentQuote.transliteration}
+          </AppText>
+          <AppText variant="body" style={[styles.englishText, { color: colors.text }]}>
+            {currentQuote.english}
+          </AppText>
+          <AppText variant="caption" style={[styles.reference, { color: colors.primary }]}>
+            {currentQuote.reference}
+          </AppText>
         </Card.Content>
       </Card>
 
       {/* Feature Grid */}
       <View style={styles.featuresContainer}>
-        <Text style={styles.sectionTitle}>Explore</Text>
+        <AppText variant="subtitle" style={[styles.sectionTitle, { color: colors.text }]}>{t.explore}</AppText>
         <View style={styles.grid}>
           {features.map((feature, index) => (
             <TouchableOpacity
@@ -62,7 +72,7 @@ export default function HomeScreen({ navigation }: any) {
               }}
             >
               <Ionicons name={feature.icon as any} size={32} color="#fff" />
-              <Text style={styles.featureText}>{feature.title}</Text>
+              <Text style={[styles.featureText, { fontSize: fontSize - 2 }]}>{feature.title}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -70,17 +80,17 @@ export default function HomeScreen({ navigation }: any) {
 
       {/* Quick Stats */}
       <View style={styles.statsContainer}>
-        <Text style={styles.sectionTitle}>Today</Text>
+        <AppText variant="subtitle" style={[styles.sectionTitle, { color: colors.text }]}>{t.today}</AppText>
         <View style={styles.statsRow}>
-          <View style={styles.statBox}>
-            <Ionicons name="sunny" size={24} color={theme.colors.primary} />
-            <Text style={styles.statLabel}>Amrit Vela</Text>
-            <Text style={styles.statValue}>4:00 AM</Text>
+          <View style={[styles.statBox, { backgroundColor: colors.card }]}>
+            <Ionicons name="sunny" size={24} color={colors.primary} />
+            <AppText variant="caption" style={[styles.statLabel, { color: colors.textSecondary }]}>Amrit Vela</AppText>
+            <AppText variant="body" style={[styles.statValue, { color: colors.text }]}>4:00 AM</AppText>
           </View>
-          <View style={styles.statBox}>
-            <Ionicons name="moon" size={24} color={theme.colors.primary} />
-            <Text style={styles.statLabel}>Rehras Sahib</Text>
-            <Text style={styles.statValue}>6:30 PM</Text>
+          <View style={[styles.statBox, { backgroundColor: colors.card }]}>
+            <Ionicons name="moon" size={24} color={colors.primary} />
+            <AppText variant="caption" style={[styles.statLabel, { color: colors.textSecondary }]}>{t.rehrasSahib}</AppText>
+            <AppText variant="body" style={[styles.statValue, { color: colors.text }]}>6:30 PM</AppText>
           </View>
         </View>
       </View>
@@ -91,10 +101,8 @@ export default function HomeScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: theme.colors.primary,
     padding: 30,
     alignItems: 'center',
   },
@@ -121,32 +129,27 @@ const styles = StyleSheet.create({
   },
   quoteTitle: {
     fontSize: 18,
-    color: theme.colors.primary,
     marginBottom: 10,
   },
   gurmukhiText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 8,
     textAlign: 'center',
   },
   transliteration: {
     fontSize: 14,
     fontStyle: 'italic',
-    color: '#666',
     marginBottom: 8,
     textAlign: 'center',
   },
   englishText: {
     fontSize: 16,
-    color: '#333',
     textAlign: 'center',
     marginBottom: 8,
   },
   reference: {
     fontSize: 12,
-    color: theme.colors.primary,
     textAlign: 'right',
     fontStyle: 'italic',
   },
@@ -156,7 +159,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 16,
   },
   grid: {
@@ -187,7 +189,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   statBox: {
-    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 12,
     width: '48%',
@@ -196,13 +197,11 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 14,
-    color: '#666',
     marginTop: 8,
   },
   statValue: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
     marginTop: 4,
   },
 });

@@ -1,0 +1,48 @@
+// Light and Dark theme colors
+export const lightColors = {
+  primary: '#FF9933',
+  accent: '#138808',
+  background: '#FFFFFF',
+  surface: '#F5F5F5',
+  card: '#FFFFFF',
+  text: '#000000',
+  textSecondary: '#666666',
+  textTertiary: '#999999',
+  border: '#E0E0E0',
+  error: '#FF6B6B',
+  success: '#4CAF50',
+  warning: '#FFA726',
+  info: '#29B6F6',
+  disabled: '#BDBDBD',
+  placeholder: '#9E9E9E',
+  backdrop: 'rgba(0, 0, 0, 0.5)',
+  notification: '#F44336',
+  divider: '#E0E0E0',
+  shadow: '#000000',
+  khanda: '#FF9933',
+};
+
+export const darkColors = {
+  primary: '#FF9933',
+  accent: '#4CAF50',
+  background: '#121212',
+  surface: '#1E1E1E',
+  card: '#2C2C2C',
+  text: '#FFFFFF',
+  textSecondary: '#B0B0B0',
+  textTertiary: '#808080',
+  border: '#3A3A3A',
+  error: '#CF6679',
+  success: '#81C784',
+  warning: '#FFB74D',
+  info: '#4FC3F7',
+  disabled: '#6E6E6E',
+  placeholder: '#757575',
+  backdrop: 'rgba(0, 0, 0, 0.7)',
+  notification: '#F44336',
+  divider: '#3A3A3A',
+  shadow: '#000000',
+  khanda: '#FFB366',
+};
+
+export type ThemeColors = typeof lightColors;

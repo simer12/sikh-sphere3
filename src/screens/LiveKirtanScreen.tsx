@@ -1,155 +1,238 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
 import { Audio } from 'expo-av';
+import { useApp } from '../hooks/useApp';
+
+interface LiveStream {
+  id: string;
+  name: string;
+  location: string;
+  url: string;
+  icon: string;
+  quality: string;
+}
 
 export default function LiveKirtanScreen() {
+  const { colors } = useApp();
   const [currentStream, setCurrentStream] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
 
-  const liveStreams = [
-    {
-      id: '1',
-      name: 'Sri Harmandir Sahib',
-      location: 'Amritsar, Punjab',
-      url: 'https://live.sgpc.net/hls/live.m3u8',
-      icon: 'radio',
-    },
-    {
-      id: '2',
-      name: 'Gurdwara Bangla Sahib',
-      location: 'New Delhi',
-      url: 'https://live.example.com/bangla-sahib',
-      icon: 'radio',
-    },
-    {
-      id: '3',
-      name: 'Gurdwara Sis Ganj Sahib',
-      location: 'Delhi',
-      url: 'https://live.example.com/sis-ganj',
-      icon: 'radio',
-    },
-  ];
+  useEffect(() => {
+    setupAudio();
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, []);
 
-  const kirtanPlaylists = [
-    {
-      id: '1',
-      title: 'Morning Raag Collection',
-      artist: 'Various Artists',
-      duration: '2 hours',
-      icon: 'musical-notes',
-    },
-    {
-      id: '2',
-      title: 'Asa Di Vaar',
-      artist: 'Bhai Harjinder Singh Ji',
-      duration: '45 mins',
-      icon: 'musical-notes',
-    },
-    {
-      id: '3',
-      title: 'Sukhmani Sahib',
-      artist: 'Bhai Joginder Singh Riar',
-      duration: '1.5 hours',
-      icon: 'musical-notes',
-    },
-  ];
-
-  const playStream = async (url: string, streamId: string) => {
-    if (sound) {
-      await sound.unloadAsync();
-    }
-
+  const setupAudio = async () => {
     try {
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: url },
-        { shouldPlay: true }
-      );
-      setSound(newSound);
-      setCurrentStream(streamId);
-      setIsPlaying(true);
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: true,
+        shouldDuckAndroid: true,
+        playThroughEarpieceAndroid: false,
+        interruptionModeIOS: 2, // DoNotMix
+        interruptionModeAndroid: 1, // DoNotMix
+      });
     } catch (error) {
+      console.error('Error setting up audio:', error);
+    }
+  };
+
+  const stream: LiveStream = {
+    id: '1',
+    name: 'Sri Harmandir Sahib',
+    location: 'Amritsar, Punjab, India',
+    url: 'https://live.sgpc.net:8442/;',
+    icon: 'radio',
+    quality: '128 kbps',
+  };
+
+  const playStream = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Stop current stream if playing
+      if (sound) {
+        try {
+          const status = await sound.getStatusAsync();
+          if (status.isLoaded) {
+            await sound.stopAsync();
+          }
+          await sound.unloadAsync();
+        } catch (error) {
+          console.log('Cleanup error:', error);
+        }
+        setSound(null);
+      }
+
+      console.log(`Playing: ${stream.name}`);
+      console.log(`URL: ${stream.url}`);
+      
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: stream.url },
+        { shouldPlay: true },
+        onPlaybackStatusUpdate
+      );
+      
+      setSound(newSound);
+      setCurrentStream(stream.id);
+      setIsPlaying(true);
+      setIsLoading(false);
+      
+    } catch (error: any) {
       console.error('Error playing stream:', error);
+      setIsLoading(false);
+      Alert.alert(
+        'Stream Error',
+        'Unable to play the live stream. Please check your internet connection.',
+        [{ text: 'OK' }]
+      );
+      setIsPlaying(false);
+      setCurrentStream(null);
+    }
+  };
+
+  const onPlaybackStatusUpdate = (status: any) => {
+    if (status.isLoaded) {
+      if (status.didJustFinish) {
+        setIsPlaying(false);
+        setCurrentStream(null);
+      }
+      if (status.error) {
+        console.error('Playback error:', status.error);
+        setIsPlaying(false);
+        setCurrentStream(null);
+      }
     }
   };
 
   const stopStream = async () => {
-    if (sound) {
-      await sound.stopAsync();
-      await sound.unloadAsync();
+    try {
+      if (sound) {
+        const status = await sound.getStatusAsync();
+        if (status.isLoaded) {
+          await sound.stopAsync();
+          await sound.unloadAsync();
+        } else {
+          await sound.unloadAsync();
+        }
+        setSound(null);
+      }
+      setIsPlaying(false);
+      setCurrentStream(null);
+    } catch (error: any) {
+      console.log('Stop stream cleanup:', error.message);
+      // Force cleanup even if there's an error
       setSound(null);
+      setIsPlaying(false);
+      setCurrentStream(null);
     }
-    setIsPlaying(false);
-    setCurrentStream(null);
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons name="radio" size={40} color={theme.colors.primary} />
-        <Text style={styles.headerText}>Live Gurbani</Text>
-        <Text style={styles.subheaderText}>24/7 Kirtan from Gurdwaras</Text>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]} contentContainerStyle={styles.contentContainer}>
+      {/* Header */}
+      <View style={[styles.header, { backgroundColor: colors.primary }]}>
+        <View style={styles.templeIconContainer}>
+          <Ionicons name="business" size={60} color="#FFD700" />
+        </View>
+        <Text style={styles.headerText}>Sri Harmandir Sahib</Text>
+        <Text style={styles.goldenTempleText}>The Golden Temple</Text>
+        <Text style={styles.subheaderText}>Live Gurbani 24/7</Text>
       </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>🔴 Live Streams</Text>
-        {liveStreams.map((stream) => (
-          <Card key={stream.id} style={styles.card}>
-            <Card.Content>
-              <View style={styles.streamCard}>
-                <View style={styles.streamInfo}>
-                  <Text style={styles.streamName}>{stream.name}</Text>
-                  <Text style={styles.streamLocation}>{stream.location}</Text>
-                  {currentStream === stream.id && isPlaying && (
-                    <View style={styles.nowPlayingBadge}>
-                      <Text style={styles.nowPlayingText}>● Now Playing</Text>
-                    </View>
-                  )}
-                </View>
-                <TouchableOpacity
-                  style={styles.playButton}
-                  onPress={() => {
-                    if (currentStream === stream.id && isPlaying) {
-                      stopStream();
-                    } else {
-                      playStream(stream.url, stream.id);
-                    }
-                  }}
-                >
+      {/* Main Stream Card */}
+      <View style={styles.mainContent}>
+        <Card style={[styles.streamCard, { backgroundColor: colors.card }]}>
+          <Card.Content style={styles.streamCardContent}>
+            {/* Status Badge */}
+            <View style={[styles.statusBadge, { backgroundColor: colors.surface }]}>
+              <View style={[styles.liveIndicator, isPlaying && styles.liveIndicatorActive]} />
+              <Text style={[styles.statusText, { color: colors.text }]}>
+                {isPlaying ? '🔴 LIVE NOW' : '⚫ Ready to Stream'}
+              </Text>
+            </View>
+
+            {/* Location Info */}
+            <View style={styles.locationContainer}>
+              <Ionicons name="location" size={20} color={colors.primary} />
+              <Text style={[styles.locationText, { color: colors.textSecondary }]}>{stream.location}</Text>
+            </View>
+
+            {/* Quality Info */}
+            <View style={styles.qualityContainer}>
+              <Ionicons name="musical-notes" size={16} color={colors.textSecondary} />
+              <Text style={[styles.qualityText, { color: colors.textSecondary }]}>High Quality • {stream.quality}</Text>
+            </View>
+
+            {/* Play/Stop Button */}
+            <TouchableOpacity
+              style={[
+                styles.controlButton,
+                { backgroundColor: colors.primary },
+                isPlaying && styles.controlButtonActive,
+                isLoading && styles.controlButtonLoading
+              ]}
+              onPress={() => {
+                if (isPlaying) {
+                  stopStream();
+                } else {
+                  playStream();
+                }
+              }}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <ActivityIndicator size="large" color="#fff" />
+              ) : (
+                <>
                   <Ionicons
-                    name={currentStream === stream.id && isPlaying ? 'stop-circle' : 'play-circle'}
+                    name={isPlaying ? 'stop' : 'play'}
                     size={50}
-                    color={theme.colors.primary}
+                    color="#fff"
                   />
-                </TouchableOpacity>
-              </View>
-            </Card.Content>
-          </Card>
-        ))}
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>🎵 Kirtan Playlists</Text>
-        {kirtanPlaylists.map((playlist) => (
-          <Card key={playlist.id} style={styles.card}>
-            <TouchableOpacity>
-              <Card.Content>
-                <View style={styles.playlistCard}>
-                  <Ionicons name={playlist.icon as any} size={40} color={theme.colors.primary} />
-                  <View style={styles.playlistInfo}>
-                    <Text style={styles.playlistTitle}>{playlist.title}</Text>
-                    <Text style={styles.playlistArtist}>{playlist.artist}</Text>
-                    <Text style={styles.playlistDuration}>{playlist.duration}</Text>
-                  </View>
-                  <Ionicons name="chevron-forward" size={24} color="#ccc" />
-                </View>
-              </Card.Content>
+                  <Text style={styles.controlButtonText}>
+                    {isPlaying ? 'Stop Kirtan' : 'Play Kirtan'}
+                  </Text>
+                </>
+              )}
             </TouchableOpacity>
-          </Card>
-        ))}
+
+            {/* Now Playing Info */}
+            {isPlaying && (
+              <View style={styles.nowPlayingContainer}>
+                <Ionicons name="radio" size={20} color="#FF0000" />
+                <Text style={styles.nowPlayingText}>Playing from Darbar Sahib</Text>
+              </View>
+            )}
+          </Card.Content>
+        </Card>
+
+        {/* Info Card */}
+        <Card style={[styles.infoCard, { backgroundColor: colors.card }]}>
+          <Card.Content>
+            <View style={styles.infoRow}>
+              <Ionicons name="time-outline" size={20} color={colors.primary} />
+              <Text style={[styles.infoText, { color: colors.textSecondary }]}>Available 24/7</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Ionicons name="headset-outline" size={20} color={colors.primary} />
+              <Text style={[styles.infoText, { color: colors.textSecondary }]}>Background playback supported</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Ionicons name="wifi-outline" size={20} color={colors.primary} />
+              <Text style={[styles.infoText, { color: colors.textSecondary }]}>Requires internet connection</Text>
+            </View>
+          </Card.Content>
+        </Card>
       </View>
     </ScrollView>
   );
@@ -158,89 +241,146 @@ export default function LiveKirtanScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  contentContainer: {
+    flexGrow: 1,
   },
   header: {
-    backgroundColor: '#fff',
-    padding: 20,
+    padding: 32,
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    paddingTop: 40,
+  },
+  templeIconContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
-    marginTop: 10,
+    color: '#fff',
+    marginTop: 8,
+  },
+  goldenTempleText: {
+    fontSize: 16,
+    color: '#FFD700',
+    marginTop: 4,
+    fontWeight: '600',
   },
   subheaderText: {
     fontSize: 14,
-    color: '#666',
-    marginTop: 5,
+    color: 'rgba(255, 255, 255, 0.9)',
+    marginTop: 8,
   },
-  section: {
-    padding: 16,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
-  },
-  card: {
-    marginBottom: 12,
-    elevation: 2,
+  mainContent: {
+    padding: 20,
   },
   streamCard: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    elevation: 4,
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  streamCardContent: {
+    padding: 24,
     alignItems: 'center',
   },
-  streamInfo: {
-    flex: 1,
+  statusBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginBottom: 20,
   },
-  streamName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+  liveIndicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#666',
+    marginRight: 8,
   },
-  streamLocation: {
+  liveIndicatorActive: {
+    backgroundColor: '#FF0000',
+  },
+  statusText: {
     fontSize: 14,
-    color: '#666',
-    marginTop: 4,
+    fontWeight: 'bold',
   },
-  nowPlayingBadge: {
+  locationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  locationText: {
+    fontSize: 16,
+    marginLeft: 8,
+  },
+  qualityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 32,
+  },
+  qualityText: {
+    fontSize: 14,
+    marginLeft: 6,
+  },
+  controlButton: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    marginBottom: 24,
+  },
+  controlButtonActive: {
+    backgroundColor: '#d32f2f',
+  },
+  controlButtonLoading: {
+    backgroundColor: '#999',
+  },
+  controlButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 12,
+  },
+  nowPlayingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF3E0',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 8,
     marginTop: 8,
   },
   nowPlayingText: {
-    fontSize: 12,
-    color: '#FF0000',
-    fontWeight: 'bold',
+    fontSize: 14,
+    color: '#E65100',
+    fontWeight: '600',
+    marginLeft: 8,
   },
-  playButton: {
-    marginLeft: 16,
+  infoCard: {
+    marginTop: 20,
+    elevation: 2,
+    borderRadius: 12,
   },
-  playlistCard: {
+  infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 8,
   },
-  playlistInfo: {
-    flex: 1,
-    marginLeft: 16,
-  },
-  playlistTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  playlistArtist: {
+  infoText: {
     fontSize: 14,
-    color: '#666',
-    marginTop: 4,
-  },
-  playlistDuration: {
-    fontSize: 12,
-    color: '#999',
-    marginTop: 2,
+    marginLeft: 12,
+    flex: 1,
   },
 });

@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-paper';
-import { theme } from '../theme';
+import { useApp } from '../hooks/useApp';
 import { historyArticles, HistoryEra } from '../data/history';
 
 export default function HistoryEraScreen({ route, navigation }: any) {
+  const { colors } = useApp();
   const { era }: { era: HistoryEra } = route.params;
   
   const eraArticles = historyArticles.filter(article => 
@@ -12,8 +13,8 @@ export default function HistoryEraScreen({ route, navigation }: any) {
   );
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { backgroundColor: colors.primary }]}>
         <Text style={styles.headerIcon}>{era.icon}</Text>
         <Text style={styles.headerTitle}>{era.title}</Text>
         <Text style={styles.headerTitleGurmukhi}>{era.titleGurmukhi}</Text>
@@ -22,7 +23,7 @@ export default function HistoryEraScreen({ route, navigation }: any) {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.sectionTitle}>Articles in this Era</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Articles in this Era</Text>
         
         {eraArticles.map((article) => (
           <TouchableOpacity
@@ -30,7 +31,7 @@ export default function HistoryEraScreen({ route, navigation }: any) {
             onPress={() => navigation.navigate('HistoryArticle', { article })}
             activeOpacity={0.7}
           >
-            <Card style={styles.articleCard}>
+            <Card style={[styles.articleCard, { backgroundColor: colors.card }]}>
               <Card.Content>
                 {article.contentWarning && (
                   <View style={styles.warningBanner}>
@@ -38,15 +39,15 @@ export default function HistoryEraScreen({ route, navigation }: any) {
                   </View>
                 )}
                 
-                <Text style={styles.articleTitle}>{article.title}</Text>
+                <Text style={[styles.articleTitle, { color: colors.primary }]}>{article.title}</Text>
                 {article.titleGurmukhi && (
-                  <Text style={styles.articleTitleGurmukhi}>{article.titleGurmukhi}</Text>
+                  <Text style={[styles.articleTitleGurmukhi, { color: colors.textSecondary }]}>{article.titleGurmukhi}</Text>
                 )}
-                <Text style={styles.articlePeriod}>{article.period}</Text>
-                <Text style={styles.articleSummary}>{article.summary}</Text>
+                <Text style={[styles.articlePeriod, { color: colors.textTertiary }]}>{article.period}</Text>
+                <Text style={[styles.articleSummary, { color: colors.text }]}>{article.summary}</Text>
                 
-                <View style={styles.readMore}>
-                  <Text style={styles.readMoreText}>Read More →</Text>
+                <View style={[styles.readMore, { borderTopColor: colors.border }]}>
+                  <Text style={[styles.readMoreText, { color: colors.primary }]}>Read More →</Text>
                 </View>
               </Card.Content>
             </Card>
@@ -60,10 +61,8 @@ export default function HistoryEraScreen({ route, navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: theme.colors.primary,
     padding: 24,
     paddingTop: 28,
     paddingBottom: 28,
@@ -105,7 +104,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 16,
     marginTop: 8,
   },
@@ -113,7 +111,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     elevation: 3,
     borderRadius: 12,
-    backgroundColor: '#fff',
   },
   warningBanner: {
     backgroundColor: '#fff3cd',
@@ -131,24 +128,20 @@ const styles = StyleSheet.create({
   articleTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginBottom: 6,
   },
   articleTitleGurmukhi: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#555',
     marginBottom: 6,
   },
   articlePeriod: {
     fontSize: 13,
-    color: '#888',
     fontWeight: '600',
     marginBottom: 10,
   },
   articleSummary: {
     fontSize: 14,
-    color: '#444',
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -156,11 +149,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: '#eee',
   },
   readMoreText: {
     fontSize: 14,
-    color: theme.colors.primary,
     fontWeight: '600',
   },
 });

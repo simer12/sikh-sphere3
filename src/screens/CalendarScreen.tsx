@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
 import { 
   getNanakshahiEvents, 
   getCurrentNanakshahiYear, 
   NANAKSHAHI_MONTHS,
   SikhEvent 
 } from '../services/nanakshahiCalendar';
+import { useApp } from '../hooks/useApp';
 
 export default function CalendarScreen() {
+  const { colors } = useApp();
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const nanakshahiYear = getCurrentNanakshahiYear();
   const sikhEvents = getNanakshahiEvents();
@@ -39,7 +40,7 @@ export default function CalendarScreen() {
   const getEventColor = (type: string) => {
     switch (type) {
       case 'gurpurab':
-        return theme.colors.primary;
+        return colors.primary;
       case 'martyrdom':
         return '#FF6B6B';
       case 'historical':
@@ -53,65 +54,65 @@ export default function CalendarScreen() {
       case 'birth':
         return '#E91E63';
       default:
-        return '#666';
+        return colors.textSecondary;
     }
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons name="calendar" size={40} color={theme.colors.primary} />
-        <Text style={styles.headerText}>Sikh Calendar</Text>
-        <Text style={styles.subheaderText}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+        <Ionicons name="calendar" size={40} color={colors.primary} />
+        <Text style={[styles.headerText, { color: colors.text }]}>Sikh Calendar</Text>
+        <Text style={[styles.subheaderText, { color: colors.textSecondary }]}>
           Nanakshahi {nanakshahiYear} (2025-2026 CE)
         </Text>
-        <Text style={styles.infoText}>
+        <Text style={[styles.infoText, { color: colors.textTertiary }]}>
           🌟 Fixed solar calendar • Adopted in 1999
         </Text>
-        <Text style={[styles.infoText, { fontWeight: 'bold', color: theme.colors.primary, marginTop: 5 }]}>
+        <Text style={[styles.infoText, { fontWeight: 'bold', color: colors.primary, marginTop: 5 }]}>
           📅 {sikhEvents.length} Total Events
         </Text>
       </View>
 
-      <View style={styles.legendContainer}>
-        <Text style={styles.legendTitle}>Event Types:</Text>
+      <View style={[styles.legendContainer, { backgroundColor: colors.card }]}>
+        <Text style={[styles.legendTitle, { color: colors.text }]}>Event Types:</Text>
         <View style={styles.legendRow}>
           <View style={styles.legendItem}>
-            <Ionicons name="star" size={16} color={theme.colors.primary} />
-            <Text style={styles.legendText}>Gurpurab</Text>
+            <Ionicons name="star" size={16} color={colors.primary} />
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Gurpurab</Text>
           </View>
           <View style={styles.legendItem}>
             <Ionicons name="flower" size={16} color="#FF6B6B" />
-            <Text style={styles.legendText}>Martyrdom</Text>
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Martyrdom</Text>
           </View>
           <View style={styles.legendItem}>
             <Ionicons name="flag" size={16} color="#4ECDC4" />
-            <Text style={styles.legendText}>Historical</Text>
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Historical</Text>
           </View>
           <View style={styles.legendItem}>
             <Ionicons name="sparkles" size={16} color="#FFB84D" />
-            <Text style={styles.legendText}>Festival</Text>
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Festival</Text>
           </View>
         </View>
         <View style={styles.legendRow}>
           <View style={styles.legendItem}>
             <Ionicons name="trophy" size={16} color="#9B59B6" />
-            <Text style={styles.legendText}>Gurgaddi</Text>
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Gurgaddi</Text>
           </View>
           <View style={styles.legendItem}>
             <Ionicons name="moon" size={16} color="#34495E" />
-            <Text style={styles.legendText}>Joti Jot</Text>
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Joti Jot</Text>
           </View>
           <View style={styles.legendItem}>
             <Ionicons name="heart" size={16} color="#E91E63" />
-            <Text style={styles.legendText}>Birth</Text>
+            <Text style={[styles.legendText, { color: colors.textSecondary }]}>Birth</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.eventsContainer}>
         {sikhEvents.map((event) => (
-          <Card key={event.id} style={styles.eventCard}>
+          <Card key={event.id} style={[styles.eventCard, { backgroundColor: colors.card }]}>
             <TouchableOpacity>
               <Card.Content>
                 <View style={styles.eventHeader}>
@@ -121,14 +122,14 @@ export default function CalendarScreen() {
                     color={getEventColor(event.type)} 
                   />
                   <View style={styles.eventInfo}>
-                    <Text style={styles.eventName}>{event.name}</Text>
-                    <Text style={styles.eventNameGurmukhi}>{event.nameGurmukhi}</Text>
-                    <Text style={styles.eventNanakshahi}>{event.nanakshahiDate}</Text>
-                    <Text style={styles.eventDate}>{event.gregorianDate}</Text>
+                    <Text style={[styles.eventName, { color: colors.text }]}>{event.name}</Text>
+                    <Text style={[styles.eventNameGurmukhi, { color: colors.textSecondary }]}>{event.nameGurmukhi}</Text>
+                    <Text style={[styles.eventNanakshahi, { color: '#FF8C00' }]}>{event.nanakshahiDate}</Text>
+                    <Text style={[styles.eventDate, { color: colors.primary }]}>{event.gregorianDate}</Text>
                     {event.year && (
-                      <Text style={styles.eventYear}>Historical: {event.year}</Text>
+                      <Text style={[styles.eventYear, { color: colors.textTertiary }]}>Historical: {event.year}</Text>
                     )}
-                    <Text style={styles.eventDescription}>{event.description}</Text>
+                    <Text style={[styles.eventDescription, { color: colors.textSecondary }]}>{event.description}</Text>
                   </View>
                 </View>
               </Card.Content>
@@ -143,33 +144,26 @@ export default function CalendarScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#fff',
     padding: 20,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     marginTop: 10,
   },
   subheaderText: {
     fontSize: 14,
-    color: '#666',
     marginTop: 5,
   },
   infoText: {
     fontSize: 12,
-    color: '#999',
     marginTop: 3,
   },
   legendContainer: {
-    backgroundColor: '#fff',
     padding: 16,
     marginTop: 16,
     marginHorizontal: 16,
@@ -179,7 +173,6 @@ const styles = StyleSheet.create({
   legendTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 8,
   },
   legendRow: {
@@ -192,7 +185,6 @@ const styles = StyleSheet.create({
   },
   legendText: {
     fontSize: 12,
-    color: '#666',
     marginLeft: 4,
   },
   eventsContainer: {
@@ -213,34 +205,28 @@ const styles = StyleSheet.create({
   eventName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
   },
   eventNameGurmukhi: {
     fontSize: 16,
-    color: '#666',
     marginTop: 4,
   },
   eventNanakshahi: {
     fontSize: 13,
-    color: '#FF8C00',
     fontWeight: '600',
     marginTop: 6,
   },
   eventDate: {
     fontSize: 14,
-    color: theme.colors.primary,
     fontWeight: 'bold',
     marginTop: 4,
   },
   eventYear: {
     fontSize: 12,
-    color: '#999',
     fontStyle: 'italic',
     marginTop: 2,
   },
   eventDescription: {
     fontSize: 14,
-    color: '#666',
     marginTop: 8,
   },
 });

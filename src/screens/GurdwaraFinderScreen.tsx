@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView, TextInput, ActivityIndicator } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView, TextInput, ActivityIndicator, Platform } from 'react-native';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
+import { useApp } from '../hooks/useApp';
 import { 
   Gurdwara, 
   fetchGurdwarasNearLocation, 
@@ -19,7 +18,23 @@ import {
 } from '../services/googlePlaces';
 import { fetchAllGurdwarasIndia } from '../services/googlePlacesEnhanced';
 
+// Map components - only available on native
+let MapView: any = null;
+let Marker: any = null;
+
+// Only import maps on native platforms
+if (Platform.OS !== 'web') {
+  try {
+    const RNMaps = require('react-native-maps');
+    MapView = RNMaps.default || RNMaps;
+    Marker = RNMaps.Marker;
+  } catch (e) {
+    console.log('Maps not available');
+  }
+}
+
 export default function GurdwaraFinderScreen() {
+  const { colors } = useApp();
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [gurdwaras, setGurdwaras] = useState<Gurdwara[]>([]);
   const [loading, setLoading] = useState(true);
@@ -145,86 +160,98 @@ export default function GurdwaraFinderScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
+      <View style={[styles.searchContainer, { backgroundColor: colors.surface, borderBottomColor: colors.border }]}>
+        <Ionicons name="search" size={20} color={colors.textSecondary} style={styles.searchIcon} />
         <TextInput
-          style={styles.searchInput}
+          style={[styles.searchInput, { color: colors.text }]}
           placeholder="Search Gurdwaras worldwide..."
+          placeholderTextColor={colors.textTertiary}
           value={searchQuery}
           onChangeText={setSearchQuery}
           onSubmitEditing={handleSearch}
         />
-        {loading && <ActivityIndicator size="small" color={theme.colors.primary} />}
+        {loading && <ActivityIndicator size="small" color={colors.primary} />}
       </View>
 
-      {/* Map */}
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: location?.coords.latitude || 31.6200,
-          longitude: location?.coords.longitude || 74.8765,
-          latitudeDelta: 10,
-          longitudeDelta: 10,
-        }}
-        showsUserLocation={true}
-      >
-        {gurdwaras.map((gurdwara) => (
-          <Marker
-            key={gurdwara.id}
-            coordinate={{
-              latitude: gurdwara.latitude,
-              longitude: gurdwara.longitude,
-            }}
-            title={gurdwara.name}
-            description={gurdwara.address}
-            onCalloutPress={() => openDirections(gurdwara)}
-          >
-            <View style={styles.markerContainer}>
-              <Ionicons 
-                name="location" 
-                size={40} 
-                color={gurdwara.type === 'takht' ? '#FFD700' : theme.colors.primary} 
-              />
-            </View>
-          </Marker>
-        ))}
-      </MapView>
+      {/* Map - Only on native platforms */}
+      {Platform.OS !== 'web' && MapView && (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location?.coords.latitude || 31.6200,
+            longitude: location?.coords.longitude || 74.8765,
+            latitudeDelta: 10,
+            longitudeDelta: 10,
+          }}
+          showsUserLocation={true}
+        >
+          {gurdwaras.map((gurdwara) => (
+            <Marker
+              key={gurdwara.id}
+              coordinate={{
+                latitude: gurdwara.latitude,
+                longitude: gurdwara.longitude,
+              }}
+              title={gurdwara.name}
+              description={gurdwara.address}
+              onCalloutPress={() => openDirections(gurdwara)}
+            >
+              <View style={styles.markerContainer}>
+                <Ionicons 
+                  name="location" 
+                  size={40} 
+                  color={gurdwara.type === 'takht' ? '#FFD700' : colors.primary} 
+                />
+              </View>
+            </Marker>
+          ))}
+        </MapView>
+      )}
+      
+      {/* Web Message */}
+      {Platform.OS === 'web' && (
+        <View style={[styles.webMessage, { backgroundColor: colors.surface }]}>
+          <Ionicons name="information-circle" size={48} color={colors.primary} />
+          <Text style={[styles.webMessageText, { color: colors.text }]}>Map view is only available on mobile apps</Text>
+          <Text style={[styles.webMessageSubtext, { color: colors.textSecondary }]}>Browse Gurdwaras in the list below</Text>
+        </View>
+      )}
 
       {/* List */}
-      <View style={styles.listContainer}>
-        <Text style={styles.listTitle}>
+      <View style={[styles.listContainer, { backgroundColor: colors.surface }]}>
+        <Text style={[styles.listTitle, { color: colors.text }]}>
           {searchQuery ? 'Search Results' : 'Gurdwaras'} ({gurdwaras.length})
         </Text>
         <ScrollView>
           {gurdwaras.map((gurdwara) => (
             <TouchableOpacity
               key={gurdwara.id}
-              style={styles.gurdwaraItem}
+              style={[styles.gurdwaraItem, { backgroundColor: colors.card }]}
               onPress={() => openDirections(gurdwara)}
             >
               <Ionicons 
                 name="location" 
                 size={24} 
-                color={gurdwara.type === 'takht' ? '#FFD700' : theme.colors.primary} 
+                color={gurdwara.type === 'takht' ? '#FFD700' : colors.primary} 
               />
               <View style={styles.gurdwaraInfo}>
-                <Text style={styles.gurdwaraName}>{gurdwara.name}</Text>
+                <Text style={[styles.gurdwaraName, { color: colors.text }]}>{gurdwara.name}</Text>
                 {gurdwara.nameGurmukhi && (
-                  <Text style={styles.gurdwaraGurmukhi}>{gurdwara.nameGurmukhi}</Text>
+                  <Text style={[styles.gurdwaraGurmukhi, { color: colors.primary }]}>{gurdwara.nameGurmukhi}</Text>
                 )}
-                <Text style={styles.gurdwaraAddress}>
+                <Text style={[styles.gurdwaraAddress, { color: colors.textSecondary }]}>
                   {gurdwara.city}, {gurdwara.country}
                 </Text>
                 {gurdwara.phone && (
-                  <Text style={styles.gurdwaraPhone}>{gurdwara.phone}</Text>
+                  <Text style={[styles.gurdwaraPhone, { color: colors.primary }]}>{gurdwara.phone}</Text>
                 )}
                 {gurdwara.type === 'takht' && (
                   <Text style={styles.takhBadge}>🪷 Takht Sahib</Text>
                 )}
               </View>
-              <Ionicons name="navigate" size={24} color="#666" />
+              <Ionicons name="navigate" size={24} color={colors.textSecondary} />
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -240,10 +267,8 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
     padding: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   searchIcon: {
     marginRight: 8,
@@ -251,7 +276,6 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: '#333',
   },
   loadAllButton: {
     marginLeft: 8,
@@ -265,19 +289,16 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     height: '50%',
-    backgroundColor: '#fff',
     padding: 16,
   },
   listTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 16,
   },
   gurdwaraItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
     padding: 12,
     borderRadius: 8,
     marginBottom: 12,
@@ -290,21 +311,17 @@ const styles = StyleSheet.create({
   gurdwaraName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
   },
   gurdwaraGurmukhi: {
     fontSize: 14,
-    color: theme.colors.primary,
     marginTop: 2,
   },
   gurdwaraAddress: {
     fontSize: 14,
-    color: '#666',
     marginTop: 4,
   },
   gurdwaraPhone: {
     fontSize: 12,
-    color: theme.colors.primary,
     marginTop: 2,
   },
   takhBadge: {
@@ -312,5 +329,22 @@ const styles = StyleSheet.create({
     color: '#FFD700',
     fontWeight: 'bold',
     marginTop: 4,
+  },
+  webMessage: {
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  webMessageText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 16,
+    textAlign: 'center',
+  },
+  webMessageSubtext: {
+    fontSize: 14,
+    marginTop: 8,
+    textAlign: 'center',
   },
 });

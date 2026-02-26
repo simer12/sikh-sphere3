@@ -2,14 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
 import { dasamGranthBanis, DASAM_GRANTH_TOTAL_VERSES } from '../data/dasamGranth';
+import { useApp } from '../hooks/useApp';
 
 export default function DasamGranthScreen({ navigation }: any) {
+  const { colors } = useApp();
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
-      <View style={styles.header}>
+      <View style={[styles.header, { backgroundColor: colors.primary }]}>
         <Text style={styles.ikOnkar}>ੴ</Text>
         <Text style={styles.headerTitle}>ਦਸਮ ਗ੍ਰੰਥ ਸਾਹਿਬ</Text>
         <Text style={styles.headerTitleEn}>Sri Dasam Granth Sahib</Text>
@@ -34,10 +35,10 @@ export default function DasamGranthScreen({ navigation }: any) {
 
       {/* Banis List */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Compositions</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Compositions</Text>
         
         {dasamGranthBanis.map((bani) => (
-          <Card key={bani.id} style={styles.card}>
+          <Card key={bani.id} style={[styles.card, { backgroundColor: colors.card }]}>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('DasamGranthDetail', {
@@ -48,16 +49,16 @@ export default function DasamGranthScreen({ navigation }: any) {
               <Card.Content>
                 <View style={styles.cardHeader}>
                   <View style={styles.cardTitleContainer}>
-                    <Title style={styles.baniName}>{bani.name}</Title>
-                    <Text style={styles.baniNameGurmukhi}>{bani.nameGurmukhi}</Text>
+                    <Title style={[styles.baniName, { color: colors.text }]}>{bani.name}</Title>
+                    <Text style={[styles.baniNameGurmukhi, { color: colors.primary }]}>{bani.nameGurmukhi}</Text>
                   </View>
-                  <Ionicons name="chevron-forward" size={24} color={theme.colors.primary} />
+                  <Ionicons name="chevron-forward" size={24} color={colors.primary} />
                 </View>
-                <Paragraph style={styles.description}>{bani.description}</Paragraph>
+                <Paragraph style={[styles.description, { color: colors.textSecondary }]}>{bani.description}</Paragraph>
                 <View style={styles.infoRow}>
                   <View style={styles.infoItem}>
-                    <Ionicons name="document-text-outline" size={16} color="#666" />
-                    <Text style={styles.infoText}>{bani.verses} verses</Text>
+                    <Ionicons name="document-text-outline" size={16} color={colors.textSecondary} />
+                    <Text style={[styles.infoText, { color: colors.textSecondary }]}>{bani.verses} verses</Text>
                   </View>
                 </View>
               </Card.Content>
@@ -67,12 +68,12 @@ export default function DasamGranthScreen({ navigation }: any) {
       </View>
 
       {/* Coming Soon Notice */}
-      <Card style={styles.comingSoonCard}>
+      <Card style={[styles.comingSoonCard, { backgroundColor: colors.card }]}>
         <Card.Content>
           <View style={styles.comingSoonContent}>
-            <Ionicons name="construct-outline" size={48} color={theme.colors.primary} />
-            <Text style={styles.comingSoonTitle}>Full Content Coming Soon</Text>
-            <Text style={styles.comingSoonText}>
+            <Ionicons name="construct-outline" size={48} color={colors.primary} />
+            <Text style={[styles.comingSoonTitle, { color: colors.text }]}>Full Content Coming Soon</Text>
+            <Text style={[styles.comingSoonText, { color: colors.textSecondary }]}>
               We're integrating the complete Dasam Granth Sahib from the Shabados Database, 
               which will provide authentic Gurmukhi text with translations.
             </Text>
@@ -88,63 +89,51 @@ export default function DasamGranthScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#fff',
     padding: 24,
     alignItems: 'center',
     borderBottomWidth: 2,
-    borderBottomColor: theme.colors.primary,
   },
   ikOnkar: {
     fontSize: 48,
-    color: theme.colors.primary,
     marginBottom: 8,
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginTop: 8,
   },
   headerTitleEn: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#333',
     marginTop: 4,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: '#666',
     marginTop: 8,
   },
   versesCount: {
     fontSize: 14,
-    color: '#888',
     marginTop: 4,
   },
   introCard: {
     margin: 16,
     marginBottom: 8,
     elevation: 3,
-    backgroundColor: '#FFF8E1',
   },
   introTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginBottom: 8,
   },
   introText: {
     fontSize: 14,
-    color: '#333',
     lineHeight: 22,
     marginBottom: 12,
   },
   availableNote: {
     fontSize: 13,
-    color: '#0F9D58',
     fontWeight: '600',
     lineHeight: 20,
   },
@@ -155,7 +144,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   card: {
@@ -174,16 +162,13 @@ const styles = StyleSheet.create({
   baniName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: theme.colors.primary,
   },
   baniNameGurmukhi: {
     fontSize: 20,
-    color: '#333',
     marginTop: 4,
   },
   description: {
     fontSize: 14,
-    color: '#666',
     marginBottom: 12,
     lineHeight: 20,
   },
@@ -198,14 +183,12 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 12,
-    color: '#666',
     marginLeft: 4,
   },
   comingSoonCard: {
     margin: 16,
     marginTop: 8,
     elevation: 3,
-    backgroundColor: '#E3F2FD',
   },
   comingSoonContent: {
     alignItems: 'center',
@@ -214,13 +197,11 @@ const styles = StyleSheet.create({
   comingSoonTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors.primary,
     marginTop: 16,
     marginBottom: 8,
   },
   comingSoonText: {
     fontSize: 14,
-    color: '#666',
     textAlign: 'center',
     lineHeight: 22,
   },

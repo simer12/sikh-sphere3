@@ -2,41 +2,42 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { theme } from '../theme';
+import { useApp } from '../hooks/useApp';
 
 export default function GuruDetailScreen({ route }: any) {
   const { guru } = route.params;
+  const { colors } = useApp();
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
         <View style={styles.iconContainer}>
-          <Ionicons name="person-circle" size={100} color={theme.colors.primary} />
+          <Ionicons name="person-circle" size={100} color={colors.primary} />
         </View>
-        <Text style={styles.guruName}>{guru.name}</Text>
-        <Text style={styles.guruNameGurmukhi}>{guru.nameGurmukhi}</Text>
-        <Text style={styles.period}>{guru.period}</Text>
+        <Text style={[styles.guruName, { color: colors.text }]}>{guru.name}</Text>
+        <Text style={[styles.guruNameGurmukhi, { color: colors.primary }]}>{guru.nameGurmukhi}</Text>
+        <Text style={[styles.period, { color: colors.textSecondary }]}>{guru.period}</Text>
         {guru.gurushipPeriod && (
-          <Text style={styles.gurushipPeriod}>Guruship: {guru.gurushipPeriod}</Text>
+          <Text style={[styles.gurushipPeriod, { color: colors.primary }]}>Guruship: {guru.gurushipPeriod}</Text>
         )}
-        <Text style={styles.birthPlace}>Born: {guru.birthPlace}</Text>
+        <Text style={[styles.birthPlace, { color: colors.textSecondary }]}>Born: {guru.birthPlace}</Text>
       </View>
 
-      <Card style={styles.card}>
+      <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <Card.Content>
-          <Text style={styles.cardTitle}>📖 About</Text>
-          <Text style={styles.description}>{guru.description}</Text>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>📖 About</Text>
+          <Text style={[styles.description, { color: colors.textSecondary }]}>{guru.description}</Text>
         </Card.Content>
       </Card>
 
       {guru.teachings && guru.teachings.length > 0 && (
-        <Card style={styles.card}>
+        <Card style={[styles.card, { backgroundColor: colors.card }]}>
           <Card.Content>
-            <Text style={styles.cardTitle}>🌟 Key Teachings</Text>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>🌟 Key Teachings</Text>
             {guru.teachings.map((teaching: string, index: number) => (
               <View key={index} style={styles.listItem}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.listText}>{teaching}</Text>
+                <Text style={[styles.bullet, { color: colors.primary }]}>•</Text>
+                <Text style={[styles.listText, { color: colors.textSecondary }]}>{teaching}</Text>
               </View>
             ))}
           </Card.Content>
@@ -44,23 +45,23 @@ export default function GuruDetailScreen({ route }: any) {
       )}
 
       {guru.keyEvents && guru.keyEvents.length > 0 && (
-        <Card style={styles.card}>
+        <Card style={[styles.card, { backgroundColor: colors.card }]}>
           <Card.Content>
-            <Text style={styles.cardTitle}>🏛️ Key Events</Text>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>🏛️ Key Events</Text>
             {guru.keyEvents.map((event: string, index: number) => (
               <View key={index} style={styles.listItem}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.listText}>{event}</Text>
+                <Text style={[styles.bullet, { color: colors.primary }]}>•</Text>
+                <Text style={[styles.listText, { color: colors.textSecondary }]}>{event}</Text>
               </View>
             ))}
           </Card.Content>
         </Card>
       )}
 
-      <Card style={styles.card}>
+      <Card style={[styles.card, { backgroundColor: colors.card }]}>
         <Card.Content>
-          <Text style={styles.cardTitle}>💎 Legacy</Text>
-          <Text style={styles.legacyText}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>💎 Legacy</Text>
+          <Text style={[styles.legacyText, { color: colors.textSecondary }]}>
             {guru.name} continues to inspire millions of Sikhs worldwide with teachings of equality,
             compassion, and devotion to the One Universal Creator.
           </Text>
@@ -73,14 +74,11 @@ export default function GuruDetailScreen({ route }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#fff',
     padding: 20,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   iconContainer: {
     marginBottom: 12,
@@ -88,29 +86,24 @@ const styles = StyleSheet.create({
   guruName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     textAlign: 'center',
   },
   guruNameGurmukhi: {
     fontSize: 20,
-    color: theme.colors.primary,
     marginTop: 8,
     textAlign: 'center',
   },
   period: {
     fontSize: 16,
-    color: '#666',
     marginTop: 8,
   },
   gurushipPeriod: {
     fontSize: 14,
-    color: theme.colors.primary,
     fontWeight: 'bold',
     marginTop: 4,
   },
   birthPlace: {
     fontSize: 14,
-    color: '#666',
     marginTop: 4,
   },
   card: {
@@ -120,12 +113,10 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   description: {
     fontSize: 16,
-    color: '#666',
     lineHeight: 24,
   },
   listItem: {
@@ -134,19 +125,16 @@ const styles = StyleSheet.create({
   },
   bullet: {
     fontSize: 16,
-    color: theme.colors.primary,
     marginRight: 8,
     fontWeight: 'bold',
   },
   listText: {
     flex: 1,
     fontSize: 15,
-    color: '#666',
     lineHeight: 22,
   },
   legacyText: {
     fontSize: 16,
-    color: '#666',
     lineHeight: 24,
     fontStyle: 'italic',
   },
