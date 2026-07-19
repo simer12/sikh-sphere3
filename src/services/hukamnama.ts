@@ -24,7 +24,7 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
     // If on web and hosted on Vercel, relative path works; otherwise call full Vercel endpoint
     const endpoint = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
       ? '/api/hukamnama'
-      : 'https://sikhsphere.vercel.app/api/hukamnama';
+      : 'https://sikh-sphere3.vercel.app/api/hukamnama';
 
     const apiRes = await fetch(endpoint);
     if (apiRes.ok) {
