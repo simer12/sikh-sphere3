@@ -1,18 +1,6 @@
 // BaniDB API Service - Khalsa Foundation's authentic Gurbani database
 const API_BASE_URL = 'https://api.banidb.com/v2';
 
-// Common Nitnem Bani IDs from BaniDB
-// Note: These are the correct complete Nitnem versions
-export const NITNEM_BANI_IDS = {
-  JAPJI_SAHIB: 2,        // Complete Japji Sahib (not Mool Mantar)
-  JAAP_SAHIB: 4,         // Complete Jaap Sahib
-  TVA_PRASAD_SAVAIYE: 5, // Tav Prasad Savaiye
-  CHAUPAI_SAHIB: 6,      // Chaupai Sahib
-  ANAND_SAHIB: 7,        // Anand Sahib (6 pauris)
-  REHRAS_SAHIB: 8,       // Rehras Sahib
-  KIRTAN_SOHILA: 9,      // Kirtan Sohila
-};
-
 interface BaniDBVerse {
   verse: {
     verseId: number;
@@ -44,6 +32,8 @@ interface BaniDBResponse {
   verses: BaniDBVerse[];
 }
 
+import { nitnemBanisMetadata, type NitnemBaniMetadata } from '../data/banis';
+
 /**
  * Fetch complete Bani from BaniDB API
  */
@@ -72,9 +62,16 @@ export async function fetchBaniFromAPI(baniId: number): Promise<BaniDBResponse> 
 /**
  * Convert BaniDB response to our app's Bani format (continuous Gutka style)
  */
-export function convertBaniDBToBani(baniDBData: BaniDBResponse, baniInfo: any) {
+export function convertBaniDBToBani(baniDBData: BaniDBResponse | BaniDBResponse[], baniInfo: NitnemBaniMetadata) {
   try {
-    const verses = baniDBData.verses;
+    const responses = Array.isArray(baniDBData) ? baniDBData : [baniDBData];
+    const verses = responses.reduce<BaniDBVerse[]>((mergedVerses, response) => {
+      if (Array.isArray(response.verses)) {
+        mergedVerses.push(...response.verses);
+      }
+
+      return mergedVerses;
+    }, []);
     
     if (!Array.isArray(verses)) {
       throw new Error('Invalid API response: verses not found');
@@ -133,21 +130,11 @@ export function convertBaniDBToBani(baniDBData: BaniDBResponse, baniInfo: any) {
  * Fetch all Nitnem Banis
  */
 export async function fetchAllNitnemBanis() {
-  const baniInfos = [
-    { id: '1', name: 'Japji Sahib', nameGurmukhi: 'ਜਪੁਜੀ ਸਾਹਿਬ', description: 'Morning prayer - The foundation of Sikh spirituality', time: 'Morning (Amrit Vela)', duration: '15-20 mins', apiId: NITNEM_BANI_IDS.JAPJI_SAHIB },
-    { id: '2', name: 'Jaap Sahib', nameGurmukhi: 'ਜਾਪੁ ਸਾਹਿਬ', description: 'Composed by Guru Gobind Singh Ji', time: 'Morning (Amrit Vela)', duration: '10-15 mins', apiId: NITNEM_BANI_IDS.JAAP_SAHIB },
-    { id: '3', name: 'Tav-Prasad Savaiye', nameGurmukhi: 'ਤ੍ਵ ਪ੍ਰਸਾਦਿ ਸਵਈਏ', description: 'Praise of the Almighty', time: 'Morning (Amrit Vela)', duration: '5 mins', apiId: NITNEM_BANI_IDS.TVA_PRASAD_SAVAIYE },
-    { id: '4', name: 'Chaupai Sahib', nameGurmukhi: 'ਚੌਪਈ ਸਾਹਿਬ', description: 'Prayer for protection', time: 'Morning/Evening', duration: '5 mins', apiId: NITNEM_BANI_IDS.CHAUPAI_SAHIB },
-    { id: '5', name: 'Anand Sahib', nameGurmukhi: 'ਆਨੰਦ ਸਾਹਿਬ', description: 'Song of Bliss', time: 'Morning/Evening', duration: '5-10 mins', apiId: NITNEM_BANI_IDS.ANAND_SAHIB },
-    { id: '6', name: 'Rehras Sahib', nameGurmukhi: 'ਰਹਿਰਾਸ ਸਾਹਿਬ', description: 'Evening prayer', time: 'Evening (Sunset)', duration: '10-15 mins', apiId: NITNEM_BANI_IDS.REHRAS_SAHIB },
-    { id: '7', name: 'Kirtan Sohila', nameGurmukhi: 'ਕੀਰਤਨ ਸੋਹਿਲਾ', description: 'Night prayer', time: 'Night (Before Sleep)', duration: '5 mins', apiId: NITNEM_BANI_IDS.KIRTAN_SOHILA },
-  ];
-
   const banis = [];
   
-  for (const info of baniInfos) {
+  for (const info of nitnemBanisMetadata) {
     try {
-      const baniData = await fetchBaniFromAPI(info.apiId);
+      const baniData = await Promise.all(info.apiIds.map(apiId => fetchBaniFromAPI(apiId)));
       const bani = convertBaniDBToBani(baniData, info);
       banis.push(bani);
     } catch (error) {

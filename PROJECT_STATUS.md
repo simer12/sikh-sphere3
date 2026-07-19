@@ -90,10 +90,10 @@ Table: user_data
 - SHA-256: `E7:32:ED:64:86:FE:3A:36:52:C7:32:F0:26:2E:A5:28:E5:9B:D0:81:F5:B5:FC:6C:8C:B8:79:D6:B4:68:73:4B`
 
 ### Supabase Project
-- **Project URL:** `https://zeylyvekbpsmvxrejpfa.supabase.co`
-- **Anon Key:** `sb_publishable_FaNKH11b6zA9By-0D-3sbA_ppI6cBha`
+- **Project URL:** `https://auwahlfkcyqcosakeqoi.supabase.co`
+- **Anon Key:** `sb_publishable_G6QH_Q1DizqMfZeynUqbIw_3BC4-ADp`
 - **Config Location:** `src/config/supabase.ts`
-- **Dashboard:** https://supabase.com/dashboard/project/zeylyvekbpsmvxrejpfa
+- **Dashboard:** https://supabase.com/dashboard/project/auwahlfkcyqcosakeqoi
 
 ### App Configuration
 - **App Scheme:** `akaalseva` (in `app.json`)
@@ -286,7 +286,7 @@ npx expo start --web
 ## 🔍 DEBUGGING TIPS
 
 ### Check Supabase Data
-1. Go to: https://supabase.com/dashboard/project/zeylyvekbpsmvxrejpfa/editor
+1. Go to: https://supabase.com/dashboard/project/auwahlfkcyqcosakeqoi/editor
 2. Click `user_data` table
 3. See all user records with synced data
 

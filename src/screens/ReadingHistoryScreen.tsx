@@ -13,6 +13,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../config/supabase';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
+import { ProgressRing } from '../components/ProgressRing';
+import { useNitnemProgress } from '../contexts/NitnemProgressContext';
 
 interface ReadingEntry {
   id: string;
@@ -25,6 +27,7 @@ interface ReadingEntry {
 export default function ReadingHistoryScreen({ navigation }: any) {
   const { user } = useAuth();
   const { t, fontSize, colors } = useApp();
+  const { weeklyCompleted, weeklyGoal, weeklyProgress, dailyStreak, badges, sessions } = useNitnemProgress();
   const [history, setHistory] = useState<ReadingEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -204,6 +207,61 @@ export default function ReadingHistoryScreen({ navigation }: any) {
         </View>
       </View>
 
+      <View style={styles.section}>
+        <Card style={[styles.momentumCard, { backgroundColor: colors.card }]}>
+          <Card.Content>
+            <View style={styles.momentumHeader}>
+              <ProgressRing
+                progress={weeklyProgress}
+                value={`${Math.min(weeklyCompleted, weeklyGoal)}/${weeklyGoal}`}
+                label="weekly goal"
+                size={100}
+              />
+              <View style={styles.momentumCopy}>
+                <Text style={[styles.sectionTitle, { color: colors.text }]}>Nitnem momentum</Text>
+                <Text style={[styles.momentumText, { color: colors.textSecondary }]}>
+                  {dailyStreak > 0
+                    ? `${dailyStreak} day streak. Keep it gentle and steady.`
+                    : 'Start with one prayer. The goal is rhythm, not pressure.'}
+                </Text>
+              </View>
+            </View>
+          </Card.Content>
+        </Card>
+
+        {badges.length > 0 && (
+          <View style={styles.badgeSection}>
+            <Text style={[styles.sectionTitle, { color: colors.text }]}>Milestone badges</Text>
+            {badges.slice(0, 6).map((badge) => (
+              <View key={badge.id} style={[styles.badgeItem, { backgroundColor: colors.card, borderColor: colors.border }]}>
+                <View style={[styles.badgeIcon, { backgroundColor: colors.surface }]}>
+                  <Ionicons name={badge.icon as any} size={22} color={colors.primary} />
+                </View>
+                <View style={styles.badgeCopy}>
+                  <Text style={[styles.badgeTitle, { color: colors.text }]}>{badge.title}</Text>
+                  <Text style={[styles.badgeDescription, { color: colors.textSecondary }]}>{badge.description}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {sessions.some((session) => session.reflection) && (
+          <View style={styles.reflectionSection}>
+            <Text style={[styles.sectionTitle, { color: colors.text }]}>Recent reflections</Text>
+            {sessions
+              .filter((session) => session.reflection)
+              .slice(0, 3)
+              .map((session) => (
+                <View key={session.id} style={[styles.reflectionItem, { backgroundColor: colors.card, borderColor: colors.border }]}>
+                  <Text style={[styles.reflectionBani, { color: colors.primary }]}>{session.baniName}</Text>
+                  <Text style={[styles.reflectionText, { color: colors.text }]}>{session.reflection}</Text>
+                </View>
+              ))}
+          </View>
+        )}
+      </View>
+
       {/* History List */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
@@ -326,6 +384,71 @@ const styles = StyleSheet.create({
   },
   section: {
     paddingHorizontal: 16,
+  },
+  momentumCard: {
+    marginBottom: 16,
+    elevation: 2,
+  },
+  momentumHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+  },
+  momentumCopy: {
+    flex: 1,
+  },
+  momentumText: {
+    fontSize: 14,
+    lineHeight: 20,
+    marginTop: 8,
+  },
+  badgeSection: {
+    marginBottom: 16,
+  },
+  badgeItem: {
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 12,
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  badgeIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  badgeCopy: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  badgeTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  badgeDescription: {
+    fontSize: 13,
+    marginTop: 3,
+  },
+  reflectionSection: {
+    marginBottom: 16,
+  },
+  reflectionItem: {
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 12,
+    marginTop: 10,
+  },
+  reflectionBani: {
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  reflectionText: {
+    fontSize: 14,
+    lineHeight: 20,
+    marginTop: 6,
   },
   sectionHeader: {
     flexDirection: 'row',

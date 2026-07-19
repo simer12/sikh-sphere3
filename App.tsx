@@ -10,6 +10,9 @@ import { theme } from './src/theme';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import { BookmarksProvider } from './src/contexts/BookmarksContext';
 import { ReadingHistoryProvider } from './src/contexts/ReadingHistoryContext';
+import { NitnemProgressProvider } from './src/contexts/NitnemProgressContext';
+import { NitnemRoutineProvider } from './src/contexts/NitnemRoutineContext';
+import { AkaalOriginalsProvider } from './src/contexts/AkaalOriginalsContext';
 import { PreferencesProvider, usePreferences } from './src/contexts/PreferencesContext';
 import { ThemeProvider } from './src/components/ThemeProvider';
 import { OnboardingFlow } from './src/components/OnboardingFlow';
@@ -23,10 +26,6 @@ import DasamGranthDetailScreen from './src/screens/DasamGranthDetailScreen';
 import LiveKirtanScreen from './src/screens/LiveKirtanScreen';
 import HukamnamaScreen from './src/screens/HukamnamaScreen';
 import CalendarScreen from './src/screens/CalendarScreen';
-import GurdwaraFinderScreen from './src/screens/GurdwaraFinderScreen';
-import LearnScreen from './src/screens/LearnScreen';
-import AboutSikhismScreen from './src/screens/AboutSikhismScreen';
-import GuruDetailScreen from './src/screens/GuruDetailScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
 import HistoryEraScreen from './src/screens/HistoryEraScreen';
 import HistoryArticleScreen from './src/screens/HistoryArticleScreen';
@@ -39,6 +38,12 @@ import PreferencesScreen from './src/screens/PreferencesScreen';
 import ReadingHistoryScreen from './src/screens/ReadingHistoryScreen';
 import BookmarksScreen from './src/screens/BookmarksScreen';
 import NotificationsScreen from './src/screens/NotificationsScreen';
+import RoutineBuilderScreen from './src/screens/RoutineBuilderScreen';
+import AkaalOriginalsScreen from './src/screens/AkaalOriginalsScreen';
+import AkaalEpisodeDetailScreen from './src/screens/AkaalEpisodeDetailScreen';
+import AkaalSeasonDetailScreen from './src/screens/AkaalSeasonDetailScreen';
+import AkaalBrowseScreen from './src/screens/AkaalBrowseScreen';
+import AkaalOriginalsAdminScreen from './src/screens/AkaalOriginalsAdminScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -54,6 +59,11 @@ function HomeStack() {
       <Stack.Screen name="HomeMain" component={HomeScreen} options={{ title: 'Home' }} />
       <Stack.Screen name="Hukamnama" component={HukamnamaScreen} options={{ title: 'Daily Hukamnama' }} />
       <Stack.Screen name="Live Kirtan" component={LiveKirtanScreen} options={{ title: 'Live Kirtan' }} />
+      <Stack.Screen name="AkaalOriginals" component={AkaalOriginalsScreen} options={{ title: 'Akaal Originals' }} />
+      <Stack.Screen name="AkaalEpisodeDetail" component={AkaalEpisodeDetailScreen} options={{ title: 'Episode' }} />
+      <Stack.Screen name="AkaalSeasonDetail" component={AkaalSeasonDetailScreen} options={{ title: 'Season' }} />
+      <Stack.Screen name="AkaalBrowse" component={AkaalBrowseScreen} options={{ title: 'Browse' }} />
+      <Stack.Screen name="AkaalOriginalsAdmin" component={AkaalOriginalsAdminScreen} options={{ title: 'Manage Originals' }} />
     </Stack.Navigator>
   );
 }
@@ -86,20 +96,6 @@ function DasamGranthStack() {
   );
 }
 
-function AboutStack() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: { backgroundColor: theme.colors.primary },
-        headerTintColor: '#fff',
-      }}
-    >
-      <Stack.Screen name="AboutList" component={AboutSikhismScreen} options={{ title: 'About Sikhism' }} />
-      <Stack.Screen name="GuruDetail" component={GuruDetailScreen} options={{ title: 'Guru' }} />
-    </Stack.Navigator>
-  );
-}
-
 function HistoryStack() {
   return (
     <Stack.Navigator
@@ -122,7 +118,13 @@ export default function App() {
         <ThemeProvider>
           <BookmarksProvider>
             <ReadingHistoryProvider>
-              <AppNavigator />
+              <NitnemProgressProvider>
+                <NitnemRoutineProvider>
+                  <AkaalOriginalsProvider>
+                    <AppNavigator />
+                  </AkaalOriginalsProvider>
+                </NitnemRoutineProvider>
+              </NitnemProgressProvider>
             </ReadingHistoryProvider>
           </BookmarksProvider>
         </ThemeProvider>
@@ -246,12 +248,15 @@ function MoreScreen({ navigation }: any) {
       <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile' }} />
       <Stack.Screen name="Preferences" component={PreferencesScreen} options={{ title: 'Preferences' }} />
       <Stack.Screen name="ReadingHistory" component={ReadingHistoryScreen} options={{ title: 'Reading History' }} />
+      <Stack.Screen name="RoutineBuilder" component={RoutineBuilderScreen} options={{ title: 'My Daily Nitnem' }} />
+      <Stack.Screen name="AkaalOriginals" component={AkaalOriginalsScreen} options={{ title: 'Akaal Originals' }} />
+      <Stack.Screen name="AkaalEpisodeDetail" component={AkaalEpisodeDetailScreen} options={{ title: 'Episode' }} />
+      <Stack.Screen name="AkaalSeasonDetail" component={AkaalSeasonDetailScreen} options={{ title: 'Season' }} />
+      <Stack.Screen name="AkaalBrowse" component={AkaalBrowseScreen} options={{ title: 'Browse' }} />
+      <Stack.Screen name="AkaalOriginalsAdmin" component={AkaalOriginalsAdminScreen} options={{ title: 'Manage Originals' }} />
       <Stack.Screen name="Bookmarks" component={BookmarksScreen} options={{ title: 'My Bookmarks' }} />
       <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ title: 'Notifications' }} />
       <Stack.Screen name="Calendar" component={CalendarScreen} options={{ title: 'Sikh Calendar' }} />
-      <Stack.Screen name="GurdwaraFinder" component={GurdwaraFinderScreen} options={{ title: 'Find Gurdwara' }} />
-      <Stack.Screen name="Learn" component={LearnScreen} options={{ title: 'Learn Gurmukhi' }} />
-      <Stack.Screen name="AboutSikhism" component={AboutStack} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
@@ -261,10 +266,13 @@ function MoreListScreen({ navigation }: any) {
   
   const menuItems = [
     { title: 'Profile', icon: 'person', screen: 'Profile' },
+    { title: 'Akaal Originals', icon: 'play-circle-outline', screen: 'AkaalOriginals' },
+    { title: 'My Daily Nitnem', icon: 'calendar-outline', screen: 'RoutineBuilder' },
+    { title: 'Preferences', icon: 'settings-outline', screen: 'Preferences' },
+    { title: 'Reading History', icon: 'bar-chart-outline', screen: 'ReadingHistory' },
+    { title: 'My Bookmarks', icon: 'bookmark-outline', screen: 'Bookmarks' },
+    { title: 'Notifications', icon: 'notifications-outline', screen: 'Notifications' },
     { title: 'Sikh Calendar', icon: 'calendar', screen: 'Calendar' },
-    { title: 'Find Gurdwara', icon: 'location', screen: 'GurdwaraFinder' },
-    { title: 'Learn Gurmukhi', icon: 'school', screen: 'Learn' },
-    { title: 'About Sikhism', icon: 'information-circle', screen: 'AboutSikhism' },
   ];
 
   return (

@@ -12,6 +12,27 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
   const [selectedSection, setSelectedSection] = useState<HistorySection | null>(null);
   const [selectedChapter, setSelectedChapter] = useState<any>(null);
 
+  const handleChapterSelect = (chapter: any) => {
+    if (!chapter) return;
+    if (article.id === 'guru-nanak-jeevan-katha' && !chapter.content) {
+      try {
+        const chaptersData = require('../data/guruNanakJeevanKathaChapters.json');
+        setSelectedChapter({
+          ...chapter,
+          content: chaptersData[chapter.id] || 'ਸਮੱਗਰੀ ਨਹੀਂ ਲੱਭੀ। (Content not found.)'
+        });
+      } catch (err) {
+        console.error('Error loading chapter content dynamically:', err);
+        setSelectedChapter({
+          ...chapter,
+          content: 'Failed to load chapter content.'
+        });
+      }
+    } else {
+      setSelectedChapter(chapter);
+    }
+  };
+
   const relatedArticlesData = article.relatedArticles
     ? historyArticles.filter(a => article.relatedArticles?.includes(a.id))
     : [];
@@ -84,7 +105,7 @@ export default function HistoryArticleScreen({ route, navigation }: any) {
                     <TouchableOpacity
                       key={chapter.id}
                       style={[styles.tocItem, { borderBottomColor: colors.border }]}
-                      onPress={() => setSelectedChapter(chapterData)}
+                      onPress={() => handleChapterSelect(chapterData)}
                     >
                       <View style={[styles.tocNumber, { backgroundColor: colors.primary }]}>
                         <Text style={styles.tocNumberText}>{chapterData?.number || (chapterIndex + 1)}</Text>

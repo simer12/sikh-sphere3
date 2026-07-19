@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from './AuthContext';
 import { supabase } from '../config/supabase';
 
@@ -81,24 +82,24 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   };
 
-  const loadLocalPreferences = () => {
+  const loadLocalPreferences = async () => {
     try {
-      const stored = localStorage.getItem('app_preferences');
+      const stored = await AsyncStorage.getItem('app_preferences');
       if (stored) {
         setPreferences(JSON.parse(stored));
       }
     } catch (error) {
-      console.log('Error loading local preferences');
+      console.log('Error loading local preferences', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const saveToLocal = (prefs: Preferences) => {
+  const saveToLocal = async (prefs: Preferences) => {
     try {
-      localStorage.setItem('app_preferences', JSON.stringify(prefs));
+      await AsyncStorage.setItem('app_preferences', JSON.stringify(prefs));
     } catch (error) {
-      console.log('Error saving to local storage');
+      console.log('Error saving to local storage', error);
     }
   };
 
@@ -110,7 +111,7 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
     setPreferences(newPreferences);
 
     // Save to local storage
-    saveToLocal(newPreferences);
+    await saveToLocal(newPreferences);
 
     // Save to database if user is logged in
     if (user) {
@@ -138,7 +139,7 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
   const resetPreferences = async () => {
     setPreferences(defaultPreferences);
-    saveToLocal(defaultPreferences);
+    await saveToLocal(defaultPreferences);
 
     if (user) {
       try {

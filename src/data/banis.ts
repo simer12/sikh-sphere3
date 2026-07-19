@@ -16,12 +16,23 @@ export interface Bani {
   punjabi: string;
 }
 
+export interface NitnemBaniMetadata {
+  id: number;
+  apiIds: number[];
+  name: string;
+  nameGurmukhi: string;
+  description: string;
+  time: string;
+  duration: string;
+}
+
 // Nitnem Bani metadata (actual content loaded from API)
 // BaniDB IDs: Correct IDs for complete Nitnem Banis
-export const nitnemBanisMetadata = [
+export const nitnemBanisMetadata: NitnemBaniMetadata[] = [
   // The five morning nitnem banis
   {
     id: 2, // Japji Sahib (Complete - not just Mool Mantar)
+    apiIds: [2],
     name: 'Japji Sahib',
     nameGurmukhi: 'ਜਪੁਜੀ ਸਾਹਿਬ',
     description: 'The first Bani in Guru Granth Sahib, composed by Guru Nanak Dev Ji. Foundation of Sikh philosophy.',
@@ -30,6 +41,7 @@ export const nitnemBanisMetadata = [
   },
   {
     id: 4, // Jaap Sahib (Complete)
+    apiIds: [4],
     name: 'Jaap Sahib',
     nameGurmukhi: 'ਜਾਪੁ ਸਾਹਿਬ',
     description: 'Composed by Guru Gobind Singh Ji. Describes 199 attributes of the Divine.',
@@ -38,6 +50,7 @@ export const nitnemBanisMetadata = [
   },
   {
     id: 5, // Tav Prasad Savaiye
+    apiIds: [6, 7],
     name: 'Tav Prasad Savaiye',
     nameGurmukhi: 'ਤ੍ਵ ਪ੍ਰਸਾਦਿ ਸਵਈਏ',
     description: 'Composed by Guru Gobind Singh Ji. Ten Savaiye (quatrains) in praise of the Divine.',
@@ -46,6 +59,7 @@ export const nitnemBanisMetadata = [
   },
   {
     id: 6, // Chaupai Sahib
+    apiIds: [9],
     name: 'Chaupai Sahib',
     nameGurmukhi: 'ਚੌਪਈ ਸਾਹਿਬ',
     description: 'Composed by Guru Gobind Singh Ji. Prayer for protection and courage.',
@@ -54,8 +68,9 @@ export const nitnemBanisMetadata = [
   },
   {
     id: 7, // Anand Sahib
+    apiIds: [10],
     name: 'Anand Sahib',
-    nameGurmukhi: 'ਅਨੰਦ ਸਾਹਿਬ',
+    nameGurmukhi: 'ਅਨੰਦੁ ਸਾਹਿਬ',
     description: 'Composed by Guru Amar Das Ji. The Song of Bliss expressing spiritual joy.',
     time: 'Morning (Amrit Vela)',
     duration: '10 minutes',
@@ -63,6 +78,7 @@ export const nitnemBanisMetadata = [
   // Evening Bani
   {
     id: 8, // Rehras Sahib
+    apiIds: [21],
     name: 'Rehras Sahib',
     nameGurmukhi: 'ਰਹਿਰਾਸ ਸਾਹਿਬ',
     description: 'Evening prayer to thank Waheguru for the day. Includes hymns from multiple Gurus.',
@@ -72,6 +88,7 @@ export const nitnemBanisMetadata = [
   // Before bedtime
   {
     id: 9, // Kirtan Sohila
+    apiIds: [23],
     name: 'Sohila Sahib',
     nameGurmukhi: 'ਸੋਹਿਲਾ ਸਾਹਿਬ',
     description: 'Bedtime prayer composed by multiple Gurus. Brings peace before sleep.',

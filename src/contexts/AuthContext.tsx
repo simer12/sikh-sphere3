@@ -7,6 +7,7 @@ import {
   updateProfile,
   User
 } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth } from '../config/firebase';
 import { supabase } from '../config/supabase';
 
@@ -15,6 +16,7 @@ interface UserData {
   email: string | null;
   displayName: string | null;
   photoURL: string | null;
+  isAdmin?: boolean;
   preferences?: {
     fontSize: number;
     darkMode: boolean;
@@ -48,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user data from Supabase
+  // Load user data from Supabase with detailed error status
   const loadUserData = async (uid: string) => {
     try {
       const { data, error } = await supabase
@@ -57,9 +59,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .eq('user_id', uid)
         .single();
       
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error loading user data:', error);
-        return null;
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // User profile explicitly not found in database (safe to create default)
+          return { notFound: true };
+        }
+        console.error('Error loading user data from Supabase:', error);
+        return { dbError: true, message: error.message };
       }
       
       if (data) {
@@ -68,6 +74,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           email: data.email,
           displayName: data.name,
           photoURL: null,
+          isAdmin: data.is_admin || false,
           preferences: {
             fontSize: 16,
             darkMode: false,
@@ -76,22 +83,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           },
         };
       }
-      return null;
-    } catch (error) {
-      console.error('Error loading user data:', error);
-      return null;
+      return { notFound: true };
+    } catch (error: any) {
+      console.error('Exception loading user data:', error);
+      return { dbError: true, message: error.message };
     }
   };
 
-  // Save user data to Supabase
+  // Save user data to Supabase and update local cache
   const saveUserData = async (uid: string, data: UserData) => {
     try {
+      // Always write to local storage first for offline usability
+      await AsyncStorage.setItem(`cached_user_data_${uid}`, JSON.stringify(data));
+      
       const { error } = await supabase
         .from('user_data')
         .upsert({
           user_id: uid,
           name: data.displayName,
           email: data.email,
+          is_admin: data.isAdmin || false,
           bani_reading_streak: 0,
           banis_read: [],
           bookmarked_banis: [],
@@ -101,7 +112,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
       
       if (error) {
-        console.error('Error saving user data:', error);
+        console.error('Error syncing user data to Supabase:', error);
       }
     } catch (error) {
       console.error('Error saving user data:', error);
@@ -113,16 +124,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(user);
       
       if (user) {
-        // Load user data from AsyncStorage
-        let storedData = await loadUserData(user.uid);
+        // 1. Try fetching from Supabase
+        const result = await loadUserData(user.uid);
         
-        if (!storedData) {
-          // Create default user data
-          storedData = {
+        if (result && 'dbError' in result) {
+          // Database connection failed. Load from local cache.
+          console.log('Database error. Attempting local cache fallback...');
+          const cached = await AsyncStorage.getItem(`cached_user_data_${user.uid}`);
+          if (cached) {
+            setUserData(JSON.parse(cached));
+          } else {
+            setUserData(null);
+          }
+        } else if (result && 'notFound' in result) {
+          // Safe to create default user data (actually new user)
+          const defaultData: UserData = {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName,
             photoURL: user.photoURL,
+            isAdmin: false,
             preferences: {
               fontSize: 16,
               darkMode: false,
@@ -130,9 +151,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               notifications: true,
             },
           };
-          await saveUserData(user.uid, storedData);
+          await saveUserData(user.uid, defaultData);
+          setUserData(defaultData);
+        } else if (result) {
+          const validData = result as UserData;
+          setUserData(validData);
+          // Sync successful retrieval to local cache
+          await AsyncStorage.setItem(`cached_user_data_${user.uid}`, JSON.stringify(validData));
         }
-        setUserData(storedData);
       } else {
         setUserData(null);
       }
@@ -145,17 +171,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signUp = async (email: string, password: string, displayName: string) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const trimmedEmail = email.trim();
+      const userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, password);
       
       // Update profile with display name
       await updateProfile(userCredential.user, { displayName });
       
-      // Create user document in AsyncStorage
+      // Create user document
       const newUserData: UserData = {
         uid: userCredential.user.uid,
         email: userCredential.user.email,
         displayName,
         photoURL: null,
+        isAdmin: false,
         preferences: {
           fontSize: 16,
           darkMode: false,
@@ -165,6 +193,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       };
       
       await saveUserData(userCredential.user.uid, newUserData);
+      setUserData(newUserData);
     } catch (error: any) {
       throw new Error(error.message);
     }
@@ -172,7 +201,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = async (email: string, password: string) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const trimmedEmail = email.trim();
+      await signInWithEmailAndPassword(auth, trimmedEmail, password);
     } catch (error: any) {
       throw new Error(error.message);
     }
@@ -195,8 +225,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     try {
       const updatedData = { ...userData, ...data } as UserData;
-      await saveUserData(user.uid, updatedData);
       setUserData(updatedData);
+      
+      // Save locally first
+      await AsyncStorage.setItem(`cached_user_data_${user.uid}`, JSON.stringify(updatedData));
+      
+      // Try to sync to cloud database
+      await saveUserData(user.uid, updatedData);
     } catch (error: any) {
       throw new Error(error.message);
     }

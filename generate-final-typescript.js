@@ -1,5 +1,5 @@
 
-'const fs = require('fs');
+const fs = require('fs');
 
 console.log('Loading final cleaned chapters and TOC structure...');
 const chaptersData = JSON.parse(fs.readFileSync('extracted-history/final-cleaned-chapters.json', 'utf8'));

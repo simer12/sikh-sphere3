@@ -18,7 +18,27 @@ interface HukamnamaData {
  * Tries direct fetch first, then falls back to parsing
  */
 export async function fetchHukamnama(): Promise<HukamnamaData> {
-  // Try direct fetch first (works on some networks)
+  // 1. Try Vercel Edge API first (CORS-friendly, cached globally at 0 DB cost)
+  try {
+    console.log('Attempting fetch from Edge API...');
+    // If on web and hosted on Vercel, relative path works; otherwise call full Vercel endpoint
+    const endpoint = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
+      ? '/api/hukamnama'
+      : 'https://sikhsphere.vercel.app/api/hukamnama';
+
+    const apiRes = await fetch(endpoint);
+    if (apiRes.ok) {
+      const data = await apiRes.json();
+      if (data && data.gurmukhi && !data.error) {
+        console.log('Edge API fetch succeeded!');
+        return data;
+      }
+    }
+  } catch (e) {
+    console.log('Edge API fetch unavailable, falling back to direct SGPC fetch...');
+  }
+
+  // 2. Try direct fetch from SGPC (fallback)
   try {
     console.log('Attempting direct SGPC fetch...');
     const response = await fetch('https://hs.sgpc.net/', {
@@ -40,7 +60,7 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
     console.log('Direct fetch failed, trying alternative...');
   }
 
-  // Fallback: Try with fetch and no-cors mode
+  // 3. Fallback: Try simple fetch
   try {
     console.log('Trying fetch with simple request...');
     const response = await fetch('https://hs.sgpc.net/');
@@ -56,7 +76,7 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
     console.log('Alternative fetch failed:', e);
   }
 
-  // If both fail, throw error with helpful message
+  // If all fail, throw error with helpful message
   throw new Error(
     'Unable to fetch Hukamnama. This may be due to network restrictions. ' +
     'Please check your internet connection or try again later.'
@@ -66,62 +86,83 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
 /**
  * Parse HTML from SGPC website to extract Hukamnama data
  */
+/**
+ * Parse HTML from SGPC website to extract Hukamnama data
+ */
 function parseHukamnamaHTML(html: string): HukamnamaData {
   // Extract date (format: 11-11-2025)
   const dateMatch = html.match(/(\d{2}-\d{2}-\d{4})/);
-  const dateString = dateMatch ? dateMatch[1] : new Date().toLocaleDateString();
+  const dateString = dateMatch ? dateMatch[1] : null;
+  let formattedDate = '';
   
-  // Convert date format
-  const [day, month, year] = dateString.split('-');
-  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-  const formattedDate = date.toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
+  if (dateString) {
+    try {
+      const [day, month, year] = dateString.split('-');
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      formattedDate = date.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    } catch (e) {
+      formattedDate = new Date().toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+  } else {
+    formattedDate = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
 
-  // Extract Raag
-  const raagMatch = html.match(/<h4[^>]*>([^<]*ਮਹਲਾ[^<]*)<\/h4>/);
+  // Extract Raag (Supports any heading, div, or paragraph tag containing "ਮਹਲਾ")
+  const raagMatch = html.match(/<(?:h[1-6]|div|p)[^>]*>([^<]*ਮਹਲਾ[^<]*)<\/(?:h[1-6]|div|p)>/i);
   const raag = raagMatch ? raagMatch[1].trim() : '';
+
+  // Helper function to thoroughly clean scraped fragments
+  const cleanScrapedText = (text: string): string => {
+    if (!text) return '';
+    return text
+      .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, ' ') // Strip internal headers
+      .replace(/<div[^>]*>.*?<\/div>/gi, ' ') // Strip internal divisions
+      .replace(/<[^>]+>/g, ' ') // Strip other HTML tags
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
 
   // Extract Gurmukhi
   let gurmukhi = '';
-  const gurmukhiSection = html.match(/<h4[^>]*>[^<]*ਮਹਲਾ[^<]*<\/h4>([\s\S]*?)<h4[^>]*>ਪੰਜਾਬੀ/);
+  const gurmukhiSection = html.match(/(?:ਮਹਲਾ[^<]*<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:ਪੰਜਾਬੀ|Punjabi|ਵਿਆਖਿਆ)/i);
   if (gurmukhiSection) {
-    gurmukhi = gurmukhiSection[1]
-      .replace(/<h5[^>]*>.*?<\/h5>/g, '')
-      .replace(/<h6[^>]*>.*?<\/h6>/g, '')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
+    gurmukhi = cleanScrapedText(gurmukhiSection[1])
       .replace(/ਮੰਗਲਵਾਰ|ਸੋਮਵਾਰ|ਬੁੱਧਵਾਰ|ਵੀਰਵਾਰ|ਸ਼ੁੱਕਰਵਾਰ|ਸ਼ਨਿੱਚਰਵਾਰ|ਐਤਵਾਰ.*/g, '')
       .trim();
   }
 
   // Extract Punjabi translation
   let punjabi = '';
-  const punjabiSection = html.match(/ਪੰਜਾਬੀ ਵਿਆਖਿਆ<\/h4>([\s\S]*?)<h4[^>]*>English/);
+  const punjabiSection = html.match(/(?:ਪੰਜਾਬੀ|Punjabi)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:English)/i);
   if (punjabiSection) {
-    punjabi = punjabiSection[1]
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    punjabi = cleanScrapedText(punjabiSection[1]);
   }
 
   // Extract English translation
   let english = '';
-  const englishSection = html.match(/English Translation<\/h4>([\s\S]*?)(Tuesday|Monday|Wednesday|Thursday|Friday|Saturday|Sunday),/);
+  const englishSection = html.match(/(?:English)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:Tuesday|Monday|Wednesday|Thursday|Friday|Saturday|Sunday)/i);
   if (englishSection) {
-    english = englishSection[1]
-      .replace(/<h5[^>]*>.*?<\/h5>/g, '')
-      .replace(/<h6[^>]*>.*?<\/h6>/g, '')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    english = cleanScrapedText(englishSection[1]);
   }
 
   // Extract Ang
-  const angMatch = html.match(/\((?:Page|ਅੰਗ):\s*(\d+)\)/i);
+  const angMatch = html.match(/(?:Page|ਅੰਗ)\s*(?::|\s)\s*(\d+)/i);
   const ang = angMatch ? angMatch[1] : 'N/A';
 
   return {

@@ -4,10 +4,11 @@
 const https = require('https');
 
 module.exports = async (req, res) => {
-  // Enable CORS
+  // Enable CORS & Vercel Global Edge Caching (1 Hour CDN cache)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Cache-Control', 'public, max-age=1800, s-maxage=3600, stale-while-revalidate=86400');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -40,49 +41,62 @@ function fetchSGPC() {
 
 function parseHukamnama(html) {
   const dateMatch = html.match(/(\d{2}-\d{2}-\d{4})/);
-  const dateString = dateMatch ? dateMatch[1] : new Date().toLocaleDateString();
-  const [day, month, year] = dateString.split('-');
-  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-  const formattedDate = date.toLocaleDateString('en-US', { 
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
-  });
+  const dateString = dateMatch ? dateMatch[1] : null;
+  let formattedDate = '';
+  
+  if (dateString) {
+    try {
+      const [day, month, year] = dateString.split('-');
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      formattedDate = date.toLocaleDateString('en-US', { 
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+      });
+    } catch (e) {
+      formattedDate = new Date().toLocaleDateString('en-US', { 
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+      });
+    }
+  } else {
+    formattedDate = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+    });
+  }
 
-  const raagMatch = html.match(/<h4[^>]*>([^<]*ਮਹਲਾ[^<]*)<\/h4>/);
+  const raagMatch = html.match(/<(?:h[1-6]|div|p)[^>]*>([^<]*ਮਹਲਾ[^<]*)<\/(?:h[1-6]|div|p)>/i);
   const raag = raagMatch ? raagMatch[1].trim() : '';
 
-  let gurmukhi = '';
-  const gurmukhiSection = html.match(/<h4[^>]*>[^<]*ਮਹਲਾ[^<]*<\/h4>([\s\S]*?)<h4[^>]*>ਪੰਜਾਬੀ/);
-  if (gurmukhiSection) {
-    gurmukhi = gurmukhiSection[1]
-      .replace(/<h5[^>]*>.*?<\/h5>/g, '')
-      .replace(/<h6[^>]*>.*?<\/h6>/g, '')
+  const cleanScrapedText = (text) => {
+    if (!text) return '';
+    return text
+      .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, ' ')
+      .replace(/<div[^>]*>.*?<\/div>/gi, ' ')
       .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/gi, ' ')
       .replace(/\s+/g, ' ')
+      .trim();
+  };
+
+  let gurmukhi = '';
+  const gurmukhiSection = html.match(/(?:ਮਹਲਾ[^<]*<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:ਪੰਜਾਬੀ|Punjabi|ਵਿਆਖਿਆ)/i);
+  if (gurmukhiSection) {
+    gurmukhi = cleanScrapedText(gurmukhiSection[1])
       .replace(/ਮੰਗਲਵਾਰ|ਸੋਮਵਾਰ|ਬੁੱਧਵਾਰ|ਵੀਰਵਾਰ|ਸ਼ੁੱਕਰਵਾਰ|ਸ਼ਨਿੱਚਰਵਾਰ|ਐਤਵਾਰ.*/g, '')
       .trim();
   }
 
   let punjabi = '';
-  const punjabiSection = html.match(/ਪੰਜਾਬੀ ਵਿਆਖਿਆ<\/h4>([\s\S]*?)<h4[^>]*>English/);
+  const punjabiSection = html.match(/(?:ਪੰਜਾਬੀ|Punjabi)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:English)/i);
   if (punjabiSection) {
-    punjabi = punjabiSection[1]
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    punjabi = cleanScrapedText(punjabiSection[1]);
   }
 
   let english = '';
-  const englishSection = html.match(/English Translation<\/h4>([\s\S]*?)(Tuesday|Monday|Wednesday|Thursday|Friday|Saturday|Sunday),/);
+  const englishSection = html.match(/(?:English)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:Tuesday|Monday|Wednesday|Thursday|Friday|Saturday|Sunday)/i);
   if (englishSection) {
-    english = englishSection[1]
-      .replace(/<h5[^>]*>.*?<\/h5>/g, '')
-      .replace(/<h6[^>]*>.*?<\/h6>/g, '')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    english = cleanScrapedText(englishSection[1]);
   }
 
-  const angMatch = html.match(/\((?:Page|ਅੰਗ):\s*(\d+)\)/i);
+  const angMatch = html.match(/(?:Page|ਅੰਗ)\s*(?::|\s)\s*(\d+)/i);
   const ang = angMatch ? angMatch[1] : 'N/A';
 
   return {

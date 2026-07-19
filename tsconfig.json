@@ -3,5 +3,9 @@
   "compilerOptions": {
     "strict": false,
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "App.tsx"
+  ]
 }

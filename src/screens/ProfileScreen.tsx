@@ -66,11 +66,6 @@ export default function ProfileScreen({ navigation }: any) {
       icon: 'help-circle-outline',
       onPress: () => Alert.alert(t.helpSupport, 'For support, email: support@akaalseva.com'),
     },
-    {
-      title: t.about,
-      icon: 'information-circle-outline',
-      onPress: () => navigation.navigate('AboutSikhism'),
-    },
   ];
 
   return (

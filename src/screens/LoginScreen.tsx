@@ -14,10 +14,19 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../contexts/AuthContext';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithCredential,
+} from 'firebase/auth';
 import { auth } from '../config/firebase';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
+
+// Required for expo-auth-session on Android/iOS
+WebBrowser.maybeCompleteAuthSession();
 
 export default function LoginScreen({ navigation }: any) {
   const { t, fontSize, colors } = useApp();
@@ -25,7 +34,28 @@ export default function LoginScreen({ navigation }: any) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const { signIn } = useAuth();
+
+  // expo-auth-session Google provider (used on mobile only)
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: '736447515274-t5mn8ojqrlpn3q6rh6ns1mbtphf9vt13.apps.googleusercontent.com',
+    iosClientId: '736447515274-0lpc5b8h7v756ijpqjh7h1ngpsmd2722.apps.googleusercontent.com',
+    webClientId: '736447515274-nqgtjaalu7si4bahm37pe2o6jmbbi95t.apps.googleusercontent.com',
+  });
+
+  // Handle Google auth response on mobile
+  React.useEffect(() => {
+    if (response?.type === 'success') {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential).catch((err) => {
+        Alert.alert('Google Sign-In Failed', err.message);
+      });
+    } else if (response?.type === 'error') {
+      Alert.alert('Google Sign-In Failed', response.error?.message || 'Something went wrong');
+    }
+  }, [response]);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -44,14 +74,25 @@ export default function LoginScreen({ navigation }: any) {
   };
 
   const handleGoogleLogin = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-      
-      // Reload to update auth state
-      window.location.reload();
-    } catch (error: any) {
-      Alert.alert('Google Sign-In Failed', error.message);
+    if (Platform.OS === 'web') {
+      // Web: use Firebase popup
+      try {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+        window.location.reload();
+      } catch (error: any) {
+        Alert.alert('Google Sign-In Failed', error.message);
+      }
+    } else {
+      // Mobile (Android/iOS): use expo-auth-session
+      setGoogleLoading(true);
+      try {
+        await promptAsync();
+      } catch (error: any) {
+        Alert.alert('Google Sign-In Failed', error.message);
+      } finally {
+        setGoogleLoading(false);
+      }
     }
   };
 
@@ -151,8 +192,13 @@ export default function LoginScreen({ navigation }: any) {
           <TouchableOpacity
             style={[styles.googleButton, { backgroundColor: colors.card, borderColor: colors.border }]}
             onPress={handleGoogleLogin}
+            disabled={googleLoading || !request}
           >
-            <Ionicons name="logo-google" size={20} color="#DB4437" />
+            {googleLoading ? (
+              <ActivityIndicator size="small" color="#DB4437" />
+            ) : (
+              <Ionicons name="logo-google" size={20} color="#DB4437" />
+            )}
             <Text style={[styles.googleButtonText, { color: colors.text }]}>Continue with Google</Text>
           </TouchableOpacity>
 
