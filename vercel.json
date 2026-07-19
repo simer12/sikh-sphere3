@@ -4,12 +4,20 @@
     {
       "src": "api/hukamnama.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/hukamnama",
       "dest": "/api/hukamnama.js"
+    },
+    {
+      "src": "/$",
+      "dest": "/api/index.js"
     }
   ]
 }
