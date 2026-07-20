@@ -21,12 +21,16 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
   // 1. Try Vercel Edge API first (CORS-friendly, cached globally at 0 DB cost)
   try {
     console.log('Attempting fetch from Edge API...');
-    // If on web and hosted on Vercel, relative path works; otherwise call full Vercel endpoint
-    const endpoint = (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app'))
-      ? '/api/hukamnama'
-      : 'https://sikh-sphere3.vercel.app/api/hukamnama';
+    const isVercelHost = typeof window !== 'undefined' && window?.location?.hostname?.endsWith('vercel.app');
+    const endpoint = isVercelHost ? '/api/hukamnama' : 'https://sikh-sphere3.vercel.app/api/hukamnama';
 
-    const apiRes = await fetch(endpoint);
+    const apiRes = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
     if (apiRes.ok) {
       const data = await apiRes.json();
       if (data && data.gurmukhi && !data.error) {
@@ -34,8 +38,8 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
         return data;
       }
     }
-  } catch (e) {
-    console.log('Edge API fetch unavailable, falling back to direct SGPC fetch...');
+  } catch (e: any) {
+    console.log('Edge API fetch unavailable, falling back to direct SGPC fetch...', e?.message || e);
   }
 
   // 2. Try direct fetch from SGPC (fallback)
