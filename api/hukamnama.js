@@ -4,11 +4,11 @@
 const https = require('https');
 
 module.exports = async (req, res) => {
-  // Enable CORS & Vercel Global Edge Caching (1 Hour CDN cache)
+  // Enable CORS & Vercel Global Edge Caching (1 Minute CDN cache to prevent stale text)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader('Cache-Control', 'public, max-age=1800, s-maxage=3600, stale-while-revalidate=86400');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=60, stale-while-revalidate=300');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();

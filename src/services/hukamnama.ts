@@ -22,7 +22,8 @@ export async function fetchHukamnama(): Promise<HukamnamaData> {
   try {
     console.log('Attempting fetch from Edge API...');
     const isVercelHost = typeof window !== 'undefined' && window?.location?.hostname?.endsWith('vercel.app');
-    const endpoint = isVercelHost ? '/api/hukamnama' : 'https://sikh-sphere3.vercel.app/api/hukamnama';
+    const baseUrl = isVercelHost ? '/api/hukamnama' : 'https://sikh-sphere3.vercel.app/api/hukamnama';
+    const endpoint = `${baseUrl}?v=${new Date().toISOString().split('T')[0]}`;
 
     const apiRes = await fetch(endpoint, {
       method: 'GET',
