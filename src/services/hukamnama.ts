@@ -134,10 +134,13 @@ function parseHukamnamaHTML(html: string): HukamnamaData {
   const cleanScrapedText = (text: string): string => {
     if (!text) return '';
     return text
+      .replace(/<!--[\s\S]*?(?:-->|$)/gi, '') // Strip HTML comments
       .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, ' ') // Strip internal headers
       .replace(/<div[^>]*>.*?<\/div>/gi, ' ') // Strip internal divisions
       .replace(/<[^>]+>/g, ' ') // Strip other HTML tags
+      .replace(/[\uFFFD\u007F-\u009F]/g, '') // Strip Unicode replacement (?) characters
       .replace(/&nbsp;/gi, ' ')
+      .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
   };

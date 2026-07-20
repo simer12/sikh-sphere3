@@ -68,10 +68,13 @@ function parseHukamnama(html) {
   const cleanScrapedText = (text) => {
     if (!text) return '';
     return text
+      .replace(/<!--[\s\S]*?(?:-->|$)/gi, '') // Strip HTML comments (including <!-- ✅)
       .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, ' ')
       .replace(/<div[^>]*>.*?<\/div>/gi, ' ')
       .replace(/<[^>]+>/g, ' ')
+      .replace(/[\uFFFD\u007F-\u009F]/g, '') // Strip Unicode replacement (?) characters
       .replace(/&nbsp;/gi, ' ')
+      .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
   };
