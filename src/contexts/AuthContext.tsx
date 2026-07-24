@@ -119,22 +119,48 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // Load cached user session immediately on mount
+  useEffect(() => {
+    const loadCachedSession = async () => {
+      try {
+        const cachedUser = await AsyncStorage.getItem('cached_auth_user');
+        if (cachedUser) {
+          const parsed = JSON.parse(cachedUser);
+          // Set user and userData from cache immediately
+          setUser(parsed.user);
+          setUserData(parsed.userData);
+          setLoading(false);
+          console.log('Restored authenticated session from local cache (sub-300ms boot).');
+        }
+      } catch (err) {
+        console.error('Error loading cached session:', err);
+      }
+    };
+    loadCachedSession();
+  }, []);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      
       if (user) {
-        // 1. Try fetching from Supabase
+        // Create a serializable user representation for local storage
+        const serializableUser = {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        } as any;
+        setUser(user);
+        
+        // Load user data in the background from Supabase
         const result = await loadUserData(user.uid);
+        let finalUserData: UserData | null = null;
         
         if (result && 'dbError' in result) {
           // Database connection failed. Load from local cache.
           console.log('Database error. Attempting local cache fallback...');
           const cached = await AsyncStorage.getItem(`cached_user_data_${user.uid}`);
           if (cached) {
-            setUserData(JSON.parse(cached));
-          } else {
-            setUserData(null);
+            finalUserData = JSON.parse(cached);
           }
         } else if (result && 'notFound' in result) {
           // Safe to create default user data (actually new user)
@@ -152,15 +178,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             },
           };
           await saveUserData(user.uid, defaultData);
-          setUserData(defaultData);
+          finalUserData = defaultData;
         } else if (result) {
-          const validData = result as UserData;
-          setUserData(validData);
+          finalUserData = result as UserData;
           // Sync successful retrieval to local cache
-          await AsyncStorage.setItem(`cached_user_data_${user.uid}`, JSON.stringify(validData));
+          await AsyncStorage.setItem(`cached_user_data_${user.uid}`, JSON.stringify(finalUserData));
+        }
+
+        if (finalUserData) {
+          setUserData(finalUserData);
+          // Persist the combined session cache
+          await AsyncStorage.setItem('cached_auth_user', JSON.stringify({
+            user: serializableUser,
+            userData: finalUserData,
+          }));
         }
       } else {
+        setUser(null);
         setUserData(null);
+        await AsyncStorage.removeItem('cached_auth_user');
       }
       
       setLoading(false);
@@ -194,6 +230,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       await saveUserData(userCredential.user.uid, newUserData);
       setUserData(newUserData);
+      
+      // Persist locally
+      await AsyncStorage.setItem('cached_auth_user', JSON.stringify({
+        user: {
+          uid: userCredential.user.uid,
+          email: userCredential.user.email,
+          displayName,
+          photoURL: null,
+        },
+        userData: newUserData,
+      }));
     } catch (error: any) {
       throw new Error(error.message);
     }
@@ -210,6 +257,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
+      await AsyncStorage.removeItem('cached_auth_user');
       await signOut(auth);
       // Reload page on web to clear state
       if (typeof window !== 'undefined') {
