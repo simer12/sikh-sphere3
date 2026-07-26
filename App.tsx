@@ -16,6 +16,26 @@ import { AkaalOriginalsProvider } from './src/contexts/AkaalOriginalsContext';
 import { PreferencesProvider, usePreferences } from './src/contexts/PreferencesContext';
 import { ThemeProvider } from './src/components/ThemeProvider';
 import { OnboardingFlow } from './src/components/OnboardingFlow';
+import { ErrorBoundary } from './src/components/ErrorBoundary';
+import { Logger } from './src/services/logger';
+
+// Track unhandled promise rejections globally
+if (typeof global !== 'undefined') {
+  try {
+    const rejectionTracking = require('promise/setimmediate/rejection-tracking');
+    rejectionTracking.enable({
+      allRejections: true,
+      onUnhandled: (id, error) => {
+        Logger.error(`Unhandled Promise Rejection [ID: ${id}]:`, error);
+      },
+      onHandled: (id) => {
+        Logger.info(`Unhandled Promise Rejection handled [ID: ${id}]`);
+      }
+    });
+  } catch (e) {
+    // Fail silently in environments where promise tracking is not supported
+  }
+}
 
 // Import screens
 import HomeScreen from './src/screens/HomeScreen';
@@ -113,23 +133,25 @@ function HistoryStack() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <PreferencesProvider>
-        <ThemeProvider>
-          <BookmarksProvider>
-            <ReadingHistoryProvider>
-              <NitnemProgressProvider>
-                <NitnemRoutineProvider>
-                  <AkaalOriginalsProvider>
-                    <AppNavigator />
-                  </AkaalOriginalsProvider>
-                </NitnemRoutineProvider>
-              </NitnemProgressProvider>
-            </ReadingHistoryProvider>
-          </BookmarksProvider>
-        </ThemeProvider>
-      </PreferencesProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <PreferencesProvider>
+          <ThemeProvider>
+            <BookmarksProvider>
+              <ReadingHistoryProvider>
+                <NitnemProgressProvider>
+                  <NitnemRoutineProvider>
+                    <AkaalOriginalsProvider>
+                      <AppNavigator />
+                    </AkaalOriginalsProvider>
+                  </NitnemRoutineProvider>
+                </NitnemProgressProvider>
+              </ReadingHistoryProvider>
+            </BookmarksProvider>
+          </ThemeProvider>
+        </PreferencesProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

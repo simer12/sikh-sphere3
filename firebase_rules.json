@@ -1,0 +1,3 @@
+{
+  "rules": "rules_version = '2';\n\nservice firebase.storage {\n  match /b/{bucket}/o {\n    // Rules for profile pictures directory\n    match /users/{userId}/{allPaths=**} {\n      // Allow public reads so profile pictures load for other users if needed\n      allow read: if true;\n      // Allow write actions only if authenticated and requesting for own user directory\n      allow write: if request.auth != null && request.auth.uid == userId;\n    }\n  }\n}"
+}
