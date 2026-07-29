@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth } from '../config/firebase';
+import { Logger } from '../services/logger';
 import { supabase } from '../config/supabase';
 
 interface UserData {
@@ -64,7 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           // User profile explicitly not found in database (safe to create default)
           return { notFound: true };
         }
-        console.error('Error loading user data from Supabase:', error);
+        Logger.warn('Error loading user data from Supabase (offline fallback active):', error?.message || error);
         return { dbError: true, message: error.message };
       }
       
@@ -85,7 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return { notFound: true };
     } catch (error: any) {
-      console.error('Exception loading user data:', error);
+      Logger.warn('Exception loading user data (offline fallback active):', error?.message || error);
       return { dbError: true, message: error.message };
     }
   };
@@ -112,10 +113,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
       
       if (error) {
-        console.error('Error syncing user data to Supabase:', error);
+        Logger.warn('Error syncing user data to Supabase (offline queue active):', error?.message || error);
       }
     } catch (error) {
-      console.error('Error saving user data:', error);
+      Logger.warn('Error saving user data (offline queue active):', error?.message || error);
     }
   };
 
@@ -130,10 +131,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setUser(parsed.user);
           setUserData(parsed.userData);
           setLoading(false);
-          console.log('Restored authenticated session from local cache (sub-300ms boot).');
+          Logger.info('Restored authenticated session from local cache (sub-300ms boot).');
         }
       } catch (err) {
-        console.error('Error loading cached session:', err);
+        Logger.warn('Error loading cached session:', err?.message || err);
       }
     };
     loadCachedSession();
@@ -157,7 +158,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (result && 'dbError' in result) {
           // Database connection failed. Load from local cache.
-          console.log('Database error. Attempting local cache fallback...');
+          Logger.info('Database error. Attempting local cache fallback...');
           const cached = await AsyncStorage.getItem(`cached_user_data_${user.uid}`);
           if (cached) {
             finalUserData = JSON.parse(cached);

@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from './AuthContext';
 import { supabase } from '../config/supabase';
+import { Logger } from '../services/logger';
 
 export interface Bookmark {
   id: string;
@@ -84,7 +85,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         await processSyncQueue();
       }
     } catch (error) {
-      console.error('Error loading bookmarks:', error);
+      Logger.warn('Error loading bookmarks (offline fallback active):', error?.message || error);
     } finally {
       setLoading(false);
     }
@@ -106,7 +107,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       // Try to flush the queue immediately in the background
       processSyncQueue();
     } catch (err) {
-      console.error('Error queueing bookmark operation:', err);
+      Logger.warn('Error queueing bookmark operation (offline queue active):', err?.message || err);
     }
   };
 
@@ -120,7 +121,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       const queue: PendingBookmarkOp[] = JSON.parse(storedQueue);
       if (queue.length === 0) return;
 
-      console.log(`Processing ${queue.length} pending offline bookmark syncs...`);
+      Logger.info(`Processing ${queue.length} pending offline bookmark syncs...`);
       
       while (queue.length > 0) {
         const op = queue[0];
@@ -153,12 +154,12 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           await AsyncStorage.setItem(queueKey, JSON.stringify(queue));
         } catch (dbErr) {
           // Offline or database error, halt processing and retry next launch
-          console.log('Database sync failed, preserving sync queue for later:', dbErr);
+          Logger.warn('Database sync failed, preserving sync queue for later:', dbErr?.message || dbErr);
           break;
         }
       }
     } catch (err) {
-      console.error('Error processing sync queue:', err);
+      Logger.warn('Error processing sync queue (retrying later):', err?.message || err);
     }
   };
 
