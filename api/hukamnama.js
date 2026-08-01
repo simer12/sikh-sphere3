@@ -62,16 +62,11 @@ function parseHukamnama(html) {
     });
   }
 
-  const raagMatch = html.match(/<(?:h[1-6]|div|p)[^>]*>([^<]*ਮਹਲਾ[^<]*)<\/(?:h[1-6]|div|p)>/i);
-  const raag = raagMatch ? raagMatch[1].trim() : '';
-
   const cleanScrapedText = (text) => {
     if (!text) return '';
     return text
-      .replace(/<!--[\s\S]*?(?:-->|$)/gi, '') // Strip HTML comments (including <!-- ✅)
-      .replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, ' ')
-      .replace(/<div[^>]*>.*?<\/div>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
+      .replace(/<!--[\s\S]*?(?:-->|$)/gi, '') // Strip HTML comments
+      .replace(/<[^>]+>/g, ' ') // Strip HTML tags
       .replace(/[\uFFFD\u007F-\u009F]/g, '') // Strip Unicode replacement (?) characters
       .replace(/&nbsp;/gi, ' ')
       .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]/g, ' ')
@@ -79,24 +74,62 @@ function parseHukamnama(html) {
       .trim();
   };
 
+  let raag = '';
   let gurmukhi = '';
-  const gurmukhiSection = html.match(/(?:ਮਹਲਾ[^<]*<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:ਪੰਜਾਬੀ|Punjabi|ਵਿਆਖਿਆ)/i);
-  if (gurmukhiSection) {
-    gurmukhi = cleanScrapedText(gurmukhiSection[1])
-      .replace(/ਮੰਗਲਵਾਰ|ਸੋਮਵਾਰ|ਬੁੱਧਵਾਰ|ਵੀਰਵਾਰ|ਸ਼ੁੱਕਰਵਾਰ|ਸ਼ਨਿੱਚਰਵਾਰ|ਐਤਵਾਰ.*/g, '')
+  let punjabi = '';
+  let english = '';
+
+  // 1. Try card-based extraction first (highly reliable based on SGPC grid container layout)
+  const gurmukhiCard = html.match(/<div class="hukamnama-card(?:\s+[^"]*)?"[^>]*>([\s\S]*?)<\/div>/i);
+  const explanationCards = html.match(/<div class="hukamnama-card2(?:\s+[^"]*)?"[^>]*>([\s\S]*?)<\/div>/gi) || [];
+
+  if (gurmukhiCard) {
+    const rawGurmukhi = gurmukhiCard[1];
+    const titleMatch = rawGurmukhi.match(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/i);
+    raag = titleMatch ? cleanScrapedText(titleMatch[1]) : '';
+    
+    gurmukhi = cleanScrapedText(rawGurmukhi)
+      .replace(/ਸ਼ਨਿਚਰਵਾਰ|ਸੋਮਵਾਰ|ਮੰਗਲਵਾਰ|ਬੁੱਧਵਾਰ|ਵੀਰਵਾਰ|ਸ਼ੁੱਕਰਵਾਰ|ਐਤਵਾਰ.*/gi, '')
       .trim();
   }
 
-  let punjabi = '';
-  const punjabiSection = html.match(/(?:ਪੰਜਾਬੀ|Punjabi)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:English)/i);
-  if (punjabiSection) {
-    punjabi = cleanScrapedText(punjabiSection[1]);
+  explanationCards.forEach((cardHtml) => {
+    if (cardHtml.includes('ਪੰਜਾਬੀ ਵਿਆਖਿਆ') || cardHtml.includes('ਪੰਜਾਬੀ')) {
+      punjabi = cleanScrapedText(cardHtml.replace(/<h[1-6][^>]*>ਪੰਜਾਬੀ ਵਿਆਖਿਆ<\/h[1-6]>/gi, ''));
+    } else if (cardHtml.includes('English Translation') || cardHtml.includes('English')) {
+      english = cleanScrapedText(cardHtml.replace(/<h[1-6][^>]*>English Translation<\/h[1-6]>/gi, ''));
+    }
+  });
+
+  // 2. Legacy markers fallback
+  if (!gurmukhi) {
+    const raagFallback = html.match(/<(?:h[1-6]|div|p)[^>]*>([^<]*ਮਹਲਾ[^<]*)<\/(?:h[1-6]|div|p)>/i);
+    raag = raagFallback ? raagFallback[1].trim() : '';
+
+    const gurmukhiFallback = html.match(/(?:ਮਹਲਾ[^<]*<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:ਪੰਜਾਬੀ|Punjabi|ਵਿਆਖਿਆ)/i);
+    if (gurmukhiFallback) {
+      gurmukhi = cleanScrapedText(gurmukhiFallback[1])
+        .replace(/ਮੰਗਲਵਾਰ|ਸੋਮਵਾਰ|ਬੁੱਧਵਾਰ|ਵੀਰਵਾਰ|ਸ਼ੁੱਕਰਵਾਰ|ਸ਼ਨਿੱਚਰਵਾਰ|ਐਤਵਾਰ.*/g, '')
+        .trim();
+    }
   }
 
-  let english = '';
-  const englishSection = html.match(/(?:English)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:Tuesday|Monday|Wednesday|Thursday|Friday|Saturday|Sunday)/i);
-  if (englishSection) {
-    english = cleanScrapedText(englishSection[1]);
+  if (!punjabi) {
+    const punjabiFallback = html.match(/(?:ਪੰਜਾਬੀ|Punjabi)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:English)/i);
+    if (punjabiFallback) {
+      punjabi = cleanScrapedText(punjabiFallback[1]);
+    }
+  }
+
+  if (!english) {
+    const englishFallback = html.match(/(?:English)(?:[\s\S]*?<\/(?:h[1-6]|div|p)>)([\s\S]*?)(?:Tuesday|Monday|Wednesday|Thursday|Friday|Saturday|Sunday)/i);
+    if (englishFallback) {
+      english = cleanScrapedText(englishFallback[1]);
+    }
+  }
+
+  if (english.startsWith('English Translation')) {
+    english = english.replace(/^English Translation\s*/i, '').trim();
   }
 
   const angMatch = html.match(/(?:Page|ਅੰਗ)\s*(?::|\s)\s*(\d+)/i);
@@ -109,6 +142,6 @@ function parseHukamnama(html) {
     english: english || 'English translation not available',
     reference: `Guru Granth Sahib Ji, Ang ${ang}`,
     ang: ang,
-    raag: raag,
+    raag: raag || 'Bhagat Bani',
   };
 }
