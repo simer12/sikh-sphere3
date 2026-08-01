@@ -10,6 +10,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
 import { useAuth } from '../contexts/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '../config/supabase';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
@@ -47,6 +48,22 @@ export default function ReadingHistoryScreen({ navigation }: any) {
       return;
     }
 
+    const cacheKey = `reading_history_cache_${user.uid}`;
+
+    // 1. Try loading from cache immediately
+    try {
+      const cached = await AsyncStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        setHistory(parsed);
+        calculateStats(parsed);
+        setLoading(false); // Render immediately
+      }
+    } catch (err) {
+      // Fail silently
+    }
+
+    // 2. Fetch fresh data from Supabase
     try {
       const { data, error } = await supabase
         .from('reading_history')
@@ -60,6 +77,7 @@ export default function ReadingHistoryScreen({ navigation }: any) {
       if (data) {
         setHistory(data);
         calculateStats(data);
+        await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
       }
     } catch (error) {
       console.error('Error loading history:', error);

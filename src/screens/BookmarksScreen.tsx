@@ -11,7 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
 import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../config/supabase';
+import { useBookmarks } from '../contexts/BookmarksContext';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
 import { EmptyState } from '../components/EmptyState';
@@ -29,63 +29,30 @@ interface Bookmark {
 export default function BookmarksScreen({ navigation }: any) {
   const { user } = useAuth();
   const { t, fontSize, colors } = useApp();
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { bookmarks, loading, removeBookmark, refreshBookmarks } = useBookmarks();
   const [refreshing, setRefreshing] = useState(false);
   const [filter, setFilter] = useState<string>('all');
 
-  useEffect(() => {
-    loadBookmarks();
-  }, []);
-
-  const loadBookmarks = async () => {
-    if (!user) {
-      setLoading(false);
-      setRefreshing(false);
-      return;
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('bookmarks')
-        .select('*')
-        .eq('user_id', user.uid)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      if (data) {
-        setBookmarks(data);
-      }
-    } catch (error) {
-      console.error('Error loading bookmarks:', error);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await refreshBookmarks();
+    setRefreshing(false);
   };
 
-  const removeBookmark = async (bookmarkId: string) => {
+  const handleRemoveBookmark = async (baniName: string) => {
     hapticFeedback.warning();
     Alert.alert(
-      t.removeBookmark,
-      t.removeBookmarkConfirm,
+      t.removeBookmark || 'Remove Bookmark',
+      t.removeBookmarkConfirm || 'Are you sure you want to remove this bookmark?',
       [
-        { text: t.cancel, style: 'cancel' },
+        { text: t.cancel || 'Cancel', style: 'cancel' },
         {
-          text: t.remove,
+          text: t.remove || 'Remove',
           style: 'destructive',
           onPress: async () => {
             try {
               hapticFeedback.success();
-              const { error } = await supabase
-                .from('bookmarks')
-                .delete()
-                .eq('id', bookmarkId);
-
-              if (error) throw error;
-
-              setBookmarks(bookmarks.filter((b) => b.id !== bookmarkId));
+              await removeBookmark(baniName);
             } catch (error) {
               hapticFeedback.error();
               console.error('Error removing bookmark:', error);
@@ -132,17 +99,7 @@ export default function BookmarksScreen({ navigation }: any) {
     );
   }
 
-  if (!user) {
-    return (
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <EmptyState
-          icon="bookmark-outline"
-          title="Sign In Required"
-          message="Please sign in to save and access your bookmarks"
-        />
-      </View>
-    );
-  }
+
 
   const filteredBookmarks = getFilteredBookmarks();
 
@@ -187,10 +144,7 @@ export default function BookmarksScreen({ navigation }: any) {
         refreshControl={
           <RefreshControl 
             refreshing={refreshing} 
-            onRefresh={() => {
-              setRefreshing(true);
-              loadBookmarks();
-            }}
+            onRefresh={handleRefresh}
             tintColor={colors.primary}
             colors={[colors.primary]}
           />
@@ -239,7 +193,7 @@ export default function BookmarksScreen({ navigation }: any) {
                     </View>
                     <TouchableOpacity
                       style={styles.removeButton}
-                      onPress={() => removeBookmark(bookmark.id)}
+                      onPress={() => handleRemoveBookmark(bookmark.bani_name)}
                     >
                       <Ionicons name="trash-outline" size={20} color={colors.error} />
                     </TouchableOpacity>

@@ -18,6 +18,7 @@ import { ThemeProvider } from './src/components/ThemeProvider';
 import { OnboardingFlow } from './src/components/OnboardingFlow';
 import { ErrorBoundary } from './src/components/ErrorBoundary';
 import { Logger } from './src/services/logger';
+import { NotificationService } from './src/services/notifications';
 
 // Track unhandled promise rejections globally
 if (typeof global !== 'undefined') {
@@ -163,6 +164,15 @@ function AppNavigator() {
 
   useEffect(() => {
     checkOnboardingStatus();
+    
+    // Request permission and schedule daily local Nitnem reminders
+    const setupNotifications = async () => {
+      const allowed = await NotificationService.requestPermissions();
+      if (allowed) {
+        await NotificationService.scheduleDailyNitnemReminders();
+      }
+    };
+    setupNotifications();
   }, []);
 
   const checkOnboardingStatus = async () => {

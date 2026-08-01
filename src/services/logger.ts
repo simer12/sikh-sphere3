@@ -5,6 +5,9 @@ export enum LogLevel {
   ERROR = 3,
 }
 
+// Feature toggle for Sentry / Firebase Crashlytics integrations in production builds
+const CRASH_REPORTING_ENABLED = false;
+
 class CentralizedLogger {
   private level: LogLevel = __DEV__ ? LogLevel.DEBUG : LogLevel.WARN;
 
@@ -51,8 +54,8 @@ class CentralizedLogger {
    * Centralized Hook for Crash Reporting Service integration (Sentry / Firebase Crashlytics)
    */
   private reportToCrashlytics(level: string, message: string, error?: any) {
-    if (__DEV__) {
-      // In development, we rely on standard console warning/error displays.
+    if (__DEV__ || !CRASH_REPORTING_ENABLED) {
+      // Bypassed in dev mode or if explicitly disabled
       return;
     }
 
