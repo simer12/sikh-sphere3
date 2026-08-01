@@ -20,15 +20,9 @@
             "CFBundleURLSchemes": [
               "com.googleusercontent.apps.736447515274-0lpc5b8h7v756ijpqjh7h1ngpsmd2722"
             ]
-          },
-          {
-            "CFBundleURLSchemes": [
-              "com.googleusercontent.apps.736447515274-0lpc5b8h7v756ijpqjh7h1ngpsmd2722"
-            ]
           }
         ],
         "UIBackgroundModes": [
-          "audio",
           "audio"
         ],
         "ITSAppUsesNonExemptEncryption": false
