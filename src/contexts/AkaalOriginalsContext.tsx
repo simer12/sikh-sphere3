@@ -224,18 +224,14 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
         setProgress(JSON.parse(storedProgress));
       }
 
-      // 2. Fetch fresh catalog from Supabase in the background
-      const [seasonsRes, episodesRes] = await Promise.all([
-        supabase.from('akaal_seasons').select('*').order('season_number', { ascending: true }),
-        supabase.from('akaal_episodes').select('*').order('episode_number', { ascending: true })
-      ]);
+      // 2. Fetch fresh catalog from Vercel CDN cached API in the background
+      const res = await fetch('https://sikh-sphere3.vercel.app/api/akaal-catalog');
+      if (!res.ok) throw new Error('Failed to fetch video catalog from Vercel Edge API');
+      const data = await res.json();
 
-      if (seasonsRes.error) throw seasonsRes.error;
-      if (episodesRes.error) throw episodesRes.error;
-
-      if (seasonsRes.data && episodesRes.data) {
-        const freshSeasons = seasonsRes.data.map(mapSeasonFromDB);
-        const freshEpisodes = episodesRes.data.map(mapEpisodeFromDB);
+      if (data && Array.isArray(data.seasons) && Array.isArray(data.episodes)) {
+        const freshSeasons = data.seasons.map(mapSeasonFromDB);
+        const freshEpisodes = data.episodes.map(mapEpisodeFromDB);
 
         setSeasons(freshSeasons);
         setEpisodes(freshEpisodes);

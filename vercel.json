@@ -6,6 +6,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/akaal-catalog.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/index.js",
       "use": "@vercel/node"
     }
@@ -14,6 +18,10 @@
     {
       "src": "/api/hukamnama",
       "dest": "/api/hukamnama.js"
+    },
+    {
+      "src": "/api/akaal-catalog",
+      "dest": "/api/akaal-catalog.js"
     },
     {
       "src": "/$",
