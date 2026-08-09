@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { supabase } from '../config/supabase';
 import { useAuth } from './AuthContext';
 import {
   AkaalOriginalEpisode,
@@ -144,63 +143,18 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
   const [episodes, setEpisodes] = useState<AkaalOriginalEpisode[]>(defaultAkaalOriginalEpisodes);
   const [progress, setProgress] = useState<Record<string, AkaalOriginalProgress>>({});
 
-  const loadUserProgress = async (uid: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('akaal_episode_progress')
-        .select('*')
-        .eq('user_id', uid);
 
-      if (error) throw error;
-
-      if (data && data.length > 0) {
-        const syncedProgress: Record<string, AkaalOriginalProgress> = {};
-        data.forEach((row: any) => {
-          syncedProgress[row.episode_id] = {
-            episodeId: row.episode_id,
-            seasonId: episodes.find((e) => e.id === row.episode_id)?.seasonId || '',
-            watchedSeconds: row.watched_seconds,
-            durationSeconds: row.duration_seconds,
-            completed: row.completed,
-            lastWatchedAt: row.last_watched_at || row.updated_at,
-          };
-        });
-
-        // Merge with local progress, prioritizing newer timestamps
-        const localCached = await AsyncStorage.getItem(PROGRESS_KEY);
-        const local = localCached ? JSON.parse(localCached) : {};
-        const merged = { ...local };
-
-        Object.keys(syncedProgress).forEach((epId) => {
-          const localEp = local[epId];
-          const cloudEp = syncedProgress[epId];
-          if (!localEp || new Date(cloudEp.lastWatchedAt) > new Date(localEp.lastWatchedAt)) {
-            merged[epId] = cloudEp;
-          }
-        });
-
-        setProgress(merged);
-        await AsyncStorage.setItem(PROGRESS_KEY, JSON.stringify(merged));
-      }
-    } catch (err: any) {
-      console.log('Using offline progress cache. (Cloud progress sync bypassed or table not created yet):', err.message);
-    }
-  };
 
   useEffect(() => {
     loadLibrary();
   }, []);
 
   useEffect(() => {
-    if (user && episodes.length > 0) {
-      loadUserProgress(user.uid);
-    } else if (!user) {
-      // Clear progress or fallback to standard cache when logging out
-      AsyncStorage.getItem(PROGRESS_KEY).then((cached) => {
-        setProgress(cached ? JSON.parse(cached) : {});
-      });
-    }
-  }, [user, episodes.length]);
+    // Simply reload the local AsyncStorage progress cache
+    AsyncStorage.getItem(PROGRESS_KEY).then((cached) => {
+      setProgress(cached ? JSON.parse(cached) : {});
+    });
+  }, [user]);
 
   const persistLibrary = async (nextSeasons: AkaalOriginalSeason[], nextEpisodes: AkaalOriginalEpisode[]) => {
     setSeasons(nextSeasons);
@@ -320,28 +274,6 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     await persistProgress(nextProgress);
-
-    // Sync to Supabase in the background if the user is authenticated
-    if (user) {
-      supabase
-        .from('akaal_episode_progress')
-        .upsert(
-          {
-            user_id: user.uid,
-            episode_id: episodeId,
-            watched_seconds: finalWatchedSeconds,
-            duration_seconds: durationSeconds,
-            completed,
-            last_watched_at: timestamp,
-          },
-          { onConflict: 'user_id,episode_id' }
-        )
-        .then(({ error }) => {
-          if (error) {
-            console.log('Failed to sync progress to Supabase (offline fallback active):', error.message);
-          }
-        });
-    }
   };
 
   const addSeason = async (season: Partial<AkaalOriginalSeason>) => {
@@ -362,15 +294,9 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     try {
-      const { error } = await supabase
-        .from('akaal_seasons')
-        .insert(mapSeasonToDB(nextSeason));
-
-      if (error) throw error;
-
       await persistLibrary([...seasons, nextSeason], episodes);
     } catch (err) {
-      console.error('Error saving season to Supabase:', err);
+      console.error('Error saving season locally:', err);
       throw err;
     }
   };
@@ -405,15 +331,9 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     try {
-      const { error } = await supabase
-        .from('akaal_episodes')
-        .insert(mapEpisodeToDB(nextEpisode));
-
-      if (error) throw error;
-
       await persistLibrary(seasons, [...episodes, nextEpisode]);
     } catch (err) {
-      console.error('Error saving episode to Supabase:', err);
+      console.error('Error saving episode locally:', err);
       throw err;
     }
   };
@@ -434,17 +354,10 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     try {
-      const { error } = await supabase
-        .from('akaal_episodes')
-        .update(mapEpisodeToDB(updated))
-        .eq('id', episodeId);
-
-      if (error) throw error;
-
       const nextEpisodes = episodes.map((item) => (item.id === episodeId ? updated : item));
       await persistLibrary(seasons, nextEpisodes);
     } catch (err) {
-      console.error('Error updating episode in Supabase:', err);
+      console.error('Error updating episode locally:', err);
       throw err;
     }
   };
@@ -460,53 +373,31 @@ export const AkaalOriginalsProvider: React.FC<{ children: React.ReactNode }> = (
     };
 
     try {
-      const { error } = await supabase
-        .from('akaal_seasons')
-        .update(mapSeasonToDB(updated))
-        .eq('id', seasonId);
-
-      if (error) throw error;
-
       const nextSeasons = seasons.map((item) => (item.id === seasonId ? updated : item));
       await persistLibrary(nextSeasons, episodes);
     } catch (err) {
-      console.error('Error updating season in Supabase:', err);
+      console.error('Error updating season locally:', err);
       throw err;
     }
   };
 
   const deleteEpisode = async (episodeId: string) => {
     try {
-      const { error } = await supabase
-        .from('akaal_episodes')
-        .delete()
-        .eq('id', episodeId);
-
-      if (error) throw error;
-
       const nextEpisodes = episodes.filter((item) => item.id !== episodeId);
       await persistLibrary(seasons, nextEpisodes);
     } catch (err) {
-      console.error('Error deleting episode from Supabase:', err);
+      console.error('Error deleting episode locally:', err);
       throw err;
     }
   };
 
   const deleteSeason = async (seasonId: string) => {
     try {
-      const { error } = await supabase
-        .from('akaal_seasons')
-        .delete()
-        .eq('id', seasonId);
-
-      if (error) throw error;
-
-      // Filter locally because DB cascade deletes them, so we sync local state
       const nextSeasons = seasons.filter((item) => item.id !== seasonId);
       const nextEpisodes = episodes.filter((item) => item.seasonId !== seasonId);
       await persistLibrary(nextSeasons, nextEpisodes);
     } catch (err) {
-      console.error('Error deleting season from Supabase:', err);
+      console.error('Error deleting season locally:', err);
       throw err;
     }
   };
