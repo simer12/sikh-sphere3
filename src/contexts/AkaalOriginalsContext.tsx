@@ -60,9 +60,9 @@ const mapSeasonFromDB = (dbSeason: any): AkaalOriginalSeason => ({
   seasonNumber: dbSeason.season_number,
   thumbnailUrl: dbSeason.thumbnail_url,
   trailerYoutubeUrl: dbSeason.trailer_youtube_url || '',
-  featured: dbSeason.featured,
-  trending: dbSeason.trending,
-  published: dbSeason.published,
+  featured: dbSeason.featured === true || dbSeason.featured === 'TRUE' || dbSeason.featured === 'true',
+  trending: dbSeason.trending === true || dbSeason.trending === 'TRUE' || dbSeason.trending === 'true',
+  published: dbSeason.published === true || dbSeason.published === 'TRUE' || dbSeason.published === 'true',
   createdAt: dbSeason.created_at,
   updatedAt: dbSeason.updated_at,
 });
@@ -80,28 +80,33 @@ const mapSeasonToDB = (season: AkaalOriginalSeason) => ({
   published: season.published,
 });
 
-const mapEpisodeFromDB = (dbEpisode: any): AkaalOriginalEpisode => ({
-  id: dbEpisode.id,
-  seasonId: dbEpisode.season_id,
-  episodeNumber: dbEpisode.episode_number,
-  title: dbEpisode.title,
-  description: dbEpisode.description || '',
-  youtubeUrl: dbEpisode.youtube_url,
-  youtubeVideoId: dbEpisode.youtube_video_id,
-  thumbnailUrl: dbEpisode.thumbnail_url,
-  durationMinutes: dbEpisode.duration_minutes,
-  importantPeople: dbEpisode.important_people || [],
-  locations: dbEpisode.locations || [],
-  timelineLabel: dbEpisode.timeline_label || '',
-  references: dbEpisode.source_references || [],
-  tags: dbEpisode.tags || [],
-  category: dbEpisode.category,
-  featured: dbEpisode.featured,
-  trending: dbEpisode.trending,
-  published: dbEpisode.published,
-  createdAt: dbEpisode.created_at,
-  updatedAt: dbEpisode.updated_at,
-});
+const mapEpisodeFromDB = (dbEpisode: any): AkaalOriginalEpisode => {
+  const videoId = dbEpisode.youtube_video_id || extractYoutubeVideoId(dbEpisode.youtube_url || '');
+  const thumbnail = dbEpisode.thumbnail_url || getYoutubeThumbnail(videoId);
+
+  return {
+    id: dbEpisode.id,
+    seasonId: dbEpisode.season_id,
+    episodeNumber: dbEpisode.episode_number,
+    title: dbEpisode.title,
+    description: dbEpisode.description || '',
+    youtubeUrl: dbEpisode.youtube_url,
+    youtubeVideoId: videoId,
+    thumbnailUrl: thumbnail,
+    durationMinutes: dbEpisode.duration_minutes,
+    importantPeople: parseList(dbEpisode.important_people),
+    locations: parseList(dbEpisode.locations),
+    timelineLabel: dbEpisode.timeline_label || '',
+    references: parseList(dbEpisode.source_references),
+    tags: parseList(dbEpisode.tags),
+    category: dbEpisode.category,
+    featured: dbEpisode.featured === true || dbEpisode.featured === 'TRUE' || dbEpisode.featured === 'true',
+    trending: dbEpisode.trending === true || dbEpisode.trending === 'TRUE' || dbEpisode.trending === 'true',
+    published: dbEpisode.published === true || dbEpisode.published === 'TRUE' || dbEpisode.published === 'true',
+    createdAt: dbEpisode.created_at,
+    updatedAt: dbEpisode.updated_at,
+  };
+};
 
 const mapEpisodeToDB = (episode: AkaalOriginalEpisode) => ({
   id: episode.id,
