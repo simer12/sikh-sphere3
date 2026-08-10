@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from './AuthContext';
-import { supabase } from '../config/supabase';
 import { Logger } from '../services/logger';
 
 export interface Bookmark {
@@ -10,14 +9,6 @@ export interface Bookmark {
   bani_type: string;
   notes?: string;
   created_at: string;
-}
-
-interface PendingBookmarkOp {
-  type: 'add' | 'remove';
-  baniName: string;
-  baniType: string;
-  notes?: string;
-  timestamp: number;
 }
 
 interface BookmarksContextType {
@@ -40,6 +31,8 @@ export const useBookmarks = () => {
   return context;
 };
 
+const STORAGE_KEY = 'guest_bookmarks_v2';
+
 export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth();
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
@@ -52,40 +45,14 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const loadBookmarks = async () => {
     setLoading(true);
     try {
-      if (!user) {
-        // Guest user mode: Load bookmarks from guest storage
-        const stored = await AsyncStorage.getItem('guest_bookmarks');
-        if (stored) {
-          setBookmarks(JSON.parse(stored));
-        } else {
-          setBookmarks([]);
-        }
+      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        setBookmarks(JSON.parse(stored));
       } else {
-        // Logged-in user mode:
-        // 1. Try loading cached bookmarks for instant (0ms) startup display
-        const cached = await AsyncStorage.getItem(`cached_bookmarks_${user.uid}`);
-        if (cached) {
-          setBookmarks(JSON.parse(cached));
-        }
-
-        // 2. Fetch fresh bookmarks from Supabase in the background
-        const { data, error } = await supabase
-          .from('bookmarks')
-          .select('*')
-          .eq('user_id', user.uid)
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        if (data) {
-          setBookmarks(data);
-          await AsyncStorage.setItem(`cached_bookmarks_${user.uid}`, JSON.stringify(data));
-        }
-
-        // 3. Process any pending offline operations
-        await processSyncQueue();
+        setBookmarks([]);
       }
     } catch (error) {
-      Logger.warn('Error loading bookmarks (offline fallback active):', error?.message || error);
+      Logger.warn('Error loading bookmarks:', error);
     } finally {
       setLoading(false);
     }
@@ -95,76 +62,8 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     return bookmarks.some((b) => b.bani_name === baniName);
   };
 
-  const queueOperation = async (op: PendingBookmarkOp) => {
-    if (!user) return;
-    try {
-      const queueKey = `bookmark_sync_queue_${user.uid}`;
-      const storedQueue = await AsyncStorage.getItem(queueKey);
-      const queue: PendingBookmarkOp[] = storedQueue ? JSON.parse(storedQueue) : [];
-      queue.push(op);
-      await AsyncStorage.setItem(queueKey, JSON.stringify(queue));
-      
-      // Try to flush the queue immediately in the background
-      processSyncQueue();
-    } catch (err) {
-      Logger.warn('Error queueing bookmark operation (offline queue active):', err?.message || err);
-    }
-  };
-
-  const processSyncQueue = async () => {
-    if (!user) return;
-    const queueKey = `bookmark_sync_queue_${user.uid}`;
-    
-    try {
-      const storedQueue = await AsyncStorage.getItem(queueKey);
-      if (!storedQueue) return;
-      const queue: PendingBookmarkOp[] = JSON.parse(storedQueue);
-      if (queue.length === 0) return;
-
-      Logger.info(`Processing ${queue.length} pending offline bookmark syncs...`);
-      
-      while (queue.length > 0) {
-        const op = queue[0];
-        
-        try {
-          if (op.type === 'add') {
-            const { error } = await supabase
-              .from('bookmarks')
-              .insert({
-                user_id: user.uid,
-                bani_name: op.baniName,
-                bani_type: op.baniType,
-                notes: op.notes || null,
-              });
-            // Ignore unique constraint violations if the bookmark already exists
-            if (error && error.code !== '23505') {
-              throw error;
-            }
-          } else if (op.type === 'remove') {
-            const { error } = await supabase
-              .from('bookmarks')
-              .delete()
-              .eq('user_id', user.uid)
-              .eq('bani_name', op.baniName);
-            if (error) throw error;
-          }
-          
-          // Successfully synced, remove from queue
-          queue.shift();
-          await AsyncStorage.setItem(queueKey, JSON.stringify(queue));
-        } catch (dbErr) {
-          // Offline or database error, halt processing and retry next launch
-          Logger.warn('Database sync failed, preserving sync queue for later:', dbErr?.message || dbErr);
-          break;
-        }
-      }
-    } catch (err) {
-      Logger.warn('Error processing sync queue (retrying later):', err?.message || err);
-    }
-  };
-
   const addBookmark = async (baniName: string, baniType: string, notes?: string) => {
-    const tempId = `temp_${Date.now()}`;
+    const tempId = `bookmark_${Date.now()}`;
     const newBookmark: Bookmark = {
       id: tempId,
       bani_name: baniName,
@@ -173,45 +72,24 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       created_at: new Date().toISOString(),
     };
 
-    // Optimistically update state instantly (0ms)
     const updatedBookmarks = [newBookmark, ...bookmarks];
     setBookmarks(updatedBookmarks);
 
-    // Save locally
-    if (!user) {
-      await AsyncStorage.setItem('guest_bookmarks', JSON.stringify(updatedBookmarks));
-    } else {
-      await AsyncStorage.setItem(`cached_bookmarks_${user.uid}`, JSON.stringify(updatedBookmarks));
-      // Queue Supabase push in background
-      await queueOperation({
-        type: 'add',
-        baniName,
-        baniType,
-        notes,
-        timestamp: Date.now(),
-      });
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedBookmarks));
+    } catch (err) {
+      Logger.warn('Error saving bookmark locally:', err);
     }
   };
 
   const removeBookmark = async (baniName: string) => {
-    // Optimistically update state instantly (0ms)
     const updatedBookmarks = bookmarks.filter((b) => b.bani_name !== baniName);
     setBookmarks(updatedBookmarks);
 
-    // Save locally
-    if (!user) {
-      await AsyncStorage.setItem('guest_bookmarks', JSON.stringify(updatedBookmarks));
-    } else {
-      await AsyncStorage.setItem(`cached_bookmarks_${user.uid}`, JSON.stringify(updatedBookmarks));
-      
-      const baniType = bookmarks.find((b) => b.bani_name === baniName)?.bani_type || 'Bani';
-      // Queue Supabase delete in background
-      await queueOperation({
-        type: 'remove',
-        baniName,
-        baniType,
-        timestamp: Date.now(),
-      });
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedBookmarks));
+    } catch (err) {
+      Logger.warn('Error removing bookmark locally:', err);
     }
   };
 

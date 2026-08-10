@@ -11,7 +11,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
 import { useAuth } from '../contexts/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { supabase } from '../config/supabase';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
 import { ProgressRing } from '../components/ProgressRing';
@@ -43,44 +42,18 @@ export default function ReadingHistoryScreen({ navigation }: any) {
   }, []);
 
   const loadHistory = async () => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-
-    const cacheKey = `reading_history_cache_${user.uid}`;
-
-    // 1. Try loading from cache immediately
+    const cacheKey = `reading_history_cache_${user?.uid || 'guest_user'}`;
     try {
       const cached = await AsyncStorage.getItem(cacheKey);
       if (cached) {
         const parsed = JSON.parse(cached);
         setHistory(parsed);
         calculateStats(parsed);
-        setLoading(false); // Render immediately
+      } else {
+        setHistory([]);
       }
     } catch (err) {
-      // Fail silently
-    }
-
-    // 2. Fetch fresh data from Supabase
-    try {
-      const { data, error } = await supabase
-        .from('reading_history')
-        .select('*')
-        .eq('user_id', user.uid)
-        .order('read_at', { ascending: false })
-        .limit(100);
-
-      if (error) throw error;
-
-      if (data) {
-        setHistory(data);
-        calculateStats(data);
-        await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
-      }
-    } catch (error) {
-      console.error('Error loading history:', error);
+      console.error('Error loading local history:', err);
     } finally {
       setLoading(false);
     }
@@ -120,16 +93,9 @@ export default function ReadingHistoryScreen({ navigation }: any) {
   };
 
   const clearHistory = async () => {
-    if (!user) return;
-
+    const cacheKey = `reading_history_cache_${user?.uid || 'guest_user'}`;
     try {
-      const { error } = await supabase
-        .from('reading_history')
-        .delete()
-        .eq('user_id', user.uid);
-
-      if (error) throw error;
-
+      await AsyncStorage.removeItem(cacheKey);
       setHistory([]);
       setStats({
         totalReads: 0,

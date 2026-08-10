@@ -11,7 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
 import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../config/supabase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
 
@@ -54,67 +54,24 @@ export default function NotificationsScreen() {
   }, []);
 
   const loadSettings = async () => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-
     try {
-      const { data, error } = await supabase
-        .from('notification_settings')
-        .select('*')
-        .eq('user_id', user.uid)
-        .single();
-
-      if (data) {
-        setSettings({
-          enabled: data.enabled ?? true,
-          dailyHukamnama: data.daily_hukamnama ?? true,
-          hukamnamaTime: data.hukamnama_time ?? '06:00',
-          nitnemReminder: data.nitnem_reminder ?? true,
-          nitnemTimes: data.nitnem_times ?? {
-            morning: true,
-            evening: true,
-            night: true,
-          },
-          gurpurabReminder: data.gurpurab_reminder ?? true,
-          weeklyProgress: data.weekly_progress ?? false,
-          newContent: data.new_content ?? true,
-        });
+      const stored = await AsyncStorage.getItem('notification_settings_local');
+      if (stored) {
+        setSettings(JSON.parse(stored));
       }
     } catch (error) {
-      console.log('No notification settings found, using defaults');
+      console.log('No notification settings found in local storage, using defaults');
     } finally {
       setLoading(false);
     }
   };
 
   const saveSettings = async (newSettings: NotificationSettings) => {
-    if (!user) return;
-
     try {
-      const { error } = await supabase
-        .from('notification_settings')
-        .upsert(
-          {
-            user_id: user.uid,
-            enabled: newSettings.enabled,
-            daily_hukamnama: newSettings.dailyHukamnama,
-            hukamnama_time: newSettings.hukamnamaTime,
-            nitnem_reminder: newSettings.nitnemReminder,
-            nitnem_times: newSettings.nitnemTimes,
-            gurpurab_reminder: newSettings.gurpurabReminder,
-            weekly_progress: newSettings.weeklyProgress,
-            new_content: newSettings.newContent,
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: 'user_id' }
-        );
-
-      if (error) throw error;
+      await AsyncStorage.setItem('notification_settings_local', JSON.stringify(newSettings));
     } catch (error) {
       console.error('Error saving settings:', error);
-      Alert.alert('Error', 'Failed to save notification settings');
+      Alert.alert('Error', 'Failed to save notification settings locally');
     }
   };
 
@@ -131,17 +88,7 @@ export default function NotificationsScreen() {
     saveSettings(newSettings);
   };
 
-  if (!user) {
-    return (
-      <View style={[styles.emptyContainer, { backgroundColor: colors.background }]}>
-        <Ionicons name="notifications-off-outline" size={80} color={colors.disabled} />
-        <Text style={[styles.emptyTitle, { color: colors.text }]}>Sign In Required</Text>
-        <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-          Please sign in to configure notification settings
-        </Text>
-      </View>
-    );
-  }
+
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>

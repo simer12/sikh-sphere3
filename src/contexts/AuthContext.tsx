@@ -1,18 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  updateProfile,
-  User
-} from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { auth } from '../config/firebase';
 import { Logger } from '../services/logger';
-import { supabase } from '../config/supabase';
 
-interface UserData {
+export interface UserData {
   uid: string;
   email: string | null;
   displayName: string | null;
@@ -26,8 +16,20 @@ interface UserData {
   };
 }
 
+// Custom mock User type to satisfy existing screen compilers
+export interface MockUser {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+  metadata: {
+    creationTime?: string;
+    lastSignInTime?: string;
+  };
+}
+
 interface AuthContextType {
-  user: User | null;
+  user: MockUser | null;
   userData: UserData | null;
   loading: boolean;
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
@@ -46,242 +48,115 @@ export const useAuth = () => {
   return context;
 };
 
+const SESSION_KEY = 'cached_auth_user_v2';
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<MockUser | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user data from Supabase with detailed error status
-  const loadUserData = async (uid: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('user_data')
-        .select('*')
-        .eq('user_id', uid)
-        .single();
-      
-      if (error) {
-        if (error.code === 'PGRST116') {
-          // User profile explicitly not found in database (safe to create default)
-          return { notFound: true };
-        }
-        Logger.warn('Error loading user data from Supabase (offline fallback active):', error?.message || error);
-        return { dbError: true, message: error.message };
-      }
-      
-      if (data) {
-        return {
-          uid: data.user_id,
-          email: data.email,
-          displayName: data.name,
-          photoURL: null,
-          isAdmin: data.is_admin || false,
-          preferences: {
-            fontSize: 16,
-            darkMode: false,
-            language: 'en' as const,
-            notifications: true,
-          },
-        };
-      }
-      return { notFound: true };
-    } catch (error: any) {
-      Logger.warn('Exception loading user data (offline fallback active):', error?.message || error);
-      return { dbError: true, message: error.message };
-    }
-  };
-
-  // Save user data to Supabase and update local cache
-  const saveUserData = async (uid: string, data: UserData) => {
-    try {
-      // Always write to local storage first for offline usability
-      await AsyncStorage.setItem(`cached_user_data_${uid}`, JSON.stringify(data));
-      
-      const { error } = await supabase
-        .from('user_data')
-        .upsert({
-          user_id: uid,
-          name: data.displayName,
-          email: data.email,
-          is_admin: data.isAdmin || false,
-          bani_reading_streak: 0,
-          banis_read: [],
-          bookmarked_banis: [],
-          updated_at: new Date().toISOString(),
-        }, {
-          onConflict: 'user_id'
-        });
-      
-      if (error) {
-        Logger.warn('Error syncing user data to Supabase (offline queue active):', error?.message || error);
-      }
-    } catch (error) {
-      Logger.warn('Error saving user data (offline queue active):', error?.message || error);
-    }
-  };
-
-  // Load cached user session immediately on mount
+  // Load user data immediately on mount
   useEffect(() => {
     const loadCachedSession = async () => {
       try {
-        const cachedUser = await AsyncStorage.getItem('cached_auth_user');
-        if (cachedUser) {
-          const parsed = JSON.parse(cachedUser);
-          // Set user and userData from cache immediately
+        const cached = await AsyncStorage.getItem(SESSION_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
           setUser(parsed.user);
           setUserData(parsed.userData);
-          setLoading(false);
-          Logger.info('Restored authenticated session from local cache (sub-300ms boot).');
+          Logger.info('Restored offline standalone profile from local storage.');
+        } else {
+          // No profile set up yet. Set a default guest user reference but keep userData null
+          // to trigger the Profile Setup screen on first launch.
+          setUser({
+            uid: 'guest_user',
+            email: 'guest@sikhsphere.local',
+            displayName: 'Sikh Sphere Guest',
+            photoURL: null,
+            metadata: {
+              creationTime: new Date().toISOString(),
+            }
+          });
+          setUserData(null);
         }
       } catch (err) {
-        Logger.warn('Error loading cached session:', err?.message || err);
+        Logger.warn('Error loading cached session:', err);
+      } finally {
+        setLoading(false);
       }
     };
     loadCachedSession();
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // Create a serializable user representation for local storage
-        const serializableUser = {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-        } as any;
-        setUser(user);
-        
-        // Load user data in the background from Supabase
-        const result = await loadUserData(user.uid);
-        let finalUserData: UserData | null = null;
-        
-        if (result && 'dbError' in result) {
-          // Database connection failed. Load from local cache.
-          Logger.info('Database error. Attempting local cache fallback...');
-          const cached = await AsyncStorage.getItem(`cached_user_data_${user.uid}`);
-          if (cached) {
-            finalUserData = JSON.parse(cached);
-          }
-        } else if (result && 'notFound' in result) {
-          // Safe to create default user data (actually new user)
-          const defaultData: UserData = {
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            isAdmin: false,
-            preferences: {
-              fontSize: 16,
-              darkMode: false,
-              language: 'en',
-              notifications: true,
-            },
-          };
-          await saveUserData(user.uid, defaultData);
-          finalUserData = defaultData;
-        } else if (result) {
-          finalUserData = result as UserData;
-          // Sync successful retrieval to local cache
-          await AsyncStorage.setItem(`cached_user_data_${user.uid}`, JSON.stringify(finalUserData));
-        }
-
-        if (finalUserData) {
-          setUserData(finalUserData);
-          // Persist the combined session cache
-          await AsyncStorage.setItem('cached_auth_user', JSON.stringify({
-            user: serializableUser,
-            userData: finalUserData,
-          }));
-        }
-      } else {
-        setUser(null);
-        setUserData(null);
-        await AsyncStorage.removeItem('cached_auth_user');
-      }
-      
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
-
   const signUp = async (email: string, password: string, displayName: string) => {
-    try {
-      const trimmedEmail = email.trim();
-      const userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, password);
-      
-      // Update profile with display name
-      await updateProfile(userCredential.user, { displayName });
-      
-      // Create user document
-      const newUserData: UserData = {
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        displayName,
-        photoURL: null,
-        isAdmin: false,
-        preferences: {
-          fontSize: 16,
-          darkMode: false,
-          language: 'en',
-          notifications: true,
-        },
-      };
-      
-      await saveUserData(userCredential.user.uid, newUserData);
-      setUserData(newUserData);
-      
-      // Persist locally
-      await AsyncStorage.setItem('cached_auth_user', JSON.stringify({
-        user: {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email,
-          displayName,
-          photoURL: null,
-        },
-        userData: newUserData,
-      }));
-    } catch (error: any) {
-      throw new Error(error.message);
-    }
+    // Deprecated for standalone mode
+    Logger.info('Sign up bypassed in standalone mode.');
   };
 
   const signIn = async (email: string, password: string) => {
-    try {
-      const trimmedEmail = email.trim();
-      await signInWithEmailAndPassword(auth, trimmedEmail, password);
-    } catch (error: any) {
-      throw new Error(error.message);
-    }
+    // Deprecated for standalone mode
+    Logger.info('Sign in bypassed in standalone mode.');
   };
 
   const logout = async () => {
     try {
-      await AsyncStorage.removeItem('cached_auth_user');
-      await signOut(auth);
-      // Reload page on web to clear state
-      if (typeof window !== 'undefined') {
-        window.location.reload();
-      }
+      await AsyncStorage.removeItem(SESSION_KEY);
+      setUser({
+        uid: 'guest_user',
+        email: 'guest@sikhsphere.local',
+        displayName: 'Sikh Sphere Guest',
+        photoURL: null,
+        metadata: {
+          creationTime: new Date().toISOString(),
+        }
+      });
+      setUserData(null);
+      Logger.info('Offline profile successfully reset.');
     } catch (error: any) {
-      throw new Error(error.message);
+      Logger.error('Error resetting offline profile:', error);
     }
   };
 
   const updateUserProfile = async (data: Partial<UserData>) => {
-    if (!user) return;
-    
     try {
-      const updatedData = { ...userData, ...data } as UserData;
-      setUserData(updatedData);
-      
-      // Save locally first
-      await AsyncStorage.setItem(`cached_user_data_${user.uid}`, JSON.stringify(updatedData));
-      
-      // Try to sync to cloud database
-      await saveUserData(user.uid, updatedData);
+      const activeUid = user?.uid || 'guest_user';
+      const currentUser: MockUser = {
+        uid: activeUid,
+        email: 'guest@sikhsphere.local',
+        displayName: data.displayName || user?.displayName || 'Sikh Sphere Guest',
+        photoURL: data.photoURL || user?.photoURL || null,
+        metadata: user?.metadata || {
+          creationTime: new Date().toISOString(),
+        }
+      };
+
+      const nextUserData: UserData = {
+        uid: activeUid,
+        email: 'guest@sikhsphere.local',
+        displayName: data.displayName || userData?.displayName || 'Sikh Sphere Guest',
+        photoURL: data.photoURL || userData?.photoURL || null,
+        isAdmin: false,
+        preferences: {
+          fontSize: data.preferences?.fontSize || userData?.preferences?.fontSize || 16,
+          darkMode: data.preferences?.darkMode || userData?.preferences?.darkMode || false,
+          language: data.preferences?.language || userData?.preferences?.language || 'en',
+          notifications: data.preferences?.notifications || userData?.preferences?.notifications || true,
+        },
+      };
+
+      setUser(currentUser);
+      setUserData(nextUserData);
+
+      await AsyncStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify({
+          user: currentUser,
+          userData: nextUserData,
+        })
+      );
+      Logger.info('Offline standalone profile updated successfully.');
     } catch (error: any) {
+      Logger.error('Failed to update offline profile:', error);
       throw new Error(error.message);
     }
   };

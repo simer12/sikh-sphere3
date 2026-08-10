@@ -11,9 +11,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../config/supabase';
-import { updateProfile } from 'firebase/auth';
-import { auth } from '../config/firebase';
 import { useApp } from '../hooks/useApp';
 import { AppText } from '../components/AppText';
 
@@ -32,33 +29,13 @@ export default function EditProfileScreen({ navigation }: any) {
     try {
       setLoading(true);
 
-      // Update Firebase profile
-      if (user && auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: displayName.trim(),
-        });
-      }
-
-      // Update Supabase
-      if (user) {
-        const { error } = await supabase
-          .from('user_data')
-          .update({
-            name: displayName.trim(),
-            updated_at: new Date().toISOString(),
-          })
-          .eq('user_id', user.uid);
-
-        if (error) throw error;
-      }
-
-      // Update context
+      // Update context (handles local storage persistence)
       await updateUserProfile({ displayName: displayName.trim() });
 
       Alert.alert(t.success, t.savedSuccessfully, [
         { text: t.ok, onPress: () => navigation.goBack() },
       ]);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error updating profile:', error);
       Alert.alert(t.error, t.tryAgain);
     } finally {

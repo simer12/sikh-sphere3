@@ -1,22 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from './AuthContext';
-import { supabase } from '../config/supabase';
 
-interface Preferences {
+export interface Preferences {
   fontSize: number;
   darkMode: boolean;
   language: 'en' | 'pa';
   notifications: boolean;
   autoPlay: boolean;
   downloadOnWifi: boolean;
-}
-
-interface PreferencesContextType {
-  preferences: Preferences;
-  loading: boolean;
-  updatePreference: <K extends keyof Preferences>(key: K, value: Preferences[K]) => Promise<void>;
-  resetPreferences: () => Promise<void>;
 }
 
 const defaultPreferences: Preferences = {
@@ -27,6 +19,13 @@ const defaultPreferences: Preferences = {
   autoPlay: false,
   downloadOnWifi: true,
 };
+
+interface PreferencesContextType {
+  preferences: Preferences;
+  loading: boolean;
+  updatePreference: <K extends keyof Preferences>(key: K, value: Preferences[K]) => Promise<void>;
+  resetPreferences: () => Promise<void>;
+}
 
 const PreferencesContext = createContext<PreferencesContextType>({} as PreferencesContextType);
 
@@ -44,43 +43,8 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      loadPreferences();
-    } else {
-      // Load from local storage for guest users
-      loadLocalPreferences();
-    }
+    loadLocalPreferences();
   }, [user]);
-
-  const loadPreferences = async () => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('user_preferences')
-        .select('*')
-        .eq('user_id', user.uid)
-        .single();
-
-      if (data) {
-        setPreferences({
-          fontSize: data.font_size || 16,
-          darkMode: data.dark_mode || false,
-          language: data.language || 'en',
-          notifications: data.notifications ?? true,
-          autoPlay: data.auto_play || false,
-          downloadOnWifi: data.download_on_wifi ?? true,
-        });
-      }
-    } catch (error) {
-      console.log('Using default preferences');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const loadLocalPreferences = async () => {
     try {
@@ -109,59 +73,12 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
   ) => {
     const newPreferences = { ...preferences, [key]: value };
     setPreferences(newPreferences);
-
-    // Save to local storage
     await saveToLocal(newPreferences);
-
-    // Save to database if user is logged in
-    if (user) {
-      try {
-        await supabase
-          .from('user_preferences')
-          .upsert(
-            {
-              user_id: user.uid,
-              font_size: newPreferences.fontSize,
-              dark_mode: newPreferences.darkMode,
-              language: newPreferences.language,
-              notifications: newPreferences.notifications,
-              auto_play: newPreferences.autoPlay,
-              download_on_wifi: newPreferences.downloadOnWifi,
-              updated_at: new Date().toISOString(),
-            },
-            { onConflict: 'user_id' }
-          );
-      } catch (error) {
-        console.error('Error saving preference:', error);
-      }
-    }
   };
 
   const resetPreferences = async () => {
     setPreferences(defaultPreferences);
     await saveToLocal(defaultPreferences);
-
-    if (user) {
-      try {
-        await supabase
-          .from('user_preferences')
-          .upsert(
-            {
-              user_id: user.uid,
-              font_size: defaultPreferences.fontSize,
-              dark_mode: defaultPreferences.darkMode,
-              language: defaultPreferences.language,
-              notifications: defaultPreferences.notifications,
-              auto_play: defaultPreferences.autoPlay,
-              download_on_wifi: defaultPreferences.downloadOnWifi,
-              updated_at: new Date().toISOString(),
-            },
-            { onConflict: 'user_id' }
-          );
-      } catch (error) {
-        console.error('Error resetting preferences:', error);
-      }
-    }
   };
 
   const value = {
